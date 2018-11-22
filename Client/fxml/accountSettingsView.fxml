@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="29.0" layoutY="26.0" text="Ustawienia konta">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="408.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="192.0" text="NAZWA" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <TextField layoutX="30.0" layoutY="96.0" promptText="Nowe hasło" />
+      <Button layoutX="30.0" layoutY="175.0" mnemonicParsing="false" text="Zmień hasło" />
+      <TextField layoutX="30.0" layoutY="136.0" promptText="Powtórz hasło" />
+      <Button layoutX="457.0" layoutY="305.0" mnemonicParsing="false" text="Usuń konto" />
+      <TextField layoutX="386.0" layoutY="348.0" promptText="Wpisz hasło" visible="false" />
+      <TextField layoutX="207.0" layoutY="71.0" promptText="Nowy login" />
+      <TextField layoutX="207.0" layoutY="105.0" promptText="Wpisz hasło" />
+      <TextField layoutX="30.0" layoutY="59.0" promptText="Aktualne hasło" />
+      <Button layoutX="207.0" layoutY="150.0" mnemonicParsing="false" text="Zmień login" />
+      <Label layoutX="30.0" layoutY="208.0" prefWidth="300.0" />
+   </children>
+</AnchorPane>
