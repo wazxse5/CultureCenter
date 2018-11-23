@@ -3,8 +3,6 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 
-import java.io.IOException;
-
 public class InitViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;

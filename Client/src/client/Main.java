@@ -17,7 +17,7 @@ public class Main extends Application {
         ViewManager viewManager = new ViewManager(primaryStage, threadClient);
         threadClient.setViewManager(viewManager);
 
-        primaryStage.setOnCloseRequest(event -> threadClient.close());
+        primaryStage.setOnCloseRequest(event -> threadClient.disconnect());
         primaryStage.setTitle("Client");
         viewManager.setInitScene();
         primaryStage.setResizable(false);

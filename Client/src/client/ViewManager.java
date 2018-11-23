@@ -20,17 +20,14 @@ public class ViewManager {
     private Scene loggedScene;
     private Scene registerScene;
 
+    private InitViewController initViewController;
+    private LoginViewController loginViewController;
+    private LoggedViewController loggedViewController;
+    private RegisterViewController registerViewController;
+
     public ViewManager(Stage primaryStage, ThreadClient threadClient) {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
-    }
-
-    public void setTitle(String title) {
-        primaryStage.setTitle(title);
-    }
-
-    public String getTitle() {
-        return primaryStage.getTitle();
     }
 
     public void setInitScene() {
@@ -40,7 +37,7 @@ public class ViewManager {
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
 
-                InitViewController initViewController = loader.getController();
+                initViewController = loader.getController();
                 initViewController.setViewManager(this);
                 initViewController.setThreadClient(threadClient);
             } catch (IOException e) {
@@ -57,7 +54,7 @@ public class ViewManager {
                 Parent parent = loader.load();
                 loginScene = new Scene(parent);
 
-                LoginViewController loginViewController = loader.getController();
+                loginViewController = loader.getController();
                 loginViewController.setViewManager(this);
                 loginViewController.setThreadClient(threadClient);
             } catch (IOException e) {
@@ -74,7 +71,7 @@ public class ViewManager {
                 Parent parent = loader.load();
                 registerScene = new Scene(parent);
 
-                RegisterViewController registerViewController = loader.getController();
+                registerViewController = loader.getController();
                 registerViewController.setViewManager(this);
                 registerViewController.setThreadClient(threadClient);
             } catch (IOException e) {
@@ -91,7 +88,7 @@ public class ViewManager {
                 Parent parent = loader.load();
                 loggedScene = new Scene(parent);
 
-                LoggedViewController loggedViewController = loader.getController();
+                loggedViewController = loader.getController();
                 loggedViewController.setViewManager(this);
                 loggedViewController.setThreadClient(threadClient);
             } catch (IOException e) {
@@ -99,5 +96,31 @@ public class ViewManager {
             }
         }
         primaryStage.setScene(loggedScene);
+    }
+
+
+
+    public void setTitle(String title) {
+        primaryStage.setTitle(title);
+    }
+
+    public String getTitle() {
+        return primaryStage.getTitle();
+    }
+
+    public InitViewController getInitViewController() {
+        return initViewController;
+    }
+
+    public LoginViewController getLoginViewController() {
+        return loginViewController;
+    }
+
+    public LoggedViewController getLoggedViewController() {
+        return loggedViewController;
+    }
+
+    public RegisterViewController getRegisterViewController() {
+        return registerViewController;
     }
 }

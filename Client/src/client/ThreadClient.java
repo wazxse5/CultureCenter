@@ -1,16 +1,15 @@
 package client;
 
 import client.task.ConnectTask;
-import client.task.LoginTask;
 import client.task.ReceiveTask;
 import message.GoodbyeMessage;
+import message.LoginAnswerMessage;
+import message.LoginRequestMessage;
 import message.Message;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ConnectException;
 import java.net.Socket;
 import java.util.concurrent.*;
 
@@ -38,6 +37,7 @@ public class ThreadClient {
         try {
             boolean connectionResult = futureConnectionResult.get(10, TimeUnit.SECONDS);
             if (connectionResult) {
+                viewManager.setTitle(viewManager.getTitle() + " - połączono");
                 receiveTask = new ReceiveTask(input);
                 receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(newValue));
                 executor.execute(receiveTask);
@@ -49,31 +49,28 @@ public class ThreadClient {
         }
     }
 
-    public boolean loginUser(String name, String password) throws IOException, InterruptedException, ExecutionException, TimeoutException {
-        LoginTask loginTask = new LoginTask(input, output, name, password);
-        Future<Boolean> futureLoginResult = executor.submit(loginTask);
-        try {
-            boolean loginResult = futureLoginResult.get(3, TimeUnit.SECONDS);
-            return loginResult;
-        } catch (TimeoutException timeoutException) {
-            futureLoginResult.cancel(true);
-            throw timeoutException;
+    public void sendLoginRequest(String name, String password) throws IOException {
+        output.writeObject(new LoginRequestMessage(name, password));
+    }
+
+    private void handleReceivedMessage(Message message) {
+        if (message instanceof LoginAnswerMessage) {
+            LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
+            if (loginAnswer.isGood()) {
+                viewManager.setLoggedView();
+            } else {
+                viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
+            }
         }
     }
 
-
-    private void handleReceivedMessage(Message message) {
-
-    }
-
-
-    public void close() {
+    public void disconnect() {
         try {
             if (output != null) output.writeObject(new GoodbyeMessage());
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) { }
         try {
-            if (socket != null)socket.close();
-        } catch (IOException ignored) {}
+            if (socket != null) socket.close();
+        } catch (IOException ignored) { }
         if (receiveTask != null) receiveTask.cancel(true);
         executor.shutdown();
     }
