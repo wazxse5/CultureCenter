@@ -5,28 +5,29 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.AccountSettingsViewController">
    <children>
-      <Label layoutX="29.0" layoutY="26.0" text="Ustawienia konta">
+      <Label layoutX="225.0" layoutY="21.0" text="Ustawienia konta">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="408.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="192.0" text="NAZWA" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TextField layoutX="30.0" layoutY="96.0" promptText="Nowe hasło" />
+      <Button fx:id="ChangePasswordButton" layoutX="30.0" layoutY="175.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="25.0" prefWidth="86.0" text="Zmień hasło" />
+      <TextField layoutX="30.0" layoutY="136.0" promptText="Powtórz hasło" />
+      <Button fx:id="RemoveAccountButton" layoutX="425.0" layoutY="175.0" mnemonicParsing="false" onAction="#removeAccount" prefHeight="25.0" prefWidth="86.0" text="Usuń konto" />
+      <TextField layoutX="386.0" layoutY="348.0" promptText="Wpisz hasło" visible="false" />
+      <TextField layoutX="207.0" layoutY="59.0" promptText="Nowy login" />
+      <TextField layoutX="207.0" layoutY="96.0" promptText="Wpisz hasło" />
+      <TextField layoutX="30.0" layoutY="59.0" promptText="Aktualne hasło" />
+      <Button fx:id="ChangeLoginButton" layoutX="207.0" layoutY="175.0" mnemonicParsing="false" onAction="#changeLogin" prefHeight="25.0" prefWidth="86.0" text="Zmień login" />
+      <Label layoutX="30.0" layoutY="208.0" prefWidth="300.0" />
+      <Button fx:id="backToLoginButton" layoutX="344.0" layoutY="331.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="240.0" text="Cofnij">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField layoutX="30.0" layoutY="96.0" promptText="Nowe hasło" />
-      <Button layoutX="30.0" layoutY="175.0" mnemonicParsing="false" text="Zmień hasło" />
-      <TextField layoutX="30.0" layoutY="136.0" promptText="Powtórz hasło" />
-      <Button layoutX="457.0" layoutY="305.0" mnemonicParsing="false" text="Usuń konto" />
-      <TextField layoutX="386.0" layoutY="348.0" promptText="Wpisz hasło" visible="false" />
-      <TextField layoutX="207.0" layoutY="71.0" promptText="Nowy login" />
-      <TextField layoutX="207.0" layoutY="105.0" promptText="Wpisz hasło" />
-      <TextField layoutX="30.0" layoutY="59.0" promptText="Aktualne hasło" />
-      <Button layoutX="207.0" layoutY="150.0" mnemonicParsing="false" text="Zmień login" />
-      <Label layoutX="30.0" layoutY="208.0" prefWidth="300.0" />
+      <TextField fx:id="P1RemoveField" layoutX="427.0" layoutY="59.0" promptText="Aktualne hasło" />
+      <TextField fx:id="P2RemoveField" layoutX="427.0" layoutY="96.0" promptText="Powtórz hasło" />
    </children>
 </AnchorPane>

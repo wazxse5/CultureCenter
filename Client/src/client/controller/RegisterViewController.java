@@ -11,6 +11,11 @@ public class RegisterViewController {
 
     }
 
+    public void register(){
+
+
+    }
+
     public void back() {
         viewManager.setInitScene();
     }

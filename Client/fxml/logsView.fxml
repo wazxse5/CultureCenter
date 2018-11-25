@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.LogsViewController">
+   <children>
+      <Label alignment="CENTER" layoutX="175.0" layoutY="52.0" prefHeight="30.0" prefWidth="251.0" text="Lista logów">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="backToLoginButton" layoutX="334.0" layoutY="321.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="240.0" text="Cofnij">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

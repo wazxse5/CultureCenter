@@ -57,7 +57,7 @@ public class ThreadClient {
         if (message instanceof LoginAnswerMessage) {
             LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
             if (loginAnswer.isGood()) {
-                viewManager.setLoggedView();
+                viewManager.setLoggedScene();
             } else {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }

@@ -3,7 +3,7 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 
-public class InitViewController {
+public class LogsViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
 
@@ -12,17 +12,16 @@ public class InitViewController {
 
     }
 
-    public void login() {
-        viewManager.setLoginScene();
+    public void sendRestorePasswordRequest() {
+       //RESTORE EMAIL POP UP
     }
 
-    public void register() {
-        viewManager.setRegisterScene();
+    public void back(){
+        viewManager.setLoggedScene();
+
     }
 
-    public void repertuar(){
-        viewManager.setRepertuarScene();
-    }
+
 
 
     public void setThreadClient(ThreadClient threadClient) {

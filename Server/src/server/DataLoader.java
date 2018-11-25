@@ -19,6 +19,7 @@ public class DataLoader {
     public void loadClients() {
         knownClients.add(new Client("test"));
         knownClients.add(new Client("wazxse5"));
+        knownClients.add(new Client("admin"));
     }
 
     public synchronized Client register(String name, String password) throws AuthenticationException {
@@ -49,6 +50,7 @@ public class DataLoader {
         // TODO: sprawdzanie hasła z pliku
         if (client.getName().equals("wazxse5") && password.equals("1234")) return true;
         else if (client.getName().equals("test") && password.equals("0000")) return true;
+        else if (client.getName().equals("admin") && password.equals("admin")) return true;
         else return false;
     }
 

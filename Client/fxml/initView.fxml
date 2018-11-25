@@ -14,7 +14,7 @@
       </Label>
       <Button fx:id="loginButton" layoutX="220.0" layoutY="129.0" mnemonicParsing="false" onAction="#login" text="Zaloguj" />
       <Button fx:id="registerButton" layoutX="293.0" layoutY="129.0" mnemonicParsing="false" onAction="#register" text="Załóż konto" />
-      <Button fx:id="repertuarButton" layoutX="229.0" layoutY="212.0" mnemonicParsing="false" text="Zobacz repertuar">
+      <Button fx:id="repertuarButton" layoutX="229.0" layoutY="212.0" mnemonicParsing="false" onAction="#repertuar" text="Zobacz repertuar">
          <font>
             <Font size="16.0" />
          </font>

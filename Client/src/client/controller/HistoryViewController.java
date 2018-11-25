@@ -3,7 +3,7 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 
-public class InitViewController {
+public class HistoryViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
 
@@ -12,17 +12,21 @@ public class InitViewController {
 
     }
 
-    public void login() {
-        viewManager.setLoginScene();
+    public void mark() {
+
     }
 
-    public void register() {
-        viewManager.setRegisterScene();
+    public void back(){
+        viewManager.setLoggedScene();
+
     }
 
-    public void repertuar(){
-        viewManager.setRepertuarScene();
+    public void regret(){
+
+
     }
+
+
 
 
     public void setThreadClient(ThreadClient threadClient) {

@@ -12,6 +12,32 @@ public class LoggedViewController {
 
     }
 
+    public void CheckHistory(){
+        viewManager.setHistoryScene();
+    }
+
+    public void ActualReserved(){
+        viewManager.setActualReservedScene();
+    }
+    public void AccountSettings(){
+
+        viewManager.setAccountSettingsScene();
+    }
+    public void LogOut(){
+        // LOG OUT
+        viewManager.setInitScene();
+    }
+    public void Repertuar()    {
+        viewManager.setRepertuarScene();
+    }
+    public void CheckLogs(){
+        viewManager.setLogsScene();
+    }
+
+    public void SetSchedule(){
+        //viewManager.setSetScheduleScene();
+    }
+
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
     }

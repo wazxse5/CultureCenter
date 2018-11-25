@@ -10,6 +10,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    boolean connected = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,7 +25,7 @@ public class Main extends Application {
         primaryStage.show();
 
         try {
-            threadClient.connect("localhost", 8989);
+            connected = threadClient.connect("localhost", 8989);
         } catch (ConnectException e) {
             viewManager.setTitle(viewManager.getTitle() + " - offline");
         }

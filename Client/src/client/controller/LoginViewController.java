@@ -41,6 +41,14 @@ public class LoginViewController {
         else if (code == 3) infoLabel.setText("Nieprawidłowe hasło");
     }
 
+    public void RememberPassword(){
+        viewManager.setInitScene();
+    }
+
+    public void restorePassword(){
+        viewManager.setRestorePasswordScene();
+    }
+
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }

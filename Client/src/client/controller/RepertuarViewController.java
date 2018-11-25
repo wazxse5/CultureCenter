@@ -3,26 +3,29 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 
-public class InitViewController {
+public class RepertuarViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
-
-
     public void initialize() {
 
     }
 
-    public void login() {
-        viewManager.setLoginScene();
+    public void reserve() {
+
     }
 
-    public void register() {
-        viewManager.setRegisterScene();
+    public void buy(){
+
     }
 
-    public void repertuar(){
-        viewManager.setRepertuarScene();
+    public void back(){
+     //   if(main.connected) {
+            viewManager.setLoggedScene();
+       // }
+        // else viewManager.setInitScene();
     }
+
+
 
 
     public void setThreadClient(ThreadClient threadClient) {
