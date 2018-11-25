@@ -1,6 +1,12 @@
 package client;
 
 import client.controller.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +17,7 @@ import java.io.IOException;
 public class ViewManager {
     private Stage primaryStage;
     private ThreadClient threadClient;
+    private StringProperty connectionState = new SimpleStringProperty();
 
     private Scene initScene;
     private Scene loginScene;
@@ -38,6 +45,13 @@ public class ViewManager {
     public ViewManager(Stage primaryStage, ThreadClient threadClient) {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
+
+        connectionState.addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("NONE")) setTitle("Client");
+            if (newValue.equals("CONNECTING")) setTitle("Client - łączenie");
+            if (newValue.equals("CONNECTED")) setTitle("Client - połączono");
+            if (newValue.equals("NOT_CONNECTED")) setTitle("Client - brak połączenia");
+        });
     }
 
 
@@ -109,8 +123,6 @@ public class ViewManager {
         primaryStage.setScene(repertuarScene);
     }
 
-
-
     public void setAccountSettingsScene() {
         if (accountSettingsScene == null) {
             try {
@@ -127,8 +139,6 @@ public class ViewManager {
         }
         primaryStage.setScene(accountSettingsScene);
     }
-
-
 
     public void setInitScene() {
         if (initScene == null) {
@@ -198,7 +208,6 @@ public class ViewManager {
         primaryStage.setScene(restorePasswordScene);
     }
 
-
     public void setLoggedScene() {
         if (loggedScene == null) {
             try {
@@ -224,6 +233,10 @@ public class ViewManager {
 
     public String getTitle() {
         return primaryStage.getTitle();
+    }
+
+    public StringProperty connectionStateProperty() {
+        return connectionState;
     }
 
     public InitViewController getInitViewController() {

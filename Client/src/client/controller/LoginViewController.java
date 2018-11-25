@@ -3,6 +3,7 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,15 +17,20 @@ public class LoginViewController {
     @FXML private TextField loginTF;
     @FXML private PasswordField passwordTF;
     @FXML private Label infoLabel;
+    @FXML private Button loginButton;
+    @FXML private Button connectButton;
+
+    public void connect() {
+        threadClient.connect("localhost", 8989);
+    }
 
     public void sendLoginRequest() {
-        try {
-            String login = loginTF.getText();
-            String password = passwordTF.getText();
-            threadClient.sendLoginRequest(login, password);
-        } catch (IOException e) {
-            infoLabel.setText("Nie można nawiązać połączenia");
-        }
+
+        String login = loginTF.getText();
+        String password = passwordTF.getText();
+        threadClient.sendLoginRequest(login, password);
+        infoLabel.setText("Nie można nawiązać połączenia");
+
     }
 
     public void back() {
@@ -41,11 +47,11 @@ public class LoginViewController {
         else if (code == 3) infoLabel.setText("Nieprawidłowe hasło");
     }
 
-    public void RememberPassword(){
+    public void RememberPassword() {
         viewManager.setInitScene();
     }
 
-    public void restorePassword(){
+    public void restorePassword() {
         viewManager.setRestorePasswordScene();
     }
 
@@ -55,5 +61,9 @@ public class LoginViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        loginButton.visibleProperty().bind(threadClient.connectedProperty());
+        connectButton.visibleProperty().bind(threadClient.connectedProperty().not());
+        loginTF.disableProperty().bind(threadClient.connectedProperty().not());
+        passwordTF.disableProperty().bind(threadClient.connectedProperty().not());
     }
 }

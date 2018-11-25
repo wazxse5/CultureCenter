@@ -19,20 +19,27 @@ public class AcceptingTask extends Task<Connection> {
         this.executor = Executors.newCachedThreadPool();
     }
 
-    @Override protected Connection call() throws Exception {
-        serverSocket.setSoTimeout(100);
-        while (!isCancelled()) {
-            try {
-                Socket socket = serverSocket.accept();
-                Connection connection = new Connection(socket);
-                updateValue(connection);
-            } catch (SocketTimeoutException ignored) {
-            }
-        }
+    @Override protected Connection call() {
+        try {
 
-        executor.shutdownNow();
-        serverSocket.close();
-        executor.shutdown();
+            serverSocket.setSoTimeout(100);
+            while (!isCancelled()) {
+                try {
+                    Socket socket = serverSocket.accept();
+                    Connection connection = new Connection(socket);
+                    updateValue(connection);
+                } catch (SocketTimeoutException ignored) {
+                }
+            }
+
+            executor.shutdownNow();
+            serverSocket.close();
+            executor.shutdown();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("end accepting");
         return null;
     }
 }

@@ -2,10 +2,14 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class LoggedViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
+
+    @FXML private Label userNameLabel;
 
 
     public void initialize() {
@@ -40,6 +44,7 @@ public class LoggedViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        userNameLabel.textProperty().bind(threadClient.userNameProperty());
     }
 
     public void setViewManager(ViewManager viewManager) {

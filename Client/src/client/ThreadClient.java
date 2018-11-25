@@ -2,21 +2,25 @@ package client;
 
 import client.task.ConnectTask;
 import client.task.ReceiveTask;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import message.GoodbyeMessage;
 import message.LoginAnswerMessage;
 import message.LoginRequestMessage;
 import message.Message;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ThreadClient {
-    private Socket socket;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private BooleanProperty connected = new SimpleBooleanProperty(false);
+    private StringProperty connectionState = new SimpleStringProperty("NONE");
+    private StringProperty userName = new SimpleStringProperty();
+
+    private Connection connection;
 
     private ViewManager viewManager;
     private ExecutorService executor;
@@ -27,30 +31,32 @@ public class ThreadClient {
         this.executor = Executors.newCachedThreadPool();
     }
 
-    public boolean connect(String host, int port) throws IOException, ExecutionException, InterruptedException, TimeoutException {
-        socket = new Socket(host, port);
-        output = new ObjectOutputStream(socket.getOutputStream());
-        input = new ObjectInputStream(socket.getInputStream());
-
-        ConnectTask connectTask = new ConnectTask(input, output);
-        Future<Boolean> futureConnectionResult = executor.submit(connectTask);
+    public void connect(String host, int port) {
+        connectionState.setValue("CONNECTING");
         try {
-            boolean connectionResult = futureConnectionResult.get(10, TimeUnit.SECONDS);
-            if (connectionResult) {
-                viewManager.setTitle(viewManager.getTitle() + " - połączono");
-                receiveTask = new ReceiveTask(input);
-                receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(newValue));
-                executor.execute(receiveTask);
-            }
-            return connectionResult;
-        } catch (TimeoutException timeoutException) {
-            futureConnectionResult.cancel(true);
-            throw timeoutException;
+            ConnectTask connectTask = new ConnectTask(host, port);
+            connectTask.setOnSucceeded(event -> handleConnection((Connection) event.getSource().getValue()));
+            connectTask.setOnFailed(event -> {
+                connectionState.setValue("NOT_CONNECTED");
+            });
+            executor.execute(connectTask);
+        } catch (Exception e) {
+            connectionState.setValue("NOT_CONNECTED");
         }
     }
 
-    public void sendLoginRequest(String name, String password) throws IOException {
-        output.writeObject(new LoginRequestMessage(name, password));
+    private void handleConnection(Connection connection) {
+        if (connection != null) {
+            connected.setValue(true);
+            connectionState.setValue("CONNECTED");
+            this.connection = connection;
+
+            receiveTask = new ReceiveTask(connection.getInput());
+            receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(newValue));
+            executor.execute(receiveTask);
+
+        } else connectionState.setValue("NOT_CONNECTED");
+
     }
 
     private void handleReceivedMessage(Message message) {
@@ -64,18 +70,32 @@ public class ThreadClient {
         }
     }
 
+    public void sendLoginRequest(String name, String password) {
+        if (connected.get()) {
+            connection.send(new LoginRequestMessage(name, password));
+            this.userName.setValue(name);
+        } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
+    }
+
     public void disconnect() {
-        try {
-            if (output != null) output.writeObject(new GoodbyeMessage());
-        } catch (IOException ignored) { }
-        try {
-            if (socket != null) socket.close();
-        } catch (IOException ignored) { }
+        if (connection != null) {
+            connection.send(new GoodbyeMessage());
+            connection.close();
+        }
         if (receiveTask != null) receiveTask.cancel(true);
         executor.shutdown();
     }
 
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
+        viewManager.connectionStateProperty().bind(connectionState);
+    }
+
+    public BooleanProperty connectedProperty() {
+        return connected;
+    }
+
+    public StringProperty userNameProperty() {
+        return userName;
     }
 }

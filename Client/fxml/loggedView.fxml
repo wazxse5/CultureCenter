@@ -11,7 +11,7 @@
       <Button fx:id="ActualReservedButton" layoutX="75.0" layoutY="169.0" mnemonicParsing="false" onAction="#ActualReserved" prefHeight="37.0" prefWidth="150.0" text="Aktualne rezerwacje" />
       <Button fx:id="AccountSettingsButton" layoutX="75.0" layoutY="213.0" mnemonicParsing="false" onAction="#AccountSettings" prefHeight="37.0" prefWidth="150.0" text="Ustawienia konta" />
       <Button fx:id="LogOutButton" layoutX="512.0" layoutY="354.0" mnemonicParsing="false" onAction="#LogOut" text="Wyloguj" />
-      <Label layoutX="208.0" layoutY="40.0" prefHeight="20.0" prefWidth="184.0" text="Zalogowany jako:">
+      <Label alignment="CENTER_RIGHT" layoutX="187.0" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="Zalogowany jako ">
          <font>
             <Font size="15.0" />
          </font>
@@ -23,5 +23,10 @@
       </Button>
       <Button fx:id="LogsButton" layoutX="425.0" layoutY="131.0" mnemonicParsing="false" onAction="#CheckLogs" text="Przegląd logów" />
       <Button fx:id="ScheduleButton" layoutX="384.0" layoutY="175.0" mnemonicParsing="false" onAction="#SetSchedule" text="Zarządzanie harmonogramem" />
+      <Label fx:id="userNameLabel" layoutX="313.0" layoutY="41.0" prefHeight="21.0" prefWidth="150.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -24,11 +24,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        try {
-            connected = threadClient.connect("localhost", 8989);
-        } catch (ConnectException e) {
-            viewManager.setTitle(viewManager.getTitle() + " - offline");
-        }
-
+        threadClient.connect("localhost", 8989);
     }
 }

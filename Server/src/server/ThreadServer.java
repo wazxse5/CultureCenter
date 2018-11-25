@@ -1,5 +1,6 @@
 package server;
 
+import javafx.application.Platform;
 import message.*;
 import server.task.AcceptingTask;
 import server.task.AuthenticationTask;
@@ -20,6 +21,7 @@ public class ThreadServer {
 
     private AcceptingTask acceptingTask;
     private Future acceptingTaskFuture;
+    private List<ReceiveTask> receiveTasks = new ArrayList<>();
 
     private final DataLoader dataLoader;
     private final List<Connection> connectedConnections;
@@ -34,7 +36,8 @@ public class ThreadServer {
             ServerSocket serverSocket = new ServerSocket(port);
             acceptingTask = new AcceptingTask(serverSocket);
             acceptingTask.valueProperty().addListener((observable, oldValue, newValue) -> handleNewConnection(newValue));
-            acceptingTaskFuture = executor.submit(acceptingTask);
+//            acceptingTaskFuture = executor.submit(acceptingTask);
+            executor.submit(acceptingTask);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,6 +47,7 @@ public class ThreadServer {
         System.out.println("New connection: id=" + connection.getId());
         connectedConnections.add(connection);
         ReceiveTask receiveTask = new ReceiveTask(connection);
+        receiveTasks.add(receiveTask);
         receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(connection, newValue));
         executor.submit(receiveTask);
     }
@@ -72,7 +76,8 @@ public class ThreadServer {
 
     public void close() {
         executor.shutdown();
-        if (acceptingTaskFuture != null) acceptingTaskFuture.cancel(true);
+//        if (acceptingTaskFuture != null) acceptingTaskFuture.cancel(true);
         if (acceptingTask != null) acceptingTask.cancel(true);
+        for (ReceiveTask r : receiveTasks) r.cancel(true);
     }
 }
