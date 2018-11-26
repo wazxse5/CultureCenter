@@ -62,11 +62,8 @@ public class ThreadServer {
             executor.submit(authenticationTask);
         }
         if (message instanceof GoodbyeMessage) {
-            try {
-                connectedConnections.remove(connection);
-                connection.close();
-            } catch (IOException ignored) {
-            }
+            connectedConnections.remove(connection);
+            connection.close();
         }
     }
 
@@ -78,6 +75,7 @@ public class ThreadServer {
         executor.shutdown();
 //        if (acceptingTaskFuture != null) acceptingTaskFuture.cancel(true);
         if (acceptingTask != null) acceptingTask.cancel(true);
+        for (Connection c : connectedConnections) c.close();
         for (ReceiveTask r : receiveTasks) r.cancel(true);
     }
 }

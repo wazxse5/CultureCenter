@@ -43,8 +43,15 @@ public class Connection extends Task {
         }
     }
 
-    public void close() throws IOException {
-        socket.close();
+    public void close() {
+        System.out.println("Connection.close");
+        try {
+            if (!socket.isClosed()) socket.close();
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getId() {

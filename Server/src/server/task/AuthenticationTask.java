@@ -33,7 +33,7 @@ public class AuthenticationTask extends Task<Client> {
             connection.send(new LoginAnswerMessage(false, e.getCode()));
         }
 
-        System.out.println("end authentication");
+        System.out.println("Connection id=" + connection.getId() + " - authentication negative");
         return null;
     }
 

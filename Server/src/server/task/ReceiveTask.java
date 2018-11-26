@@ -6,6 +6,7 @@ import server.Connection;
 
 import java.io.EOFException;
 import java.io.ObjectInputStream;
+import java.net.SocketException;
 
 public class ReceiveTask extends Task<Message> {
     private final Connection connection;
@@ -16,8 +17,6 @@ public class ReceiveTask extends Task<Message> {
 
     @Override protected Message call() {
         try {
-
-
             ObjectInputStream inputStream = connection.getInputStream();
             while (!isCancelled()) {
                 try {
@@ -30,6 +29,8 @@ public class ReceiveTask extends Task<Message> {
                     Thread.sleep(10);
                 }
             }
+        } catch (SocketException ignored) {
+            // TODO: 26.11.2018 dopisać reakcję
         } catch (Exception e) {
             e.printStackTrace();
         }
