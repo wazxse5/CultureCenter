@@ -1,6 +1,5 @@
 package server;
 
-import javafx.application.Platform;
 import message.*;
 import server.task.AcceptingTask;
 import server.task.AuthenticationTask;
@@ -51,6 +50,7 @@ public class ThreadServer {
         receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(connection, newValue));
         executor.submit(receiveTask);
     }
+
 
     private void handleReceivedMessage(Connection connection, Message message) {
         if (message instanceof WelcomeMessage) {

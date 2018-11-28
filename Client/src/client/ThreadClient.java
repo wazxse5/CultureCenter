@@ -6,12 +6,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import message.GoodbyeMessage;
-import message.LoginAnswerMessage;
-import message.LoginRequestMessage;
-import message.Message;
+import message.*;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -76,6 +72,13 @@ public class ThreadClient {
             this.userName.setValue(name);
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
+
+    public void sendRegisterRequest(String name, String password, String email) {
+        if(connected.get()){
+            connection.send(new RegisterRequestMessage(name,password,email));
+        } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
+    }
+
 
     public void disconnect() {
         if (connection != null) {

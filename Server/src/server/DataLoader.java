@@ -17,9 +17,13 @@ public class DataLoader {
     }
 
     public void loadClients() {
-        knownClients.add(new Client("test"));
-        knownClients.add(new Client("wazxse5"));
-        knownClients.add(new Client("admin"));
+        knownClients.add(new Client("test","0000","o@.pl"));
+        knownClients.add(new Client("wazxse5","1234","adasd@o2.pl"));
+        knownClients.add(new Client("admin","admin","cos@o2.pl"));
+    }
+
+    public void addClient(String name,String password, String email){
+        knownClients.add(new Client (name, password, email));
     }
 
     public synchronized Client register(String name, String password) throws AuthenticationException {
@@ -37,7 +41,7 @@ public class DataLoader {
         for (Client client : knownClients) {
             if (client.getName().equals(name)) {
                 // TODO: Dodać sprawdzanie czy klient nie został już zaologowany
-                if (checkPassword(client, password)) {
+                if (checkPassword(client, password, name)) {
                     return client;
                 } else throw new WrongPasswordException();
             }
@@ -46,11 +50,10 @@ public class DataLoader {
     }
 
 
-    private boolean checkPassword(Client client, String password) {
+    private boolean checkPassword(Client client, String password, String login) {
         // TODO: sprawdzanie hasła z pliku
-        if (client.getName().equals("wazxse5") && password.equals("1234")) return true;
-        else if (client.getName().equals("test") && password.equals("0000")) return true;
-        else if (client.getName().equals("admin") && password.equals("admin")) return true;
+        if (client.getName().equals(login) && password.equals(client.getPassword())) return true;
+
         else return false;
     }
 
