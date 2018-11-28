@@ -1,12 +1,8 @@
 package client;
 
 import client.controller.*;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +14,6 @@ public class ViewManager {
     private Stage primaryStage;
     private ThreadClient threadClient;
     private StringProperty connectionState = new SimpleStringProperty();
-
     private Scene initScene;
     private Scene loginScene;
     private Scene loggedScene;
@@ -61,6 +56,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/historyView.fxml"));
                 Parent parent = loader.load();
                 historyScene = new Scene(parent);
+
 
                 historyViewController = loader.getController();
                 historyViewController.setViewManager(this);
@@ -146,6 +142,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/initView.fxml"));
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
+               // initScene.getStylesheets().add("../../../Resources/styles.css");
 
                 initViewController = loader.getController();
                 initViewController.setViewManager(this);
