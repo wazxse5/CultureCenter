@@ -57,8 +57,8 @@ public class ThreadServer {
             connection.send(new WelcomeAnswerMessage());
         }
         if (message instanceof LoginRequestMessage) {
-            LoginRequestMessage loginRequestMessage = (LoginRequestMessage) message;
-            AuthenticationTask authenticationTask = new AuthenticationTask(loginRequestMessage, connection, dataLoader);
+            LoginRequestMessage loginRequest = (LoginRequestMessage) message;
+            AuthenticationTask authenticationTask = new AuthenticationTask(loginRequest, connection, dataLoader);
             executor.submit(authenticationTask);
         }
         if (message instanceof GoodbyeMessage) {
@@ -66,9 +66,8 @@ public class ThreadServer {
             connection.close();
         }
         if(message instanceof RegisterRequestMessage){
-            dataLoader.addClient(((RegisterRequestMessage) message).getName(),((RegisterRequestMessage) message).getPassword(),((RegisterRequestMessage) message).getMail());
-
-
+            RegisterRequestMessage registerRequest = (RegisterRequestMessage) message;
+            dataLoader.addClient(registerRequest.getName(),registerRequest.getPassword(),registerRequest.getMail());
         }
     }
 

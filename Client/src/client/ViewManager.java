@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class ViewManager {
     private Stage primaryStage;
@@ -142,7 +143,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/initView.fxml"));
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
-               // initScene.getStylesheets().add("../../../Resources/styles.css");
+                initScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 initViewController = loader.getController();
                 initViewController.setViewManager(this);
