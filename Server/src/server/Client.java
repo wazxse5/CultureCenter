@@ -4,7 +4,6 @@ public class Client {
     private String name;
     private String password;
     private String email;
-    private Connection connection;
 
     public Client(String name) {
         this.name = name;
@@ -18,20 +17,11 @@ public class Client {
 
     }
 
-
     public String getName() {
         return name;
     }
     public String getPassword() {
         return password;
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
 
 }

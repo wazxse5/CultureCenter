@@ -29,11 +29,12 @@ public class ReceiveTask extends Task<Message> {
                     Thread.sleep(10);
                 }
             }
-        } catch (SocketException ignored) {
+        } catch (SocketException | InterruptedException ignored) {
             // TODO: 26.11.2018 dopisać reakcję
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         System.out.println("end receive");
         return null;
     }

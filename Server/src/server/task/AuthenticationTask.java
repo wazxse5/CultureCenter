@@ -26,7 +26,7 @@ public class AuthenticationTask extends Task<Client> {
         try {
             Client client = dataLoader.login(name, password);
             connection.send(new LoginAnswerMessage(true));
-            client.setConnection(connection);
+            connection.setClient(client);
             System.out.println("Connection id=" + connection.getId() + " - logged user " + name);
             return client;
         } catch (AuthenticationException e) {

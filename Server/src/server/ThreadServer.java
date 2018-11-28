@@ -1,5 +1,9 @@
 package server;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import message.*;
 import server.task.AcceptingTask;
 import server.task.AuthenticationTask;
@@ -11,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class ThreadServer {
     private ViewManager viewManager;
@@ -19,15 +22,14 @@ public class ThreadServer {
     private final ExecutorService executor = Executors.newCachedThreadPool();
 
     private AcceptingTask acceptingTask;
-    private Future acceptingTaskFuture;
     private List<ReceiveTask> receiveTasks = new ArrayList<>();
 
     private  DataLoader dataLoader;
-    private final List<Connection> connectedConnections;
+    private final ObservableList<Connection> connectedConnections;
 
     public ThreadServer() {
         dataLoader = new DataLoader();
-        connectedConnections = new ArrayList<>();
+        connectedConnections = FXCollections.observableArrayList(Connection.extractor());
     }
 
     public void start(int port) {
@@ -35,7 +37,6 @@ public class ThreadServer {
             ServerSocket serverSocket = new ServerSocket(port);
             acceptingTask = new AcceptingTask(serverSocket);
             acceptingTask.valueProperty().addListener((observable, oldValue, newValue) -> handleNewConnection(newValue));
-//            acceptingTaskFuture = executor.submit(acceptingTask);
             executor.submit(acceptingTask);
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,8 +44,8 @@ public class ThreadServer {
     }
 
     private void handleNewConnection(Connection connection) {
-        System.out.println("New connection: id=" + connection.getId());
         connectedConnections.add(connection);
+
         ReceiveTask receiveTask = new ReceiveTask(connection);
         receiveTasks.add(receiveTask);
         receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(connection, newValue));
@@ -75,9 +76,12 @@ public class ThreadServer {
         this.viewManager = viewManager;
     }
 
+    public ListProperty<Connection> connectedConnectionsProperty() {
+        return new SimpleListProperty<>(connectedConnections);
+    }
+
     public void close() {
         executor.shutdown();
-//        if (acceptingTaskFuture != null) acceptingTaskFuture.cancel(true);
         if (acceptingTask != null) acceptingTask.cancel(true);
         for (Connection c : connectedConnections) c.close();
         for (ReceiveTask r : receiveTasks) r.cancel(true);

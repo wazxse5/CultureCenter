@@ -1,15 +1,17 @@
 package server;
 
-import javafx.concurrent.Task;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.util.Callback;
 import message.Message;
-import org.omg.CORBA.Object;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class Connection extends Task {
+public class Connection {
     private static int idCounter = 0;
     private int id;
 
@@ -17,6 +19,8 @@ public class Connection extends Task {
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
     private Client client;
+
+    private StringProperty description = new SimpleStringProperty();
 
     public Connection(Socket socket) {
         this.id = idCounter++;
@@ -27,15 +31,11 @@ public class Connection extends Task {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        description.setValue("Połączenie id=" + id + " - niezalogowano");
     }
 
-
-    @Override protected Object call() {
-        return null;
-    }
 
     public void send(Message message) {
-
         try {
             outputStream.writeObject(message);
         } catch (IOException e) {
@@ -54,8 +54,29 @@ public class Connection extends Task {
         }
     }
 
+    public static Callback<Connection, Observable[]> extractor() {
+        return (Connection c) -> new Observable[]{c.descriptionProperty()};
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+
+        String text = "Połączenie id=" + id;
+        if (client == null) text += " - niezalogowano";
+        else text += " - użytkownik " + client.getName();
+        description.setValue(text);
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public String getDescription() {
+        return description.get();
     }
 
     public ObjectInputStream getInputStream() {
