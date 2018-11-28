@@ -22,7 +22,7 @@ public class ThreadServer {
     private Future acceptingTaskFuture;
     private List<ReceiveTask> receiveTasks = new ArrayList<>();
 
-    private final DataLoader dataLoader;
+    private  DataLoader dataLoader;
     private final List<Connection> connectedConnections;
 
     public ThreadServer() {
@@ -64,6 +64,11 @@ public class ThreadServer {
         if (message instanceof GoodbyeMessage) {
             connectedConnections.remove(connection);
             connection.close();
+        }
+        if(message instanceof RegisterRequestMessage){
+            dataLoader.addClient(((RegisterRequestMessage) message).getName(),((RegisterRequestMessage) message).getPassword(),((RegisterRequestMessage) message).getMail());
+
+
         }
     }
 

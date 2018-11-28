@@ -15,7 +15,7 @@ public class RegisterViewController {
     @FXML private PasswordField passwordTFR;
     @FXML private Label infoLabel;
     @FXML private PasswordField password1TFR;
-    @FXML private TextField MailTFR;
+    @FXML private TextField mailTFR;
 
 
     public void initialize() {
@@ -27,14 +27,15 @@ public class RegisterViewController {
         String login = loginTFR.getText();
         String password = passwordTFR.getText();
         String password2 = password1TFR.getText();
-        String email = MailTFR.getText();
-        if (login != null && password != null && password2 != null & email != null) {
-            //if(login) nie ma takiego loginu :){ - tylko wymaga polaczenia ;fffffffffffff
-            if (password == password2)
+        String email = mailTFR.getText();
+
+        if (!login.equals("") && !password.equals("") && !password2.equals("") && !email.equals("")) {
+
+            if (password.equals(password2)==true) {
                 threadClient.sendRegisterRequest(login, password, email);
-            else setInfoLabel(2);
+                setInfoLabel(4);
+            } else setInfoLabel(2);
         }
-        //} else setInfoLabel(1);
         else setInfoLabel(3);
     }
 
@@ -42,6 +43,7 @@ public class RegisterViewController {
         if (code == 1) infoLabel.setText("Nazwa użytkownika jest w użyciu");
         else if (code == 2) infoLabel.setText("Hasła się od siebie różnią");
         else if (code == 3) infoLabel.setText("Proszę wypełnić wszystkie pola");
+        else if (code == 4) infoLabel.setText("Zarejestrowano użytkownika: " + loginTFR.getText());
     }
 
 
