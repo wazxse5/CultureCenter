@@ -73,6 +73,14 @@ public class ThreadClient {
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
 
+    public void sendLoginCheckRequest(String name) {
+        if (connected.get()) {
+            connection.send(new LoginRequestMessage(name));
+        } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
+    }
+
+
+
     public void sendRegisterRequest(String name, String password, String email) {
         if(connected.get()){
             connection.send(new RegisterRequestMessage(name,password,email));

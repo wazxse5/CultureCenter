@@ -19,15 +19,25 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="ReserveButton" layoutX="31.0" layoutY="211.0" mnemonicParsing="false" onAction="#reserve" prefHeight="37.0" prefWidth="110.0" text="Zarezerwuj">
+      <Button fx:id="ReserveButton" layoutX="38.0" layoutY="321.0" mnemonicParsing="false" onAction="#reserve" prefHeight="24.0" prefWidth="82.0" text="Zarezerwuj">
          <font>
-            <Font size="16.0" />
+            <Font size="11.0" />
          </font>
       </Button>
-      <Button fx:id="BuyButton" layoutX="31.0" layoutY="258.0" mnemonicParsing="false" onAction="#buy" prefHeight="37.0" prefWidth="110.0" text="Zapłać">
+      <Button fx:id="BuyButton" layoutX="147.0" layoutY="321.0" mnemonicParsing="false" onAction="#buy" prefHeight="24.0" prefWidth="82.0" text="Kup">
          <font>
-            <Font size="16.0" />
+            <Font size="11.0" />
          </font>
       </Button>
+      <TableView layoutX="18.0" layoutY="86.0" prefHeight="209.0" prefWidth="568.0">
+        <columns>
+          <TableColumn prefWidth="119.0" text="Nazwa Wydarzenia" />
+          <TableColumn prefWidth="93.0" text="Typ" />
+            <TableColumn prefWidth="93.0" text="Data" />
+            <TableColumn prefWidth="93.0" text="Godzina" />
+            <TableColumn prefWidth="93.0" text="Sala" />
+            <TableColumn prefWidth="93.0" text="il. miejsc" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

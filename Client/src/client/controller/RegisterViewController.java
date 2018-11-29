@@ -32,15 +32,25 @@ public class RegisterViewController {
         if (!login.equals("") && !password.equals("") && !password2.equals("") && !email.equals("")) {
 
             if (password.equals(password2)==true) {
-                threadClient.sendRegisterRequest(login, password, email);
-                setInfoLabel(4);
+                if(!sendLoginCheckRequest()) {
+                    threadClient.sendRegisterRequest(login, password, email);
+                    setInfoLabel(4);
+                } else setInfoLabel(1);
             } else setInfoLabel(2);
         }
         else setInfoLabel(3);
     }
+    public boolean sendLoginCheckRequest(){
+        String login = loginTFR.getText();
+        boolean result = false;
+        if(!login.equals("")){
+           threadClient.sendLoginCheckRequest(login);
+        }
+        return result;
+    }
 
     public void setInfoLabel(int code) {
-        if (code == 1) infoLabel.setText("Nazwa użytkownika jest w użyciu");
+        if (code == 1) infoLabel.setText("Podany login jest już zajęty");
         else if (code == 2) infoLabel.setText("Hasła się od siebie różnią");
         else if (code == 3) infoLabel.setText("Proszę wypełnić wszystkie pola");
         else if (code == 4) infoLabel.setText("Zarejestrowano użytkownika: " + loginTFR.getText());

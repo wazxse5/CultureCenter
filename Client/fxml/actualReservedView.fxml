@@ -19,10 +19,18 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="CancelReservationButton" layoutX="58.0" layoutY="254.0" mnemonicParsing="false" onAction="#cancelReservation" prefHeight="30.0" prefWidth="94.0" text="Anuluj">
+      <Button fx:id="CancelReservationButton" layoutX="59.0" layoutY="329.0" mnemonicParsing="false" onAction="#cancelReservation" prefHeight="8.0" prefWidth="64.0" text="Anuluj">
          <font>
-            <Font size="16.0" />
+            <Font size="11.0" />
          </font>
       </Button>
+      <TableView layoutX="12.0" layoutY="84.0" prefHeight="208.0" prefWidth="584.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Wydarzenie" />
+          <TableColumn prefWidth="75.0" text="Data" />
+            <TableColumn prefWidth="75.0" text="Godzina" />
+            <TableColumn prefWidth="75.0" text="Ilość miejsc" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

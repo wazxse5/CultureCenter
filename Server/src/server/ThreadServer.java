@@ -70,6 +70,13 @@ public class ThreadServer {
             RegisterRequestMessage registerRequest = (RegisterRequestMessage) message;
             dataLoader.addClient(registerRequest.getName(),registerRequest.getPassword(),registerRequest.getMail());
         }
+        if(message instanceof  LoginCheckAnswerMessage){
+            LoginCheckRequestMessage checkRequest = (LoginCheckRequestMessage) message;
+            if(dataLoader.getKnownClients().contains( checkRequest.getLogin())) {
+                checkRequest.stateTrue();
+                //wyslij wiadomosc do klienta true
+            }
+        }
     }
 
     public void setViewManager(ViewManager viewManager) {

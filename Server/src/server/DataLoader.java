@@ -16,6 +16,10 @@ public class DataLoader {
         loadClients();
     }
 
+    public List<Client> getKnownClients() {
+        return knownClients;
+    }
+
     public void loadClients() {
         knownClients.add(new Client("test","0000","o@.pl"));
         knownClients.add(new Client("wazxse5","1234","adasd@o2.pl"));
