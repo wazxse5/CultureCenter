@@ -27,6 +27,9 @@ public class ThreadClient {
         this.executor = Executors.newCachedThreadPool();
     }
 
+    public BooleanProperty getConnected(){
+        return connected;
+    }
     public void connect(String host, int port) {
         connectionState.setValue("CONNECTING");
         try {

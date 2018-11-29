@@ -19,10 +19,10 @@ public class RepertuarViewController {
     }
 
     public void back(){
-     //   if(main.connected) {
+        if((boolean)threadClient.getConnected().get()) {
             viewManager.setLoggedScene();
-       // }
-        // else viewManager.setInitScene();
+        }
+         else viewManager.setInitScene();
     }
 
 
