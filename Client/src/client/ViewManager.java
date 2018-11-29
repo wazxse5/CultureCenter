@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class ViewManager {
     private Stage primaryStage;
@@ -57,7 +56,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/historyView.fxml"));
                 Parent parent = loader.load();
                 historyScene = new Scene(parent);
-
+                historyScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 historyViewController = loader.getController();
                 historyViewController.setViewManager(this);
@@ -75,6 +74,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/actualReservedView.fxml"));
                 Parent parent = loader.load();
                 actualReservedScene = new Scene(parent);
+                actualReservedScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 actualReservedViewController = loader.getController();
                 actualReservedViewController.setViewManager(this);
@@ -92,7 +92,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/logsView.fxml"));
                 Parent parent = loader.load();
                 logsScene = new Scene(parent);
-
+                logsScene.getStylesheets().add("/../commonSources/css/styles.css");
                 logsViewController = loader.getController();
                 logsViewController.setViewManager(this);
                 logsViewController.setThreadClient(threadClient);
@@ -109,6 +109,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertuarView.fxml"));
                 Parent parent = loader.load();
                 repertuarScene = new Scene(parent);
+                repertuarScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 repertuarViewController = loader.getController();
                 repertuarViewController.setViewManager(this);
@@ -126,6 +127,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/accountSettingsView.fxml"));
                 Parent parent = loader.load();
                 accountSettingsScene = new Scene(parent);
+                accountSettingsScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 accountSettingsViewController = loader.getController();
                 accountSettingsViewController.setViewManager(this);
@@ -161,6 +163,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/loginView.fxml"));
                 Parent parent = loader.load();
                 loginScene = new Scene(parent);
+                loginScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 loginViewController = loader.getController();
                 loginViewController.setViewManager(this);
@@ -178,6 +181,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/registerView.fxml"));
                 Parent parent = loader.load();
                 registerScene = new Scene(parent);
+                registerScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 registerViewController = loader.getController();
                 registerViewController.setViewManager(this);
@@ -195,6 +199,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/restorePasswordView.fxml"));
                 Parent parent = loader.load();
                 restorePasswordScene = new Scene(parent);
+                restorePasswordScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 restorePasswordViewController = loader.getController();
                 restorePasswordViewController.setViewManager(this);
@@ -212,6 +217,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/loggedView.fxml"));
                 Parent parent = loader.load();
                 loggedScene = new Scene(parent);
+                loggedScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 loggedViewController = loader.getController();
                 loggedViewController.setViewManager(this);

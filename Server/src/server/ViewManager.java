@@ -25,6 +25,8 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/initView.fxml"));
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
+                initScene.getStylesheets().add("/../commonSources/css/styles.css");
+
 
                 InitViewController initViewController = loader.getController();
                 initViewController.setViewManager(this);
