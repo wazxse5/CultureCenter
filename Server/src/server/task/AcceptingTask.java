@@ -39,7 +39,6 @@ public class AcceptingTask extends Task<Connection> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("end accepting");
         return null;
     }
 }

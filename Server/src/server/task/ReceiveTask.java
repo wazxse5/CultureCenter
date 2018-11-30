@@ -35,7 +35,6 @@ public class ReceiveTask extends Task<Message> {
             e.printStackTrace();
         }
 
-        System.out.println("end receive");
         return null;
     }
 }

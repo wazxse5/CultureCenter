@@ -27,13 +27,11 @@ public class AuthenticationTask extends Task<Client> {
             Client client = dataLoader.login(name, password);
             connection.send(new LoginAnswerMessage(true));
             connection.setClient(client);
-            System.out.println("Connection id=" + connection.getId() + " - logged user " + name);
             return client;
         } catch (AuthenticationException e) {
             connection.send(new LoginAnswerMessage(false, e.getCode()));
         }
 
-        System.out.println("Connection id=" + connection.getId() + " - authentication negative");
         return null;
     }
 

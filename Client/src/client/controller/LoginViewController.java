@@ -34,7 +34,7 @@ public class LoginViewController {
     }
 
     public void back() {
-        viewManager.setInitScene();
+        viewManager.clearContentPane();
     }
 
     public void setInfoLabel(String text) {

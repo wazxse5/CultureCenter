@@ -6,24 +6,29 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ViewManager {
-    private Stage primaryStage;
     private ThreadClient threadClient;
     private StringProperty connectionState = new SimpleStringProperty();
+
+    private Stage primaryStage;
+    private BorderPane contentPane;
+
     private Scene initScene;
-    private Scene loginScene;
-    private Scene loggedScene;
-    private Scene registerScene;
-    private Scene restorePasswordScene;
-    private Scene accountSettingsScene;
-    private Scene historyScene;
-    private Scene logsScene;
-    private Scene repertuarScene;
-    private Scene actualReservedScene;
+    private Region loginScene;
+    private Region loggedScene;
+    private Region registerScene;
+    private Region restorePasswordScene;
+    private Region accountSettingsScene;
+    private Region historyScene;
+    private Region logsScene;
+    private Region repertuarScene;
+    private Region actualReservedScene;
 
     private InitViewController initViewController;
     private LoginViewController loginViewController;
@@ -36,10 +41,15 @@ public class ViewManager {
     private RepertuarViewController repertuarViewController;
     private ActualReservedViewController actualReservedViewController;
 
+    private final String mainCssPath = "/../commonSources/css/styles.css";
+
 
     public ViewManager(Stage primaryStage, ThreadClient threadClient) {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
+
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(500);
 
         connectionState.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("NONE")) setTitle("Client");
@@ -54,8 +64,7 @@ public class ViewManager {
         if (historyScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/historyView.fxml"));
-                Parent parent = loader.load();
-                historyScene = new Scene(parent);
+                historyScene = loader.load();
                 historyScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 historyViewController = loader.getController();
@@ -65,15 +74,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku HistoryView");
             }
         }
-        primaryStage.setScene(historyScene);
+        contentPane.setCenter(historyScene);
     }
 
     public void setActualReservedScene() {
         if (actualReservedScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/actualReservedView.fxml"));
-                Parent parent = loader.load();
-                actualReservedScene = new Scene(parent);
+                actualReservedScene = loader.load();
                 actualReservedScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 actualReservedViewController = loader.getController();
@@ -83,16 +91,16 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku actualReservedView");
             }
         }
-        primaryStage.setScene(actualReservedScene);
+        contentPane.setCenter(actualReservedScene);
     }
 
     public void setLogsScene() {
         if (logsScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/logsView.fxml"));
-                Parent parent = loader.load();
-                logsScene = new Scene(parent);
+                logsScene = loader.load();
                 logsScene.getStylesheets().add("/../commonSources/css/styles.css");
+
                 logsViewController = loader.getController();
                 logsViewController.setViewManager(this);
                 logsViewController.setThreadClient(threadClient);
@@ -100,15 +108,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku logsView");
             }
         }
-        primaryStage.setScene(logsScene);
+        contentPane.setCenter(logsScene);
     }
 
     public void setRepertuarScene() {
         if (repertuarScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertuarView.fxml"));
-                Parent parent = loader.load();
-                repertuarScene = new Scene(parent);
+                repertuarScene = loader.load();
                 repertuarScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 repertuarViewController = loader.getController();
@@ -118,15 +125,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku repertuarView");
             }
         }
-        primaryStage.setScene(repertuarScene);
+        contentPane.setCenter(repertuarScene);
     }
 
     public void setAccountSettingsScene() {
         if (accountSettingsScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/accountSettingsView.fxml"));
-                Parent parent = loader.load();
-                accountSettingsScene = new Scene(parent);
+                accountSettingsScene = loader.load();
                 accountSettingsScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 accountSettingsViewController = loader.getController();
@@ -136,7 +142,7 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku accountSettingsView");
             }
         }
-        primaryStage.setScene(accountSettingsScene);
+        contentPane.setCenter(accountSettingsScene);
     }
 
     public void setInitScene() {
@@ -145,7 +151,7 @@ public class ViewManager {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/initView.fxml"));
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
-                initScene.getStylesheets().add("/../commonSources/css/styles.css");
+                initScene.getStylesheets().add(mainCssPath);
 
                 initViewController = loader.getController();
                 initViewController.setViewManager(this);
@@ -161,8 +167,7 @@ public class ViewManager {
         if (loginScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/loginView.fxml"));
-                Parent parent = loader.load();
-                loginScene = new Scene(parent);
+                loginScene = loader.load();
                 loginScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 loginViewController = loader.getController();
@@ -172,15 +177,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku loginView");
             }
         }
-        primaryStage.setScene(loginScene);
+        contentPane.setCenter(loginScene);
     }
 
     public void setRegisterScene() {
         if (registerScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/registerView.fxml"));
-                Parent parent = loader.load();
-                registerScene = new Scene(parent);
+                registerScene = loader.load();
                 registerScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 registerViewController = loader.getController();
@@ -190,15 +194,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku registerView");
             }
         }
-        primaryStage.setScene(registerScene);
+        contentPane.setCenter(registerScene);
     }
 
     public void setRestorePasswordScene() {
         if (restorePasswordScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/restorePasswordView.fxml"));
-                Parent parent = loader.load();
-                restorePasswordScene = new Scene(parent);
+                restorePasswordScene = loader.load();
                 restorePasswordScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 restorePasswordViewController = loader.getController();
@@ -208,15 +211,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku restorePasswordView");
             }
         }
-        primaryStage.setScene(restorePasswordScene);
+        contentPane.setCenter(restorePasswordScene);
     }
 
     public void setLoggedScene() {
         if (loggedScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/loggedView.fxml"));
-                Parent parent = loader.load();
-                loggedScene = new Scene(parent);
+                loggedScene = loader.load();
                 loggedScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 loggedViewController = loader.getController();
@@ -226,7 +228,11 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku loggedView");
             }
         }
-        primaryStage.setScene(loggedScene);
+        contentPane.setCenter(loggedScene);
+    }
+
+    public void clearContentPane() {
+        contentPane.setCenter(null);
     }
 
 
@@ -272,4 +278,7 @@ public class ViewManager {
         return repertuarViewController;
     }
 
+    public void setContentPane(BorderPane contentPane) {
+        this.contentPane = contentPane;
+    }
 }

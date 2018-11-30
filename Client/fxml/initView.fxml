@@ -1,23 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.InitViewController">
-   <children>
-      <Label layoutX="196.0" layoutY="30.0" text="Witaj w ośrodku kultury">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="loginButton" layoutX="220.0" layoutY="129.0" mnemonicParsing="false" onAction="#login" text="Zaloguj" />
-      <Button fx:id="registerButton" layoutX="293.0" layoutY="129.0" mnemonicParsing="false" onAction="#register" text="Załóż konto" />
-      <Button fx:id="repertuarButton" layoutX="229.0" layoutY="212.0" mnemonicParsing="false" onAction="#repertuar" text="Zobacz repertuar">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+<BorderPane fx:id="contentPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.InitViewController">
+   <top>
+      <AnchorPane styleClass="myborder">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="50.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Button minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="&lt;">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="&gt;">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField minWidth="150.0" prefHeight="30.0" prefWidth="500.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button minWidth="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Wyszukaj">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="registerButton" minWidth="80.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="80.0" text="Rejestracja">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="loginButton" minWidth="80.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="80.0" text="Logowanie">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox prefWidth="200.0" styleClass="myborder" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Polecane">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Wydarzenia">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="repertuarButton" mnemonicParsing="false" onAction="#repertuar" prefHeight="50.0" prefWidth="200.0" text="Repertuar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Informacje">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Restauracja">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Kontakt">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </left>
+   <bottom>
+      <HBox prefHeight="50.0" prefWidth="200.0" styleClass="myborder" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+
+   </center>
+</BorderPane>

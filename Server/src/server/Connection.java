@@ -1,5 +1,6 @@
 package server;
 
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -44,7 +45,6 @@ public class Connection {
     }
 
     public void close() {
-        System.out.println("Connection.close");
         try {
             if (!socket.isClosed()) socket.close();
             inputStream.close();
@@ -68,7 +68,8 @@ public class Connection {
         String text = "Połączenie id=" + id;
         if (client == null) text += " - niezalogowano";
         else text += " - użytkownik " + client.getName();
-        description.setValue(text);
+        String finalText = text;
+        Platform.runLater(() -> description.setValue(finalText));
     }
 
     public StringProperty descriptionProperty() {
