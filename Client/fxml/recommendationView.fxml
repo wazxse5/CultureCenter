@@ -9,175 +9,179 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane fx:id="flowPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RecommendationViewController">
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
+<AnchorPane styleClass="myborder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RecommendationViewController">
    <children>
-      <Label alignment="CENTER" prefHeight="46.0" prefWidth="586.0" text="TOP miesiąca">
+      <Label alignment="BOTTOM_CENTER" prefHeight="46.0" prefWidth="586.0" text="TOP miesiąca">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview1" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
+      <FlowPane fx:id="flowPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </padding>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
          <children>
-            <ImageView fx:id="imageview2" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview1" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview2" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview3" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview4" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview5" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview6" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview7" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="130.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
+               <children>
+                  <ImageView fx:id="imageview8" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </FlowPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview3" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview4" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview5" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview6" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview7" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="135.0" style="-fx-border-radius: 1; -fx-border-color: grey;">
-         <children>
-            <ImageView fx:id="imageview8" fitHeight="122.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <FlowPane.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-         </FlowPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
+      </FlowPane>
    </children>
-</FlowPane>
+</AnchorPane>
