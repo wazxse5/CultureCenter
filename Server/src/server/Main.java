@@ -20,5 +20,8 @@ public class Main extends Application {
         viewManager.setInitScene();
         primaryStage.setResizable(false);
         primaryStage.show();
+
+//        DBConnect connect = new DBConnect();
+//        connect.loginUser("adam", "1237");
     }
 }

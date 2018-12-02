@@ -5,14 +5,17 @@ import exception.NameIsInUseException;
 import exception.NoSuchUserException;
 import exception.WrongPasswordException;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataLoader {
     private List<Client> knownClients;
+    private DBConnect dbConnect;
 
     public DataLoader() {
         knownClients = new ArrayList<>();
+        dbConnect = new DBConnect();
         loadClients();
     }
 
@@ -41,25 +44,16 @@ public class DataLoader {
         return client;
     }
 
-    public synchronized Client login(String name, String password) throws AuthenticationException {
-        for (Client client : knownClients) {
-            if (client.getName().equals(name)) {
-                // TODO: Dodać sprawdzanie czy klient nie został już zaologowany
-                if (checkPassword(client, password, name)) {
-                    return client;
-                } else throw new WrongPasswordException();
-            }
+    public synchronized Client login(String name, String password) throws AuthenticationException, SQLException {
+        int result = dbConnect.loginUser(name, password);
+        if (result == 0) {
+            return new Client(name);
         }
-        throw new NoSuchUserException();
+        if (result == 2) throw new NoSuchUserException();
+        if (result == 3) throw new WrongPasswordException();
+        return null;
     }
 
-
-    private boolean checkPassword(Client client, String password, String login) {
-        // TODO: sprawdzanie hasła z pliku
-        if (client.getName().equals(login) && password.equals(client.getPassword())) return true;
-
-        else return false;
-    }
 
 
 }

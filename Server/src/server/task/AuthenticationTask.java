@@ -8,6 +8,8 @@ import server.Client;
 import server.DataLoader;
 import server.Connection;
 
+import java.sql.SQLException;
+
 public class AuthenticationTask extends Task<Client> {
     private final LoginRequestMessage loginRequestMessage;
     private final Connection connection;
@@ -30,6 +32,8 @@ public class AuthenticationTask extends Task<Client> {
             return client;
         } catch (AuthenticationException e) {
             connection.send(new LoginAnswerMessage(false, e.getCode()));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return null;
