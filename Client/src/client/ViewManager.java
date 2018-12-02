@@ -21,7 +21,6 @@ public class ViewManager {
 
     public Scene initScene;
     private Region loginScene;
-    private Region loggedScene;
     private Region registerScene;
     private Region restorePasswordScene;
     private Region accountSettingsScene;
@@ -37,7 +36,6 @@ public class ViewManager {
 
     private InitViewController initViewController;
     private LoginViewController loginViewController;
-    private LoggedViewController loggedViewController;
     private RegisterViewController registerViewController;
     private RestorePasswordController restorePasswordViewController;
     private AccountSettingsViewController accountSettingsViewController;
@@ -58,7 +56,7 @@ public class ViewManager {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
 
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinWidth(810);
         primaryStage.setMinHeight(500);
 
         connectionState.addListener((observable, oldValue, newValue) -> {
@@ -86,7 +84,6 @@ public class ViewManager {
         contentPane.setCenter(contactScene);
     }
 
-
     public void setInfosScene() {
         if (infosScene == null) {
             try {
@@ -103,7 +100,6 @@ public class ViewManager {
         }
         contentPane.setCenter(infosScene);
     }
-
 
     public void setHistoryScene() {
         if (historyScene == null) {
@@ -139,8 +135,6 @@ public class ViewManager {
         contentPane.setCenter(eventsScene);
     }
 
-
-
     public void setRecommendationsScene() {
         if (recommendationScene == null) {
             try {
@@ -157,8 +151,6 @@ public class ViewManager {
         }
         contentPane.setCenter(recommendationScene);
     }
-
-
 
     public void setActualReservedScene() {
         if (actualReservedScene == null) {
@@ -297,27 +289,10 @@ public class ViewManager {
         contentPane.setCenter(restorePasswordScene);
     }
 
-    public void setLoggedScene() {
-        if (loggedScene == null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/loggedView.fxml"));
-                loggedScene = loader.load();
-                loggedScene.getStylesheets().add("/../commonSources/css/styles.css");
-
-                loggedViewController = loader.getController();
-                loggedViewController.setViewManager(this);
-                loggedViewController.setThreadClient(threadClient);
-            } catch (IOException e) {
-                setTitle("Nie można załadować widoku loggedView");
-            }
-        }
-        contentPane.setCenter(loggedScene);
-    }
 
     public void clearContentPane() {
         contentPane.setCenter(null);
     }
-
 
 
     public void setTitle(String title) {
@@ -343,10 +318,6 @@ public class ViewManager {
 
     public EventsViewController getEventsViewController() {
         return eventsViewController;
-    }
-
-    public LoggedViewController getLoggedViewController() {
-        return loggedViewController;
     }
 
     public RestorePasswordController getRestorePasswordViewController(){

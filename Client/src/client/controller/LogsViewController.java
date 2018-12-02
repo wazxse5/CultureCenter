@@ -17,7 +17,6 @@ public class LogsViewController {
     }
 
     public void back(){
-        viewManager.setLoggedScene();
 
     }
 

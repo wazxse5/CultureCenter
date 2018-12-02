@@ -3,10 +3,12 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 
 public class InitViewController {
@@ -15,6 +17,11 @@ public class InitViewController {
 
     @FXML private BorderPane contentPane;
     @FXML private ImageView imageView;
+
+    @FXML private HBox hboxLoggedNO;
+    @FXML private HBox hboxLoggedYES;
+    @FXML private HBox hboxLoggedAs;
+    @FXML private Label loggedUserName;
 
     public void initialize() {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
@@ -29,8 +36,16 @@ public class InitViewController {
         viewManager.setLoginScene();
     }
 
+    public  void logout() {
+
+    }
+
     public void register() {
         viewManager.setRegisterScene();
+    }
+
+    public void accountSettings() {
+
     }
 
     public void repertuar(){
@@ -58,6 +73,10 @@ public class InitViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        hboxLoggedNO.visibleProperty().bind(threadClient.loggedProperty().not());
+        hboxLoggedYES.visibleProperty().bind(threadClient.loggedProperty());
+        hboxLoggedAs.visibleProperty().bind(threadClient.loggedProperty());
+        loggedUserName.textProperty().bind(threadClient.userNameProperty());
     }
 
     public void setViewManager(ViewManager viewManager) {

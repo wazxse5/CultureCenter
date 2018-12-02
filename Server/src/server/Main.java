@@ -17,11 +17,9 @@ public class Main extends Application {
 
         primaryStage.setOnCloseRequest(event -> threadServer.close());
         primaryStage.setTitle("Server");
+        primaryStage.setMinHeight(400);
+        primaryStage.setMinWidth(300);
         viewManager.setInitScene();
-        primaryStage.setResizable(false);
         primaryStage.show();
-
-//        DBConnect connect = new DBConnect();
-//        connect.loginUser("adam", "1237");
     }
 }

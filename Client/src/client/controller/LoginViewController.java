@@ -23,12 +23,10 @@ public class LoginViewController {
     }
 
     public void sendLoginRequest() {
-
         String login = loginTF.getText();
         String password = passwordTF.getText();
         threadClient.sendLoginRequest(login, password);
         infoLabel.setText("Nie można nawiązać połączenia");
-
     }
 
     public void back() {

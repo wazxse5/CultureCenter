@@ -28,6 +28,8 @@ public class RegisterViewController {
     }
 
     public void sendRegisterRequest() {
+        String name = nameTF.getText();
+        String surname = surnameTF.getText();
         String login = loginTF.getText();
         String password = passwordTF.getText();
         String password2 = password1TF.getText();
@@ -36,7 +38,7 @@ public class RegisterViewController {
         if (!login.equals("") && !password.equals("") && !password2.equals("") && !email.equals("")) {
 
             if (password.equals(password2)) {
-                threadClient.sendRegisterRequest(login, password, email);
+                threadClient.sendRegisterRequest(name, surname, login, password, email);
                 setInfoLabel(4);
             } else setInfoLabel(2);
         }

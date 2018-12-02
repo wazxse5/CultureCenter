@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 public class ThreadClient {
     private BooleanProperty connected = new SimpleBooleanProperty(false);
     private StringProperty connectionState = new SimpleStringProperty("NONE");
+    private BooleanProperty logged = new SimpleBooleanProperty(false);
     private StringProperty userName = new SimpleStringProperty();
 
     private Connection connection;
@@ -35,9 +36,7 @@ public class ThreadClient {
         try {
             ConnectTask connectTask = new ConnectTask(host, port);
             connectTask.setOnSucceeded(event -> handleConnection((Connection) event.getSource().getValue()));
-            connectTask.setOnFailed(event -> {
-                connectionState.setValue("NOT_CONNECTED");
-            });
+            connectTask.setOnFailed(event -> connectionState.setValue("NOT_CONNECTED"));
             executor.execute(connectTask);
         } catch (Exception e) {
             connectionState.setValue("NOT_CONNECTED");
@@ -62,7 +61,8 @@ public class ThreadClient {
         if (message instanceof LoginAnswerMessage) {
             LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
             if (loginAnswer.isGood()) {
-                viewManager.setLoggedScene();
+                viewManager.setRecommendationsScene();
+                logged.setValue(true);
             } else {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
@@ -79,20 +79,11 @@ public class ThreadClient {
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
 
-    public void sendLoginCheckRequest(String name) {
-        if (connected.get()) {
-            connection.send(new LoginRequestMessage(name));
-        } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
-    }
-
-
-
-    public void sendRegisterRequest(String name, String password, String email) {
+    public void sendRegisterRequest(String name, String surname, String login, String password, String email) {
         if(connected.get()){
-            connection.send(new RegisterRequestMessage(name,password,email));
+            connection.send(new RegisterRequestMessage(name, surname, login,password,email));
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
-
 
     public void disconnect() {
         if (connection != null) {
@@ -106,6 +97,10 @@ public class ThreadClient {
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
         viewManager.connectionStateProperty().bind(connectionState);
+    }
+
+    public BooleanProperty loggedProperty() {
+        return logged;
     }
 
     public BooleanProperty connectedProperty() {

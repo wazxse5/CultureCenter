@@ -45,7 +45,7 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="hboxTF" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox fx:id="hboxLoggedNO" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Button fx:id="registerButton" minWidth="80.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="80.0" text="Rejestracja">
                      <HBox.margin>
@@ -53,6 +53,23 @@
                      </HBox.margin>
                   </Button>
                   <Button fx:id="loginButton" minWidth="80.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="80.0" text="Logowanie">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="hboxLoggedYES" alignment="CENTER_RIGHT" layoutX="620.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="accountButton" minWidth="80.0" mnemonicParsing="false" onAction="#accountSettings" prefHeight="30.0" prefWidth="80.0" text="Konto">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="logoutButton" minWidth="80.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="80.0" text="Wyloguj">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -118,7 +135,30 @@
       </VBox>
    </left>
    <bottom>
-      <HBox prefHeight="50.0" prefWidth="200.0" styleClass="myborder" BorderPane.alignment="CENTER" />
+      <AnchorPane styleClass="myborder">
+         <children>
+            <HBox fx:id="hboxLoggedAs" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Zalogowano jako: ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="loggedUserName" text="userName">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
    </bottom>
    <center>
 

@@ -17,7 +17,6 @@ public class ActualReservedViewController {
     }
 
     public void back(){
-        viewManager.setLoggedScene();
 
     }
 

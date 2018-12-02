@@ -1,7 +1,6 @@
 package server;
 
 import exception.AuthenticationException;
-import exception.NameIsInUseException;
 import exception.NoSuchUserException;
 import exception.WrongPasswordException;
 
@@ -30,8 +29,8 @@ public class DataLoader {
     }
 
 
-    public synchronized int register(String login, String password, String mail) throws SQLException {
-        int result = dbConnect.addClient("name", "surname", mail, login, password);
+    public synchronized int register(String name, String surname, String login, String password, String mail) throws SQLException {
+        int result = dbConnect.addClient(name, surname, mail, login, password);
         return result;
     }
 

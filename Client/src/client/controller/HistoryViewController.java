@@ -17,7 +17,6 @@ public class HistoryViewController {
     }
 
     public void back(){
-        viewManager.setLoggedScene();
 
     }
 

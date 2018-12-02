@@ -17,7 +17,6 @@ public class AccountSettingsViewController {
     }
 
     public void back(){
-        viewManager.setLoggedScene();
 
     }
 

@@ -1,6 +1,5 @@
 package server;
 
-import exception.AuthenticationException;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -71,7 +70,7 @@ public class ThreadServer {
         if(message instanceof RegisterRequestMessage){
             RegisterRequestMessage registerRequest = (RegisterRequestMessage) message;
             try {
-                int res = dataLoader.register(registerRequest.getName(), registerRequest.getPassword(), registerRequest.getMail());
+                int res = dataLoader.register(registerRequest.getName(), registerRequest.getSurname(), registerRequest.getLogin(), registerRequest.getPassword(), registerRequest.getMail());
                 if (res == 0) connection.send(new RegisterAnswerMessage(true));
                 else connection.send(new RegisterAnswerMessage(false, res));
             } catch (SQLException e) {
