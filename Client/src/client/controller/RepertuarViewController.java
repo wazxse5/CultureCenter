@@ -18,15 +18,6 @@ public class RepertuarViewController {
 
     }
 
-    public void back(){
-        if((boolean)threadClient.getConnected().get()) {
-            viewManager.setLoggedScene();
-        }
-         else viewManager.setInitScene();
-    }
-
-
-
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
