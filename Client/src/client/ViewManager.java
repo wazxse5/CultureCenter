@@ -6,8 +6,8 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class ViewManager {
     private Stage primaryStage;
     private BorderPane contentPane;
 
-    private Scene initScene;
+    public Scene initScene;
     private Region loginScene;
     private Region loggedScene;
     private Region registerScene;
@@ -30,6 +30,10 @@ public class ViewManager {
     private Region repertuarScene;
     private Region actualReservedScene;
     private Region recommendationScene;
+    private Region eventsScene;
+    private Region infosScene;
+    private Region contactScene;
+
 
     private InitViewController initViewController;
     private LoginViewController loginViewController;
@@ -42,6 +46,10 @@ public class ViewManager {
     private RepertuarViewController repertuarViewController;
     private ActualReservedViewController actualReservedViewController;
     private RecommendationViewController recommendationViewController;
+    private EventsViewController eventsViewController;
+    private InfosViewController infosViewController;
+    private ContactViewController contactViewController;
+
 
     private final String mainCssPath = "/../commonSources/css/styles.css";
 
@@ -59,6 +67,41 @@ public class ViewManager {
             if (newValue.equals("CONNECTED")) setTitle("Client - połączono");
             if (newValue.equals("NOT_CONNECTED")) setTitle("Client - brak połączenia");
         });
+    }
+
+    public void setContactScene() {
+        if (infosScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/contactView.fxml"));
+                contactScene = loader.load();
+                contactScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                contactViewController = loader.getController();
+                contactViewController.setViewManager(this);
+                contactViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku ContactsView");
+            }
+        }
+        contentPane.setCenter(contactScene);
+    }
+
+
+    public void setInfosScene() {
+        if (infosScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/infosView.fxml"));
+                infosScene = loader.load();
+                infosScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                infosViewController = loader.getController();
+                infosViewController.setViewManager(this);
+                infosViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku InfosView");
+            }
+        }
+        contentPane.setCenter(infosScene);
     }
 
 
@@ -79,8 +122,27 @@ public class ViewManager {
         contentPane.setCenter(historyScene);
     }
 
+    public void setEventsScene() {
+        if (eventsScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/eventsView.fxml"));
+                eventsScene = loader.load();
+                eventsScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                eventsViewController = loader.getController();
+                eventsViewController.setViewManager(this);
+                eventsViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku EventsView");
+            }
+        }
+        contentPane.setCenter(eventsScene);
+    }
+
+
+
     public void setRecommendationsScene() {
-        if (historyScene == null) {
+        if (recommendationScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/recommendationView.fxml"));
                 recommendationScene = loader.load();
@@ -95,6 +157,8 @@ public class ViewManager {
         }
         contentPane.setCenter(recommendationScene);
     }
+
+
 
     public void setActualReservedScene() {
         if (actualReservedScene == null) {
@@ -275,6 +339,10 @@ public class ViewManager {
 
     public LoginViewController getLoginViewController() {
         return loginViewController;
+    }
+
+    public EventsViewController getEventsViewController() {
+        return eventsViewController;
     }
 
     public LoggedViewController getLoggedViewController() {

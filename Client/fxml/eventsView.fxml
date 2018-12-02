@@ -7,9 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RepertuarViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
    <children>
-      <Label alignment="CENTER" layoutX="176.0" layoutY="25.0" prefHeight="30.0" prefWidth="251.0" text="Repertuar">
+      <Label alignment="CENTER" layoutX="175.0" layoutY="29.0" prefHeight="30.0" prefWidth="251.0" text="Wydarzenia">
          <font>
             <Font size="20.0" />
          </font>
@@ -29,13 +29,13 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <TableView layoutX="17.0" layoutY="67.0" prefHeight="209.0" prefWidth="568.0">
+      <TableView layoutX="17.0" layoutY="68.0" prefHeight="209.0" prefWidth="568.0">
         <columns>
-          <TableColumn prefWidth="119.0" text="Nazwa Wydarzenia" />
-            <TableColumn prefWidth="93.0" text="Data" />
-            <TableColumn prefWidth="93.0" text="Godzina" />
-            <TableColumn prefWidth="93.0" text="Sala" />
-            <TableColumn prefWidth="93.0" text="il. miejsc" />
+          <TableColumn prefWidth="122.0" text="Nazwa Wydarzenia" />
+          <TableColumn prefWidth="137.0" text="Typ" />
+            <TableColumn prefWidth="88.0" text="Data" />
+            <TableColumn prefWidth="107.0" text="Godzina" />
+            <TableColumn prefWidth="113.0" text="Sala" />
         </columns>
       </TableView>
    </children>

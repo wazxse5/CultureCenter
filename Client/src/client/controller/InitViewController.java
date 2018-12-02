@@ -5,7 +5,9 @@ import client.ViewManager;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+
 
 public class InitViewController {
     private ViewManager viewManager;
@@ -17,6 +19,10 @@ public class InitViewController {
     public void initialize() {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
         imageView.setImage(logo);
+        imageView.setOnMouseClicked((MouseEvent event) -> {
+            contentPane.setCenter(null);
+        });
+
     }
 
     public void login() {
@@ -33,6 +39,20 @@ public class InitViewController {
 
     public void recommendation() {
         viewManager.setRecommendationsScene();
+    }
+
+    public void events(){
+        viewManager.setEventsScene();
+    }
+
+    public void infos(){
+        viewManager.setInfosScene();
+
+    }
+
+    public void contact(){
+        viewManager.setContactScene();
+
     }
 
 

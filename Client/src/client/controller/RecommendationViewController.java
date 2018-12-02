@@ -3,7 +3,6 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class RecommendationViewController {
@@ -20,7 +19,7 @@ public class RecommendationViewController {
     @FXML private ImageView imageview8;
 
     public void initialize() {
-        Image image = new Image(String.valueOf(getClass().getResource("/../commonSources/images/no-image.jpg")));
+        /*Image image = new Image(String.valueOf(getClass().getResource("/../commonSources/images/no-image.jpg")));
         imageview1.setImage(image);
         imageview2.setImage(image);
         imageview3.setImage(image);
@@ -29,6 +28,7 @@ public class RecommendationViewController {
         imageview6.setImage(image);
         imageview7.setImage(image);
         imageview8.setImage(image);
+        */
     }
 
     public void setThreadClient(ThreadClient threadClient) {
