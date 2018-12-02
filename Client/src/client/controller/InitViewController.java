@@ -15,7 +15,7 @@ public class InitViewController {
     @FXML private ImageView imageView;
 
     public void initialize() {
-        Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/logo.png")));
+        Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
         imageView.setImage(logo);
     }
 
@@ -29,6 +29,10 @@ public class InitViewController {
 
     public void repertuar(){
         viewManager.setRepertuarScene();
+    }
+
+    public void recommendation() {
+        viewManager.setRecommendationsScene();
     }
 
 

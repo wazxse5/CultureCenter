@@ -1,5 +1,6 @@
 package server;
 
+import exception.AuthenticationException;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import server.task.ReceiveTask;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -68,7 +70,13 @@ public class ThreadServer {
         }
         if(message instanceof RegisterRequestMessage){
             RegisterRequestMessage registerRequest = (RegisterRequestMessage) message;
-            dataLoader.addClient(registerRequest.getName(),registerRequest.getPassword(),registerRequest.getMail());
+            try {
+                int res = dataLoader.register(registerRequest.getName(), registerRequest.getPassword(), registerRequest.getMail());
+                if (res == 0) connection.send(new RegisterAnswerMessage(true));
+                else connection.send(new RegisterAnswerMessage(false, res));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         if(message instanceof  LoginCheckAnswerMessage){
             LoginCheckRequestMessage checkRequest = (LoginCheckRequestMessage) message;

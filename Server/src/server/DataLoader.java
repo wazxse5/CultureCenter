@@ -24,24 +24,15 @@ public class DataLoader {
     }
 
     public void loadClients() {
-        knownClients.add(new Client("test","0000","o@.pl"));
-        knownClients.add(new Client("wazxse5","1234","adasd@o2.pl"));
-        knownClients.add(new Client("admin","admin","cos@o2.pl"));
+        knownClients.add(new Client("test", "0000", "o@.pl"));
+        knownClients.add(new Client("wazxse5", "1234", "adasd@o2.pl"));
+        knownClients.add(new Client("admin", "admin", "cos@o2.pl"));
     }
 
-    public void addClient(String name,String password, String email){
-        knownClients.add(new Client (name, password, email));
-    }
 
-    public synchronized Client register(String name, String password) throws AuthenticationException {
-        for (Client c : knownClients) {
-            if (c.getName().equals(name)) {
-                throw new NameIsInUseException();
-            }
-        }
-        Client client = new Client(name);
-        knownClients.add(client);
-        return client;
+    public synchronized int register(String login, String password, String mail) throws SQLException {
+        int result = dbConnect.addClient("name", "surname", mail, login, password);
+        return result;
     }
 
     public synchronized Client login(String name, String password) throws AuthenticationException, SQLException {
@@ -53,7 +44,6 @@ public class DataLoader {
         if (result == 3) throw new WrongPasswordException();
         return null;
     }
-
 
 
 }

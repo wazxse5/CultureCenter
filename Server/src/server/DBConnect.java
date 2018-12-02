@@ -64,6 +64,14 @@ public class DBConnect {
         }
     }
 
+    public int addClient(String name, String surname, String mail, String login, String password) throws SQLException {
+        String query = "CALL addClient(\"" + name + "\", \"" + surname + "\", \"" + mail + "\", \"" + login + "\", \"" + password + "\")";
+        rs = st.executeQuery(query);
+        rs.next();
+        int res = rs.getInt("res");
+        return res;
+    }
+
     public int loginUser(String name, String password) throws SQLException {
         String query = "CALL loginClient(\"" + name + "\", \"" + password + "\")";
         rs = st.executeQuery(query);

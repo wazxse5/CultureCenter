@@ -15,7 +15,7 @@ public class RegisterAnswerMessage extends Message {
         this.infoCode = infoCode;
     }
 
-    public boolean isOk() {
+    public boolean isGood() {
         return ok;
     }
 

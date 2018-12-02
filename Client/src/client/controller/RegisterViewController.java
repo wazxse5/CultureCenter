@@ -31,22 +31,12 @@ public class RegisterViewController {
 
         if (!login.equals("") && !password.equals("") && !password2.equals("") && !email.equals("")) {
 
-            if (password.equals(password2)==true) {
-                if(!sendLoginCheckRequest()) {
-                    threadClient.sendRegisterRequest(login, password, email);
-                    setInfoLabel(4);
-                } else setInfoLabel(1);
+            if (password.equals(password2)) {
+                threadClient.sendRegisterRequest(login, password, email);
+                setInfoLabel(4);
             } else setInfoLabel(2);
         }
         else setInfoLabel(3);
-    }
-    public boolean sendLoginCheckRequest(){
-        String login = loginTFR.getText();
-        boolean result = false;
-        if(!login.equals("")){
-           threadClient.sendLoginCheckRequest(login);
-        }
-        return result;
     }
 
     public void setInfoLabel(int code) {

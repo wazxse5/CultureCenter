@@ -68,7 +68,7 @@
    <left>
       <VBox prefWidth="200.0" styleClass="myborder" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Polecane">
+            <Button mnemonicParsing="false" onAction="#recommendation" prefHeight="50.0" prefWidth="200.0" text="Polecane">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>

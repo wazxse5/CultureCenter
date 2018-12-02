@@ -29,6 +29,7 @@ public class ViewManager {
     private Region logsScene;
     private Region repertuarScene;
     private Region actualReservedScene;
+    private Region recommendationScene;
 
     private InitViewController initViewController;
     private LoginViewController loginViewController;
@@ -40,6 +41,7 @@ public class ViewManager {
     private LogsViewController logsViewController;
     private RepertuarViewController repertuarViewController;
     private ActualReservedViewController actualReservedViewController;
+    private RecommendationViewController recommendationViewController;
 
     private final String mainCssPath = "/../commonSources/css/styles.css";
 
@@ -75,6 +77,23 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(historyScene);
+    }
+
+    public void setRecommendationsScene() {
+        if (historyScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/recommendationView.fxml"));
+                recommendationScene = loader.load();
+                recommendationScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                recommendationViewController = loader.getController();
+                recommendationViewController.setViewManager(this);
+                recommendationViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku RecommendationView");
+            }
+        }
+        contentPane.setCenter(recommendationScene);
     }
 
     public void setActualReservedScene() {

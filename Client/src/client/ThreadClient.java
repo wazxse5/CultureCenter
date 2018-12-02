@@ -67,6 +67,9 @@ public class ThreadClient {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
         }
+        if (message instanceof RegisterAnswerMessage) {
+            RegisterAnswerMessage registerAnswer = (RegisterAnswerMessage) message;
+        }
     }
 
     public void sendLoginRequest(String name, String password) {

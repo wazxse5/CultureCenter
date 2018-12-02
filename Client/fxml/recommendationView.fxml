@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<FlowPane fx:id="flowPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RecommendationViewController">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <children>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview1" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview2" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview3" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview4" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview5" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview6" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview7" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="130.0">
+         <children>
+            <ImageView fx:id="imageview8" fitHeight="160.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="120.0" text="Tytuł">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</FlowPane>
