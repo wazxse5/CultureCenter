@@ -28,7 +28,9 @@ public class InitViewController {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
         imageView.setImage(logo);
         imageView.setOnMouseClicked((MouseEvent event) -> {
-            contentPane.setCenter(null);
+            viewManager.setRecommendationsScene();
+//            contentPane.setCenter(null);
+
         });
 
     }
@@ -68,7 +70,6 @@ public class InitViewController {
 
     public void contact(){
         viewManager.setContactScene();
-
     }
 
 

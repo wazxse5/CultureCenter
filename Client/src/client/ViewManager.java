@@ -68,7 +68,7 @@ public class ViewManager {
     }
 
     public void setContactScene() {
-        if (infosScene == null) {
+        if (contactScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/contactView.fxml"));
                 contactScene = loader.load();
