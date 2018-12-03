@@ -63,6 +63,10 @@ public class ThreadServer {
             AuthenticationTask authenticationTask = new AuthenticationTask(loginRequest, connection, dataLoader);
             executor.submit(authenticationTask);
         }
+        if (message instanceof LogoutRequestMessage) {
+            connection.send(new LogoutAnswerMessage());
+            connection.setClient(null);
+        }
         if (message instanceof GoodbyeMessage) {
             connectedConnections.remove(connection);
             connection.close();

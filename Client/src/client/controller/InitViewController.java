@@ -22,6 +22,7 @@ public class InitViewController {
     @FXML private HBox hboxLoggedYES;
     @FXML private HBox hboxLoggedAs;
     @FXML private Label loggedUserName;
+    @FXML private Label notLoggedLabel;
 
     public void initialize() {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
@@ -37,7 +38,7 @@ public class InitViewController {
     }
 
     public  void logout() {
-
+        threadClient.sendLogoutRequest();
     }
 
     public void register() {
@@ -77,6 +78,7 @@ public class InitViewController {
         hboxLoggedYES.visibleProperty().bind(threadClient.loggedProperty());
         hboxLoggedAs.visibleProperty().bind(threadClient.loggedProperty());
         loggedUserName.textProperty().bind(threadClient.userNameProperty());
+        notLoggedLabel.visibleProperty().bind(threadClient.loggedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {

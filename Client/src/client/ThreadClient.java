@@ -31,6 +31,7 @@ public class ThreadClient {
     public BooleanProperty getConnected(){
         return connected;
     }
+
     public void connect(String host, int port) {
         connectionState.setValue("CONNECTING");
         try {
@@ -70,6 +71,9 @@ public class ThreadClient {
         if (message instanceof RegisterAnswerMessage) {
             RegisterAnswerMessage registerAnswer = (RegisterAnswerMessage) message;
         }
+        if (message instanceof LogoutAnswerMessage) {
+            logged.setValue(false);
+        }
     }
 
     public void sendLoginRequest(String name, String password) {
@@ -83,6 +87,12 @@ public class ThreadClient {
         if(connected.get()){
             connection.send(new RegisterRequestMessage(name, surname, login,password,email));
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
+    }
+
+    public void sendLogoutRequest() {
+        if (connected.get()) {
+            connection.send(new LogoutRequestMessage());
+        }
     }
 
     public void disconnect() {

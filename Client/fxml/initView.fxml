@@ -137,7 +137,12 @@
    <bottom>
       <AnchorPane styleClass="myborder">
          <children>
-            <HBox fx:id="hboxLoggedAs" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+            <Label fx:id="notLoggedLabel" text="Niezalogowano" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox fx:id="hboxLoggedAs" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Zalogowano jako: ">
                      <font>
