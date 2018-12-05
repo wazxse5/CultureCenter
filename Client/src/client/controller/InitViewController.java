@@ -71,6 +71,12 @@ public class InitViewController {
     public void contact(){
         viewManager.setContactScene();
     }
+    public void logs(){
+        viewManager.setLogsScene();
+        if((boolean)threadClient.getConnected().get()) threadClient.sendLogsCheckRequest((String)(threadClient.getUserName().get()));
+        threadClient.sendLogsCheckRequest("");
+
+    }
 
 
     public void setThreadClient(ThreadClient threadClient) {

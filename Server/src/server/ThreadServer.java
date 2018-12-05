@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 import message.*;
 import server.task.AcceptingTask;
 import server.task.AuthenticationTask;
@@ -85,9 +86,22 @@ public class ThreadServer {
             LoginCheckRequestMessage checkRequest = (LoginCheckRequestMessage) message;
             if(dataLoader.getKnownClients().contains( checkRequest.getLogin())) {
                 checkRequest.stateTrue();
-                //wyslij wiadomosc do klienta true
             }
         }
+        if (message instanceof LogsCheckRequestMessage){
+            LogsCheckRequestMessage checkRequest = (LogsCheckRequestMessage) message;
+            TableView result;
+            try {
+                result = dataLoader.getLogs(checkRequest.getLogin());
+                connection.send(new LogsCheckAnswerMessage(result));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+
+        }
+
     }
 
     public void setViewManager(ViewManager viewManager) {

@@ -14,10 +14,20 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="backToLoginButton" layoutX="334.0" layoutY="321.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="240.0" text="Cofnij">
+      <Button fx:id="refreshButton" layoutX="37.0" layoutY="322.0" mnemonicParsing="false" onAction="#refresh" prefHeight="30.0" prefWidth="99.0" text="Odśwież">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+      <TableView fx:id="tableLogs" layoutX="37.0" layoutY="96.0" prefHeight="209.0" prefWidth="537.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="38.0" text="id" />
+          <TableColumn fx:id="columnUser" prefWidth="139.0" text="user" />
+            <TableColumn fx:id="columnMail" prefWidth="100.0" text="mail" />
+            <TableColumn fx:id="columnDate" prefWidth="70.0" text="date" />
+            <TableColumn fx:id="columnType" prefWidth="92.0" text="type" />
+            <TableColumn fx:id="columnAddInfo" prefWidth="97.0" text="addInfo" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

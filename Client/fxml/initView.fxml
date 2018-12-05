@@ -125,6 +125,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button fx:id="LogsButton" mnemonicParsing="false" onAction="#logs" prefHeight="50.0" prefWidth="200.0" text="Logi">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
          <BorderPane.margin>
             <Insets />

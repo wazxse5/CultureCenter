@@ -1,8 +1,7 @@
 package server;
 
-import java.sql.*;
 import java.sql.Connection;
-
+import java.sql.*;
 public class DBConnect {
     private Connection con;
     private Statement st;
@@ -14,7 +13,7 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-    private String password = "";
+    private String password = "usbw";
 
 
     public DBConnect() {
@@ -79,4 +78,14 @@ public class DBConnect {
         int res = rs.getInt("res");
         return res;
     }
+
+    public ResultSet getLogs(String login)throws SQLException{
+        String query = "CALL showLogs(\""+login + "\")";
+        rs=st.executeQuery(query);
+        System.out.println(rs);
+        rs.next();
+        return rs;
+    }
+
+
 }

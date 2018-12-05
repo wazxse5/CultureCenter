@@ -6,6 +6,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.TableView;
 import message.*;
 
 import java.util.concurrent.ExecutorService;
@@ -16,6 +17,10 @@ public class ThreadClient {
     private StringProperty connectionState = new SimpleStringProperty("NONE");
     private BooleanProperty logged = new SimpleBooleanProperty(false);
     private StringProperty userName = new SimpleStringProperty();
+
+
+
+    private TableView logsCheckData = new TableView();
 
     private Connection connection;
 
@@ -74,6 +79,11 @@ public class ThreadClient {
         if (message instanceof LogoutAnswerMessage) {
             logged.setValue(false);
         }
+        if(message instanceof LogsCheckAnswerMessage){
+            LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
+            logsCheckData = logsAnswer.getResult();
+            System.out.println(logsCheckData);
+        }
     }
 
     public void sendLoginRequest(String name, String password) {
@@ -93,6 +103,12 @@ public class ThreadClient {
         if (connected.get()) {
             connection.send(new LogoutRequestMessage());
         }
+    }
+    public void sendLogsCheckRequest(String login){
+        if(connected.get()){
+            connection.send(new LogsCheckRequestMessage(login));
+        }
+
     }
 
     public void disconnect() {
@@ -119,5 +135,11 @@ public class ThreadClient {
 
     public StringProperty userNameProperty() {
         return userName;
+    }
+    public StringProperty getUserName(){
+        return  userName;
+    }
+    public TableView getLogsCheckData() {
+        return logsCheckData;
     }
 }

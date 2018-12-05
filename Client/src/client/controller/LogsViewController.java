@@ -2,12 +2,13 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 
 public class LogsViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
-
-
+    @FXML private TableView tableView;
     public void initialize() {
 
     }
@@ -19,6 +20,12 @@ public class LogsViewController {
     public void back(){
 
     }
+
+    public void refresh(){
+       tableView = threadClient.getLogsCheckData();
+        //System.out.println(threadClient.getLogsCheckData());
+    }
+
 
 
 
