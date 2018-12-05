@@ -6,9 +6,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.TableView;
 import message.*;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,7 +20,7 @@ public class ThreadClient {
 
 
 
-    private TableView logsCheckData = new TableView();
+    private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<ArrayList<String>>();
 
     private Connection connection;
 
@@ -82,7 +82,6 @@ public class ThreadClient {
         if(message instanceof LogsCheckAnswerMessage){
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
             logsCheckData = logsAnswer.getResult();
-            System.out.println(logsCheckData);
         }
     }
 
@@ -139,7 +138,7 @@ public class ThreadClient {
     public StringProperty getUserName(){
         return  userName;
     }
-    public TableView getLogsCheckData() {
+    public ArrayList<ArrayList<String>> getLogsCheckData() {
         return logsCheckData;
     }
 }

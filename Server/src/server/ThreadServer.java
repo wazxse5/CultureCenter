@@ -4,7 +4,6 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
 import message.*;
 import server.task.AcceptingTask;
 import server.task.AuthenticationTask;
@@ -90,7 +89,7 @@ public class ThreadServer {
         }
         if (message instanceof LogsCheckRequestMessage){
             LogsCheckRequestMessage checkRequest = (LogsCheckRequestMessage) message;
-            TableView result;
+            ArrayList<ArrayList<String>> result;
             try {
                 result = dataLoader.getLogs(checkRequest.getLogin());
                 connection.send(new LogsCheckAnswerMessage(result));

@@ -1,16 +1,16 @@
 package message;
 
-import javafx.scene.control.TableView;
+import java.util.ArrayList;
 
 public class LogsCheckAnswerMessage extends Message {
     private static final long serialVersionUID = 577111173596981704L;
-    private TableView result;
+    private ArrayList<ArrayList<String>> result;
 
-    public TableView getResult(){
+    public ArrayList getResult(){
         return result;
     }
 
-    public LogsCheckAnswerMessage(TableView result){
+    public LogsCheckAnswerMessage(ArrayList result){
         this.result = result;
 
     }

@@ -76,6 +76,7 @@ public class InitViewController {
         if((boolean)threadClient.getConnected().get()) threadClient.sendLogsCheckRequest((String)(threadClient.getUserName().get()));
         threadClient.sendLogsCheckRequest("");
 
+
     }
 
 
