@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +15,8 @@ import java.util.Iterator;
 public class LogsViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
-    private TableView<ArrayList> table;
+    private Iterator<ArrayList<String>> it;
+    private ObservableList<ArrayList> list;
     @FXML private TableView<ArrayList> tableView;
     @FXML private TableColumn<ArrayList, String> columnId;
     @FXML private TableColumn<ArrayList, String> columnUser;
@@ -25,6 +27,13 @@ public class LogsViewController {
 
 
     public void initialize() {
+
+        columnId.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("id"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("user"));
+        columnMail.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("mail"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("date"));
+        columnType.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("type"));
+        columnAddInfo.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("addInfo"));
 
     }
 
@@ -37,39 +46,21 @@ public class LogsViewController {
     }
 
     public void refresh(){
-       // ObservableList<ArrayList<String>> tableView = FXCollections.observableArrayList();
-  /*      TableColumn<ArrayList,String> columnId = new TableColumn<>("columnId");
-        TableColumn<ArrayList,String>columnUser = new TableColumn<>("columnUser");
-        TableColumn<ArrayList,String>columnMail = new TableColumn<>("columnMail");
-        TableColumn<ArrayList,String>columnDate = new TableColumn<>("columnDate");
-        TableColumn<ArrayList,String>columnType = new TableColumn<>("columnType");
-        TableColumn<ArrayList,String>columnAddInfo = new TableColumn<>("columnAddInfo");
-*/
-  /*      columnId.setCellValueFactory(new PropertyValueFactory<>("columnId"));
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("columnUser"));
-        columnMail.setCellValueFactory(new PropertyValueFactory<>("columnMail"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("columnDate"));
-        columnType.setCellValueFactory(new PropertyValueFactory<>("columnType"));
-        columnAddInfo.setCellValueFactory(new PropertyValueFactory<>("columnAddInfo"));
-*/
-        //table = new TableView<>();
-        tableView = new TableView<>();
-       // table.setItems(getValues());
-        System.out.println(getValues());
+
         tableView.setItems(getValues());
-     //  table.getColumns().addAll(columnId,columnUser,columnMail,columnDate,columnType,columnAddInfo);
-      //  tableView.getColumns().addAll(columnId,columnUser,columnMail,columnDate,columnType,columnAddInfo);
-        //tableView = table;
+        tableView.refresh();
     }
 
 
     public ObservableList<ArrayList> getValues(){
-        ObservableList<ArrayList> list = FXCollections.observableArrayList();
-        Iterator<ArrayList<String>> it = threadClient.getLogsCheckData().iterator();
+       // list.clear();
+        tableView.getItems().clear();
+        list = FXCollections.observableArrayList();
+        it = threadClient.getLogsCheckData().iterator();
         while(it.hasNext()){
             list.add(it.next());
-
         }
+
         return list;
     }
 

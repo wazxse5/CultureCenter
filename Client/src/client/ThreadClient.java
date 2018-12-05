@@ -82,6 +82,7 @@ public class ThreadClient {
         if(message instanceof LogsCheckAnswerMessage){
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
             logsCheckData = logsAnswer.getResult();
+            System.out.println(logsCheckData);
         }
     }
 

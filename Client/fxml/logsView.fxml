@@ -19,6 +19,15 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <TableView fx:id="tableLogs" layoutX="37.0" layoutY="96.0" prefHeight="209.0" prefWidth="537.0" />
+      <TableView fx:id="tableView" editable="true" layoutX="37.0" layoutY="96.0" prefHeight="209.0" prefWidth="537.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="38.0" text="id" />
+          <TableColumn fx:id="columnUser" prefWidth="139.0" text="user" />
+            <TableColumn fx:id="columnMail" prefWidth="100.0" text="mail" />
+            <TableColumn fx:id="columnDate" prefWidth="70.0" text="date" />
+            <TableColumn fx:id="columnType" prefWidth="92.0" text="type" />
+            <TableColumn fx:id="columnAddInfo" prefWidth="97.0" text="addInfo" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

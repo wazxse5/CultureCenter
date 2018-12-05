@@ -24,7 +24,7 @@ public class DataLoader {
         dbConnect = new DBConnect();
         logsCheckData = FXCollections.observableArrayList();
         tableview = new TableView();
-        SQLarray = new ArrayList<ArrayList>();
+
 
     }
 
@@ -58,8 +58,9 @@ public class DataLoader {
         logsCheckData = FXCollections.observableArrayList();
         ResultSet result = null;
         try {
+            SQLarray = new ArrayList<ArrayList>();
             result = dbConnect.getLogs(login);
-            int counter = 0;
+
             ArrayList<String> tables = new ArrayList<String>();
 
             for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++) {
@@ -75,6 +76,9 @@ public class DataLoader {
                 }
                 SQLarray.add(newal);
             }
+            System.out.println(SQLarray);
+            System.out.println(SQLarray.size());
+            tableview = new TableView();
         }
         catch (SQLException e){
             e.printStackTrace();
