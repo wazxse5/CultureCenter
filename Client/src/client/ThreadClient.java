@@ -21,7 +21,8 @@ public class ThreadClient {
 
 
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<ArrayList<String>>();
-
+    private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> repertuarCheckData = new ArrayList<ArrayList<String>>();
     private Connection connection;
 
     private ViewManager viewManager;
@@ -82,7 +83,14 @@ public class ThreadClient {
         if(message instanceof LogsCheckAnswerMessage){
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
             logsCheckData = logsAnswer.getResult();
-            System.out.println(logsCheckData);
+        }
+        if(message instanceof EventsCheckAnswerMessage){
+            EventsCheckAnswerMessage eventsAnswer = (EventsCheckAnswerMessage) message;
+            eventsCheckData = eventsAnswer.getResult();
+        }
+        if(message instanceof RegisterAnswerMessage){
+            RepertuarCheckAnswerMessage repertuarAnswer = (RepertuarCheckAnswerMessage) message;
+            repertuarCheckData= repertuarAnswer.getResult();
         }
     }
 
@@ -109,6 +117,17 @@ public class ThreadClient {
             connection.send(new LogsCheckRequestMessage(login));
         }
 
+    }
+    public void sendEventsCheckRequest(){
+        if(connected.get()){
+            connection.send(new EventsCheckRequestMessage());
+        }
+
+    }
+    public void sendRepertuarCheckRequest(){
+        if(connected.get()){
+            connection.send(new RepertuarCheckRequestMessage());
+        }
     }
 
     public void disconnect() {
@@ -141,5 +160,8 @@ public class ThreadClient {
     }
     public ArrayList<ArrayList<String>> getLogsCheckData() {
         return logsCheckData;
+    }
+    public ArrayList<ArrayList<String>> getEventsCheckData() {
+        return eventsCheckData;
     }
 }

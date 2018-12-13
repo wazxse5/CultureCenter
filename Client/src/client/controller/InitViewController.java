@@ -52,6 +52,7 @@ public class InitViewController {
     }
 
     public void repertuar(){
+        threadClient.sendRepertuarCheckRequest();
         viewManager.setRepertuarScene();
     }
 
@@ -59,7 +60,9 @@ public class InitViewController {
         viewManager.setRecommendationsScene();
     }
 
-    public void events(){
+    public void events()
+    {
+        threadClient.sendEventsCheckRequest();
         viewManager.setEventsScene();
     }
 

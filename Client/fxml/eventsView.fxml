@@ -19,24 +19,28 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="ReserveButton" layoutX="38.0" layoutY="321.0" mnemonicParsing="false" onAction="#reserve" prefHeight="24.0" prefWidth="82.0" text="Zarezerwuj">
+      <Button fx:id="ReserveButton" layoutX="38.0" layoutY="309.0" mnemonicParsing="false" onAction="#reserve" prefHeight="24.0" prefWidth="82.0" text="Zarezerwuj">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button fx:id="BuyButton" layoutX="147.0" layoutY="321.0" mnemonicParsing="false" onAction="#buy" prefHeight="24.0" prefWidth="82.0" text="Kup">
+      <Button fx:id="BuyButton" layoutX="147.0" layoutY="309.0" mnemonicParsing="false" onAction="#buy" prefHeight="24.0" prefWidth="82.0" text="Kup">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <TableView layoutX="17.0" layoutY="68.0" prefHeight="209.0" prefWidth="568.0">
+      <TableView fx:id="tableView" layoutX="17.0" layoutY="68.0" prefHeight="209.0" prefWidth="568.0">
         <columns>
-          <TableColumn prefWidth="122.0" text="Nazwa Wydarzenia" />
-          <TableColumn prefWidth="137.0" text="Typ" />
-            <TableColumn prefWidth="88.0" text="Data" />
-            <TableColumn prefWidth="107.0" text="Godzina" />
-            <TableColumn prefWidth="113.0" text="Sala" />
+          <TableColumn fx:id="columnId" prefWidth="122.0" text="Id wydarzenia" visible="false" />
+          <TableColumn fx:id="columnName" text="Nazwa" />
+            <TableColumn fx:id="columnStartTime" prefWidth="75.0" text="Czas start" />
+            <TableColumn fx:id="columnTitle" prefWidth="76.0" text="Tytuł" />
+            <TableColumn fx:id="columnDuration" prefWidth="82.0" text="Czas Trwania" />
+            <TableColumn fx:id="columnAgeRestriction" minWidth="0.0" prefWidth="47.0" text="PEGI" />
+            <TableColumn fx:id="columnLanguage" maxWidth="258.0" prefWidth="98.0" text="Język" />
+            <TableColumn fx:id="columnReleaseDate" minWidth="0.0" prefWidth="109.0" text="Premiera" />
         </columns>
       </TableView>
+      <Button fx:id="refreshButton" layoutX="38.0" layoutY="343.0" mnemonicParsing="false" onAction="#refresh" prefHeight="17.0" prefWidth="95.0" text="Odśwież" />
    </children>
 </AnchorPane>

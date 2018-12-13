@@ -16,14 +16,21 @@ public class DataLoader {
     private List<Client> knownClients;
     private DBConnect dbConnect;
     private ObservableList<ObservableList>logsCheckData;
+    private ObservableList<ObservableList>eventsCheckData;
+    private ObservableList<ObservableList>repertuarCheckData;
+
+
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
+    private ArrayList<ArrayList> SQLEventsarray;
+    private ArrayList<ArrayList> SQLrepertuararray;
 
     public DataLoader() {
         knownClients = new ArrayList<>();
         dbConnect = new DBConnect();
         logsCheckData = FXCollections.observableArrayList();
         tableview = new TableView();
+
 
 
     }
@@ -62,12 +69,12 @@ public class DataLoader {
             result = dbConnect.getLogs(login);
 
             ArrayList<String> tables = new ArrayList<String>();
-
+/*
             for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++) {
 
                 tables.add((result.getMetaData().getColumnName(i)));
             }
-            SQLarray.add(tables);
+            SQLarray.add(tables);*/
 
             while(result.next()){
                 ArrayList<String> newal = new ArrayList<String>();
@@ -76,15 +83,59 @@ public class DataLoader {
                 }
                 SQLarray.add(newal);
             }
-            System.out.println(SQLarray);
-            System.out.println(SQLarray.size());
-            tableview = new TableView();
+            System.out.println(SQLrepertuararray);
+            System.out.println(SQLrepertuararray.size());
         }
         catch (SQLException e){
             e.printStackTrace();
         }
         return SQLarray;
     }
+    public synchronized  ArrayList getRepertuar()throws SQLException{
+        repertuarCheckData = FXCollections.observableArrayList();
+        ResultSet result=null;
+        try{
+            SQLEventsarray = new ArrayList<ArrayList>();
+            result= dbConnect.getRepertuar();
+
+            ArrayList<String> tables = new ArrayList<String>();
+            while(result.next()){
+                ArrayList<String> newal = new ArrayList<String>();
+                for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
+                    newal.add(result.getString(i));
+                }
+                SQLrepertuararray.add(newal);
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return SQLrepertuararray;
+    }
+
+    public synchronized ArrayList getEvents() throws SQLException{
+        eventsCheckData= FXCollections.observableArrayList();
+        ResultSet result = null;
+        try{
+            SQLEventsarray = new ArrayList<ArrayList>();
+            result = dbConnect.getEvents();
+            ArrayList<String> tables = new ArrayList<String>();
+
+            while(result.next()){
+                ArrayList<String> newal = new ArrayList<String>();
+                for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
+                    newal.add(result.getString(i));
+                }
+                SQLEventsarray.add(newal);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return SQLEventsarray;
+
+
+    }
+
 
 
 }

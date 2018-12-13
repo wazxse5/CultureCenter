@@ -96,9 +96,29 @@ public class ThreadServer {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+        if(message instanceof  EventsCheckRequestMessage){
+            EventsCheckRequestMessage checkRequest = (EventsCheckRequestMessage) message;
+            ArrayList<ArrayList<String>> result;
+            try{
+                result= dataLoader.getEvents();
+                connection.send(new EventsCheckAnswerMessage(result));
+            }catch( SQLException e){
+                e.printStackTrace();
+            }
+        }
+        if(message instanceof  RepertuarCheckRequestMessage){
+            RepertuarCheckRequestMessage checkRequest = (RepertuarCheckRequestMessage)message;
+            ArrayList<ArrayList<String>> result;
 
+            try{
 
-
+                result=dataLoader.getRepertuar();
+                connection.send(new RepertuarCheckAnswerMessage(result));
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
         }
 
     }

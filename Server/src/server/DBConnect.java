@@ -13,8 +13,8 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-    private String password = "usbw";
-
+    private String password = "";
+   // private String password = "usbw"; -- do mojej bazy usbwebserver
 
     public DBConnect() {
         try {
@@ -81,6 +81,19 @@ public class DBConnect {
 
     public ResultSet getLogs(String login)throws SQLException{
         String query = "CALL showLogs(\""+login + "\")";
+        rs=st.executeQuery(query);
+        rs.next();
+        return rs;
+    }
+    public ResultSet getEvents() throws SQLException{
+        String query = "CALL showEvents";
+        rs=st.executeQuery(query);
+        System.out.println(rs);
+        rs.next();
+        return rs;
+    }
+    public ResultSet getRepertuar() throws SQLException{
+        String query = "CALL showSchedule";
         rs=st.executeQuery(query);
         System.out.println(rs);
         rs.next();

@@ -10,31 +10,28 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class LogsViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
-    private Iterator<ArrayList<String>> it;
-    private ObservableList<ArrayList> list;
-    @FXML private TableView<ArrayList> tableView;
-    @FXML private TableColumn<ArrayList, String> columnId;
-    @FXML private TableColumn<ArrayList, String> columnUser;
-    @FXML private TableColumn<ArrayList, String> columnMail;
-    @FXML private TableColumn<ArrayList, String> columnDate;
-    @FXML private TableColumn<ArrayList, String> columnType;
-    @FXML private TableColumn<ArrayList, String> columnAddInfo;
+    private ObservableList<Log> list;
+    @FXML private TableView<Log> tableView;
+    @FXML private TableColumn<Log, String> columnId;
+    @FXML private TableColumn<Log, String> columnUser;
+    @FXML private TableColumn<Log, String> columnMail;
+    @FXML private TableColumn<Log, String> columnDate;
+    @FXML private TableColumn<Log, String> columnType;
+    @FXML private TableColumn<Log, String> columnAddInfo;
 
 
     public void initialize() {
-
-        columnId.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("id"));
-        columnUser.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("user"));
-        columnMail.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("mail"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("date"));
-        columnType.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("type"));
-        columnAddInfo.setCellValueFactory(new PropertyValueFactory<ArrayList, String>("addInfo"));
-
+        columnId.setCellValueFactory(new PropertyValueFactory<Log, String>("id"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<Log, String>("user"));
+        columnMail.setCellValueFactory(new PropertyValueFactory<Log, String>("mail"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<Log, String>("date"));
+        columnType.setCellValueFactory(new PropertyValueFactory<Log, String>("type"));
+        columnAddInfo.setCellValueFactory(new PropertyValueFactory<Log, String>("addInfo"));
     }
 
     public void sendRestorePasswordRequest() {
@@ -46,21 +43,19 @@ public class LogsViewController {
     }
 
     public void refresh(){
-
         tableView.setItems(getValues());
-        tableView.refresh();
+//        tableView.getColumns().addAll(columnId,columnUser,columnMail,columnDate,columnType,columnAddInfo);
+       tableView.refresh();
     }
 
 
-    public ObservableList<ArrayList> getValues(){
+    public ObservableList<Log> getValues(){
        // list.clear();
-        tableView.getItems().clear();
+       // tableView.getItems().clear();
         list = FXCollections.observableArrayList();
-        it = threadClient.getLogsCheckData().iterator();
-        while(it.hasNext()){
-            list.add(it.next());
+        for(ArrayList<String> x : threadClient.getLogsCheckData()){
+            list.add(new Log(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5)));
         }
-
         return list;
     }
 
@@ -72,4 +67,6 @@ public class LogsViewController {
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }
+
+
 }
