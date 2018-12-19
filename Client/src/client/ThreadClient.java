@@ -64,6 +64,7 @@ public class ThreadClient {
             if (loginAnswer.isGood()) {
                 viewManager.setRecommendationsScene();
                 logged.setValue(true);
+                viewManager.setUserData(loginAnswer.getUserLogin(), loginAnswer.getUserName(), loginAnswer.getUserSurName(), loginAnswer.getUserMail());
             } else {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
@@ -73,6 +74,7 @@ public class ThreadClient {
         }
         if (message instanceof LogoutAnswerMessage) {
             logged.setValue(false);
+            viewManager.setUserData("", "", "", "");
         }
         if(message instanceof LogsCheckAnswerMessage){
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;

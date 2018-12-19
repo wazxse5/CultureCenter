@@ -20,4 +20,12 @@ public class Client {
     public String getLogin() {
         return login;
     }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getMail() {
+        return mail;
+    }
 }
