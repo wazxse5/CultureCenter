@@ -19,18 +19,18 @@ import java.util.concurrent.Executors;
 
 public class ThreadServer {
     private ViewManager viewManager;
+    private DataLoader dataLoader;
 
-    private final ExecutorService executor = Executors.newCachedThreadPool();
-
+    private final ExecutorService executor;
     private AcceptingTask acceptingTask;
-    private List<ReceiveTask> receiveTasks = new ArrayList<>();
-
-    private  DataLoader dataLoader;
+    private List<ReceiveTask> receiveTasks;
     private final ObservableList<Connection> connectedConnections;
 
     public ThreadServer() {
-        dataLoader = new DataLoader();
-        connectedConnections = FXCollections.observableArrayList(Connection.extractor());
+        this.dataLoader = new DataLoader();
+        this.executor = Executors.newCachedThreadPool();
+        this.receiveTasks = new ArrayList<>();
+        this.connectedConnections = FXCollections.observableArrayList(Connection.extractor());
     }
 
     public void start(int port) {
@@ -53,7 +53,6 @@ public class ThreadServer {
         executor.submit(receiveTask);
     }
 
-
     private void handleReceivedMessage(Connection connection, Message message) {
         if (message instanceof WelcomeMessage) {
             connection.send(new WelcomeAnswerMessage());
@@ -62,6 +61,7 @@ public class ThreadServer {
             LoginRequestMessage loginRequest = (LoginRequestMessage) message;
             AuthenticationTask authenticationTask = new AuthenticationTask(loginRequest, connection, dataLoader);
             executor.submit(authenticationTask);
+            System.out.println("loginrequest");
         }
         if (message instanceof LogoutRequestMessage) {
             connection.send(new LogoutAnswerMessage());
@@ -71,7 +71,7 @@ public class ThreadServer {
             connectedConnections.remove(connection);
             connection.close();
         }
-        if(message instanceof RegisterRequestMessage){
+        if (message instanceof RegisterRequestMessage) {
             RegisterRequestMessage registerRequest = (RegisterRequestMessage) message;
             try {
                 int res = dataLoader.register(registerRequest.getName(), registerRequest.getSurname(), registerRequest.getLogin(), registerRequest.getPassword(), registerRequest.getMail());
@@ -81,13 +81,13 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-        if(message instanceof  LoginCheckAnswerMessage){
+        if (message instanceof LoginCheckAnswerMessage) {
             LoginCheckRequestMessage checkRequest = (LoginCheckRequestMessage) message;
-            if(dataLoader.getKnownClients().contains( checkRequest.getLogin())) {
+            if (dataLoader.getKnownClients().contains(checkRequest.getLogin())) {
                 checkRequest.stateTrue();
             }
         }
-        if (message instanceof LogsCheckRequestMessage){
+        if (message instanceof LogsCheckRequestMessage) {
             LogsCheckRequestMessage checkRequest = (LogsCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
             try {
@@ -97,26 +97,25 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-        if(message instanceof  EventsCheckRequestMessage){
+        if (message instanceof EventsCheckRequestMessage) {
             EventsCheckRequestMessage checkRequest = (EventsCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
-            try{
-                result= dataLoader.getEvents();
+            try {
+                result = dataLoader.getEvents();
                 connection.send(new EventsCheckAnswerMessage(result));
-            }catch( SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(message instanceof  RepertuarCheckRequestMessage){
-            RepertuarCheckRequestMessage checkRequest = (RepertuarCheckRequestMessage)message;
+        if (message instanceof RepertuarCheckRequestMessage) {
+            RepertuarCheckRequestMessage checkRequest = (RepertuarCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
 
-            try{
+            try {
 
-                result=dataLoader.getRepertuar();
+                result = dataLoader.getRepertuar();
                 connection.send(new RepertuarCheckAnswerMessage(result));
-            }
-            catch(SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

@@ -64,19 +64,26 @@ public class DBConnect {
     }
 
     public int addClient(String name, String surname, String mail, String login, String password) throws SQLException {
-        String query = "CALL addClient(\"" + name + "\", \"" + surname + "\", \"" + mail + "\", \"" + login + "\", \"" + password + "\")";
-        rs = st.executeQuery(query);
+        String query = "CALL addClient(?, ?, ?, ?, ?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, name);
+        ps.setString(2, surname);
+        ps.setString(3, mail);
+        ps.setString(4, login);
+        ps.setString(5, password);
+        rs = ps.executeQuery();
         rs.next();
-        int res = rs.getInt("res");
-        return res;
+        return rs.getInt("res");
     }
 
     public int loginUser(String name, String password) throws SQLException {
-        String query = "CALL loginClient(\"" + name + "\", \"" + password + "\")";
-        rs = st.executeQuery(query);
+        String query = "CALL loginClient(?, ?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, name);
+        ps.setString(2, password);
+        rs = ps.executeQuery();
         rs.next();
-        int res = rs.getInt("res");
-        return res;
+        return rs.getInt("res");
     }
 
     public ResultSet getLogs(String login)throws SQLException{

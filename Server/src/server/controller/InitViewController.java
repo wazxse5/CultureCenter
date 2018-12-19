@@ -32,6 +32,10 @@ public class InitViewController {
         threadServer.start(8989);
     }
 
+    public void close() {
+        threadServer.close();
+    }
+
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }

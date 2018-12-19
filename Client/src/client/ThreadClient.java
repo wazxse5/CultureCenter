@@ -20,9 +20,9 @@ public class ThreadClient {
 
 
 
-    private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<ArrayList<String>>();
-    private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<ArrayList<String>>();
-    private ArrayList<ArrayList<String>> repertuarCheckData = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
+    private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
+    private ArrayList<ArrayList<String>> repertuarCheckData = new ArrayList<>();
     private Connection connection;
 
     private ViewManager viewManager;
@@ -88,7 +88,7 @@ public class ThreadClient {
             EventsCheckAnswerMessage eventsAnswer = (EventsCheckAnswerMessage) message;
             eventsCheckData = eventsAnswer.getResult();
         }
-        if(message instanceof RegisterAnswerMessage){
+        if(message instanceof RepertuarCheckAnswerMessage){
             RepertuarCheckAnswerMessage repertuarAnswer = (RepertuarCheckAnswerMessage) message;
             repertuarCheckData= repertuarAnswer.getResult();
         }
