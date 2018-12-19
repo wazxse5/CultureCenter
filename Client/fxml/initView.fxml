@@ -101,7 +101,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="repertuarButton" mnemonicParsing="false" onAction="#repertuar" prefHeight="50.0" prefWidth="200.0" text="Repertuar">
+            <Button fx:id="repertoireButton" mnemonicParsing="false" onAction="#repertoire" prefHeight="50.0" prefWidth="200.0" text="Repertuar">
                <font>
                   <Font size="18.0" />
                </font>

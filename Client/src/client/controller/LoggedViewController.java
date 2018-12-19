@@ -32,7 +32,7 @@ public class LoggedViewController {
         viewManager.setInitScene();
     }
     public void Repertuar()    {
-        viewManager.setRepertuarScene();
+        viewManager.setRepertoireScene();
     }
     public void CheckLogs(){
         viewManager.setLogsScene();

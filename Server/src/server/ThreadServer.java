@@ -80,12 +80,6 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-        if (message instanceof LoginCheckAnswerMessage) {
-            LoginCheckRequestMessage checkRequest = (LoginCheckRequestMessage) message;
-            if (dataLoader.getKnownClients().contains(checkRequest.getLogin())) {
-                checkRequest.stateTrue();
-            }
-        }
         if (message instanceof LogsCheckRequestMessage) {
             LogsCheckRequestMessage checkRequest = (LogsCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -106,14 +100,14 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-        if (message instanceof RepertuarCheckRequestMessage) {
-            RepertuarCheckRequestMessage checkRequest = (RepertuarCheckRequestMessage) message;
+        if (message instanceof RepertoireCheckRequestMessage) {
+            RepertoireCheckRequestMessage checkRequest = (RepertoireCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
 
             try {
 
                 result = dataLoader.getRepertuar();
-                connection.send(new RepertuarCheckAnswerMessage(result));
+                connection.send(new RepertoireCheckAnswerMessage(result));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

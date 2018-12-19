@@ -18,11 +18,9 @@ public class ThreadClient {
     private BooleanProperty logged = new SimpleBooleanProperty(false);
     private StringProperty userName = new SimpleStringProperty();
 
-
-
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
-    private ArrayList<ArrayList<String>> repertuarCheckData = new ArrayList<>();
+    private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
     private Connection connection;
 
     private ViewManager viewManager;
@@ -32,10 +30,6 @@ public class ThreadClient {
 
     public ThreadClient() {
         this.executor = Executors.newCachedThreadPool();
-    }
-
-    public BooleanProperty getConnected(){
-        return connected;
     }
 
     public void connect(String host, int port) {
@@ -88,9 +82,9 @@ public class ThreadClient {
             EventsCheckAnswerMessage eventsAnswer = (EventsCheckAnswerMessage) message;
             eventsCheckData = eventsAnswer.getResult();
         }
-        if(message instanceof RepertuarCheckAnswerMessage){
-            RepertuarCheckAnswerMessage repertuarAnswer = (RepertuarCheckAnswerMessage) message;
-            repertuarCheckData= repertuarAnswer.getResult();
+        if(message instanceof RepertoireCheckAnswerMessage){
+            RepertoireCheckAnswerMessage repertoireAnswer = (RepertoireCheckAnswerMessage) message;
+            repertoireCheckData = repertoireAnswer.getResult();
         }
     }
 
@@ -112,11 +106,11 @@ public class ThreadClient {
             connection.send(new LogoutRequestMessage());
         }
     }
+
     public void sendLogsCheckRequest(String login){
         if(connected.get()){
             connection.send(new LogsCheckRequestMessage(login));
         }
-
     }
     public void sendEventsCheckRequest(){
         if(connected.get()){
@@ -124,12 +118,11 @@ public class ThreadClient {
         }
 
     }
-    public void sendRepertuarCheckRequest(){
+    public void sendRepertoireCheckRequest(){
         if(connected.get()){
-            connection.send(new RepertuarCheckRequestMessage());
+            connection.send(new RepertoireCheckRequestMessage());
         }
     }
-
     public void disconnect() {
         if (connection != null) {
             connection.send(new GoodbyeMessage());
@@ -152,12 +145,18 @@ public class ThreadClient {
         return connected;
     }
 
+    public boolean isConnected() {
+        return connected.get();
+    }
+
     public StringProperty userNameProperty() {
         return userName;
     }
-    public StringProperty getUserName(){
-        return  userName;
+
+    public String getUserName() {
+        return userName.get();
     }
+
     public ArrayList<ArrayList<String>> getLogsCheckData() {
         return logsCheckData;
     }

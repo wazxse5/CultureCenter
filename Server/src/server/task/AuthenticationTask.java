@@ -23,7 +23,7 @@ public class AuthenticationTask extends Task<Client> {
 
 
     @Override protected Client call() {
-        String name = loginRequestMessage.getName();
+        String name = loginRequestMessage.getLogin();
         String password = loginRequestMessage.getPassword();
         try {
             Client client = dataLoader.login(name, password);

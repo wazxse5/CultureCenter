@@ -2,7 +2,7 @@ package message;
 
 import java.util.ArrayList;
 
-public class RepertuarCheckAnswerMessage extends Message {
+public class RepertoireCheckAnswerMessage extends Message {
     private static final long serialVersionUID = 577111173596981704L;
     private ArrayList<ArrayList<String>> result;
 
@@ -10,7 +10,7 @@ public class RepertuarCheckAnswerMessage extends Message {
         return result;
     }
 
-    public RepertuarCheckAnswerMessage(ArrayList result){
+    public RepertoireCheckAnswerMessage(ArrayList result){
         this.result = result;
 
     }

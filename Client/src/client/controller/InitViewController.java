@@ -27,12 +27,7 @@ public class InitViewController {
     public void initialize() {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
         imageView.setImage(logo);
-        imageView.setOnMouseClicked((MouseEvent event) -> {
-            viewManager.setRecommendationsScene();
-//            contentPane.setCenter(null);
-
-        });
-
+        imageView.setOnMouseClicked((MouseEvent event) -> viewManager.setRecommendationsScene());
     }
 
     public void login() {
@@ -48,38 +43,35 @@ public class InitViewController {
     }
 
     public void accountSettings() {
-
+        viewManager.setAccountSettingsScene();
     }
 
-    public void repertuar(){
-        threadClient.sendRepertuarCheckRequest();
-        viewManager.setRepertuarScene();
+    public void repertoire() {
+        threadClient.sendRepertoireCheckRequest();
+        viewManager.setRepertoireScene();
     }
 
     public void recommendation() {
         viewManager.setRecommendationsScene();
     }
 
-    public void events()
-    {
+    public void events() {
         threadClient.sendEventsCheckRequest();
         viewManager.setEventsScene();
     }
 
-    public void infos(){
+    public void infos() {
         viewManager.setInfosScene();
-
     }
 
     public void contact(){
         viewManager.setContactScene();
     }
-    public void logs(){
+
+    public void logs() {
         viewManager.setLogsScene();
-        if((boolean)threadClient.getConnected().get()) threadClient.sendLogsCheckRequest((String)(threadClient.getUserName().get()));
+        if(threadClient.isConnected()) threadClient.sendLogsCheckRequest((threadClient.getUserName()));
         threadClient.sendLogsCheckRequest("");
-
-
     }
 
 

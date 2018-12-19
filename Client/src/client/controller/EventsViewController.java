@@ -47,9 +47,9 @@ public class EventsViewController {
     }
 
     public void back(){
-        if((boolean)threadClient.getConnected().get()) {
+        if(threadClient.isConnected()) {
         }
-         else viewManager.setInitScene();
+        else viewManager.setInitScene();
     }
 
     public void refresh(){

@@ -19,14 +19,14 @@ public class ViewManager {
     private Stage primaryStage;
     private BorderPane contentPane;
 
-    public Scene initScene;
+    private Scene initScene;
     private Region loginScene;
     private Region registerScene;
     private Region restorePasswordScene;
     private Region accountSettingsScene;
     private Region historyScene;
     private Region logsScene;
-    private Region repertuarScene;
+    private Region repertoireScene;
     private Region actualReservedScene;
     private Region recommendationScene;
     private Region eventsScene;
@@ -186,12 +186,12 @@ public class ViewManager {
         contentPane.setCenter(logsScene);
     }
 
-    public void setRepertuarScene() {
-        if (repertuarScene == null) {
+    public void setRepertoireScene() {
+        if (repertoireScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertuarView.fxml"));
-                repertuarScene = loader.load();
-                repertuarScene.getStylesheets().add("/../commonSources/css/styles.css");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertoireView.fxml"));
+                repertoireScene = loader.load();
+                repertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 repertuarViewController = loader.getController();
                 repertuarViewController.setViewManager(this);
@@ -200,7 +200,7 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku repertuarView");
             }
         }
-        contentPane.setCenter(repertuarScene);
+        contentPane.setCenter(repertoireScene);
     }
 
     public void setAccountSettingsScene() {
