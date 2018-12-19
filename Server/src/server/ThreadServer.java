@@ -61,7 +61,6 @@ public class ThreadServer {
             LoginRequestMessage loginRequest = (LoginRequestMessage) message;
             AuthenticationTask authenticationTask = new AuthenticationTask(loginRequest, connection, dataLoader);
             executor.submit(authenticationTask);
-            System.out.println("loginrequest");
         }
         if (message instanceof LogoutRequestMessage) {
             connection.send(new LogoutAnswerMessage());
@@ -119,7 +118,6 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-
     }
 
     public void setViewManager(ViewManager viewManager) {

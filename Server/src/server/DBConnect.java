@@ -2,6 +2,9 @@ package server;
 
 import java.sql.Connection;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBConnect {
     private Connection con;
     private Statement st;
@@ -25,6 +28,20 @@ public class DBConnect {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+    }
+
+    public List<Client> getAllClients() throws SQLException {
+        List<Client> clients = new ArrayList<>();
+        String query = "SELECT Name, Surname, mail, login FROM client";
+        rs = st.executeQuery(query);
+        while (rs.next()) {
+            String name = rs.getString("Name");
+            String surname = rs.getString("Surname");
+            String mail = rs.getString("mail");
+            String login = rs.getString("login");
+            clients.add(new Client(name, surname, mail, login));
+        }
+        return clients;
     }
 
     public void getData() {
@@ -54,13 +71,16 @@ public class DBConnect {
         }
     }
 
-    public void addEmployee() {
-        String query = "CALL addEmployee(\"Oskar\", \"Goerczowski\", \"PK\", \"user\", \"user1\", \"99.99\", 1)";
-        try {
-            rs = st.executeQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void addEmployee(String name, String surname, String department, String login, String password, int salary) throws SQLException {
+        String query = "CALL addEmployee(?, ?, ?, ?, ?, ?, 1)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, name);
+        ps.setString(2, surname);
+        ps.setString(3, department);
+        ps.setString(4, login);
+        ps.setString(5, password);
+        ps.setInt(6, salary);
+        rs = st.executeQuery(query);
     }
 
     public int addClient(String name, String surname, String mail, String login, String password) throws SQLException {

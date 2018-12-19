@@ -2,26 +2,22 @@ package server;
 
 public class Client {
     private String name;
-    private String password;
-    private String email;
+    private String surname;
+    private String mail;
+    private String login;
 
-    public Client(String name) {
+    public Client(String name, String surname, String mail, String login) {
         this.name = name;
-    }
-
-    public Client(String name, String password, String email) {
-
-        this.name = name;
-        this.password = password;
-        this.email = email;
-
+        this.surname = surname;
+        this.mail = mail;
+        this.login = login;
     }
 
     public String getName() {
         return name;
     }
-    public String getPassword() {
-        return password;
-    }
 
+    public String getLogin() {
+        return login;
+    }
 }

@@ -26,35 +26,27 @@ public class DataLoader {
     private ArrayList<ArrayList> SQLrepertuararray;
 
     public DataLoader() {
-        knownClients = new ArrayList<>();
         dbConnect = new DBConnect();
+        try {
+            knownClients = dbConnect.getAllClients();
+        } catch (SQLException e) { e.printStackTrace(); }
         logsCheckData = FXCollections.observableArrayList();
         tableview = new TableView();
-
-
-
     }
 
     public List<Client> getKnownClients() {
         return knownClients;
     }
 
-    public void loadClients() {
-        knownClients.add(new Client("test", "0000", "o@.pl"));
-        knownClients.add(new Client("wazxse5", "1234", "adasd@o2.pl"));
-        knownClients.add(new Client("admin", "admin", "cos@o2.pl"));
-    }
-
-
     public synchronized int register(String name, String surname, String login, String password, String mail) throws SQLException {
         int result = dbConnect.addClient(name, surname, mail, login, password);
         return result;
     }
 
-    public synchronized Client login(String name, String password) throws AuthenticationException, SQLException {
-        int result = dbConnect.loginUser(name, password);
+    public synchronized Client login(String login, String password) throws AuthenticationException, SQLException {
+        int result = dbConnect.loginUser(login, password);
         if (result == 0) {
-            return new Client(name);
+            for (Client client : knownClients) if (client.getLogin().equals(login)) return client;
         }
         if (result == 2) throw new NoSuchUserException();
         if (result == 3) throw new WrongPasswordException();
