@@ -4,11 +4,15 @@ import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 
 public class AccountSettingsViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
 
+    @FXML private TabPane tabPane;
+    @FXML private AnchorPane changeData;
     @FXML private Label userLoginLabel;
     @FXML private Label userNameLabel;
     @FXML private Label userSurnameLabel;
@@ -27,27 +31,25 @@ public class AccountSettingsViewController {
 
     }
 
-    public void changePassword(){
+    public void changePassword() {
 
 
     }
 
-    public void removeAccount(){
-
-    }
-    public void changeLogin(){
+    public void removeAccount() {
 
     }
 
-    public void setUserData(String login, String name, String surname, String mail) {
-        this.userLoginLabel.setText(login);
-        this.userNameLabel.setText(name);
-        this.userSurnameLabel.setText(surname);
-        this.userMailLabel.setText(mail);
+    public void changeLogin() {
+
     }
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        userLoginLabel.textProperty().bind(threadClient.getConnection().userLoginProperty());
+        userNameLabel.textProperty().bind(threadClient.getConnection().userNameProperty());
+        userSurnameLabel.textProperty().bind(threadClient.getConnection().userSurnameProperty());
+        userMailLabel.textProperty().bind(threadClient.getConnection().userMailProperty());
     }
 
     public void setViewManager(ViewManager viewManager) {

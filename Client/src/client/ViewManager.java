@@ -340,8 +340,4 @@ public class ViewManager {
         this.contentPane = contentPane;
     }
 
-    public void setUserData(String login, String name, String surname, String mail) {
-        accountSettingsViewController.setUserData(login, name, surname, mail);
-        // FIXME: accountsSettingsViewController jest null ponieważ widok accounts settings nie był wcześniej otwierany
-    }
 }

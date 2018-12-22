@@ -36,7 +36,7 @@ public class ThreadClient {
         connectionState.setValue("CONNECTING");
         try {
             ConnectTask connectTask = new ConnectTask(host, port);
-            connectTask.setOnSucceeded(event -> handleConnection((Connection) event.getSource().getValue()));
+            connectTask.setOnSucceeded(event -> handleNewConnection((Connection) event.getSource().getValue()));
             connectTask.setOnFailed(event -> connectionState.setValue("NOT_CONNECTED"));
             executor.execute(connectTask);
         } catch (Exception e) {
@@ -44,27 +44,25 @@ public class ThreadClient {
         }
     }
 
-    private void handleConnection(Connection connection) {
-        if (connection != null) {
+    private void handleNewConnection(Connection newConnection) {
+        if (newConnection != null) {
             connected.setValue(true);
             connectionState.setValue("CONNECTED");
-            this.connection = connection;
+            connection = newConnection;
 
-            receiveTask = new ReceiveTask(connection.getInput());
+            receiveTask = new ReceiveTask(newConnection.getInput());
             receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(newValue));
             executor.execute(receiveTask);
-
         } else connectionState.setValue("NOT_CONNECTED");
-
     }
 
     private void handleReceivedMessage(Message message) {
         if (message instanceof LoginAnswerMessage) {
             LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
             if (loginAnswer.isGood()) {
-                viewManager.setRecommendationsScene();
                 logged.setValue(true);
-                viewManager.setUserData(loginAnswer.getUserLogin(), loginAnswer.getUserName(), loginAnswer.getUserSurName(), loginAnswer.getUserMail());
+                viewManager.setRecommendationsScene();
+                connection.setUserData(loginAnswer.getUserName(), loginAnswer.getUserSurName(), loginAnswer.getUserMail(), loginAnswer.getUserLogin());
             } else {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
@@ -74,7 +72,7 @@ public class ThreadClient {
         }
         if (message instanceof LogoutAnswerMessage) {
             logged.setValue(false);
-            viewManager.setUserData("", "", "", "");
+            connection.setUserData("","","","");
         }
         if(message instanceof LogsCheckAnswerMessage){
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
@@ -164,5 +162,9 @@ public class ThreadClient {
     }
     public ArrayList<ArrayList<String>> getEventsCheckData() {
         return eventsCheckData;
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }
