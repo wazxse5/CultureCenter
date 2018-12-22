@@ -67,6 +67,7 @@ public class RegisterViewController {
         registerButton.visibleProperty().bind(threadClient.connectedProperty());
         connectButton.visibleProperty().bind(threadClient.connectedProperty().not());
         nameTF.disableProperty().bind(threadClient.connectedProperty().not());
+        nameTF.disabledProperty().addListener(observable -> nameTF.requestFocus());
         surnameTF.disableProperty().bind(threadClient.connectedProperty().not());
         loginTF.disableProperty().bind(threadClient.connectedProperty().not());
         passwordTF.disableProperty().bind(threadClient.connectedProperty().not());
@@ -78,4 +79,7 @@ public class RegisterViewController {
         threadClient.connect("localhost", 8989);
     }
 
+    public void prepareFocus() {
+        nameTF.requestFocus();
+    }
 }

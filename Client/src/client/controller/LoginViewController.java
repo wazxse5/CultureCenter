@@ -60,6 +60,11 @@ public class LoginViewController {
         loginButton.visibleProperty().bind(threadClient.connectedProperty());
         connectButton.visibleProperty().bind(threadClient.connectedProperty().not());
         loginTF.disableProperty().bind(threadClient.connectedProperty().not());
+        loginTF.disabledProperty().addListener(observable -> loginTF.requestFocus());
         passwordTF.disableProperty().bind(threadClient.connectedProperty().not());
+    }
+
+    public void prepareFocus() {
+        loginTF.requestFocus();
     }
 }

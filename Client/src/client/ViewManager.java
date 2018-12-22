@@ -253,6 +253,7 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(loginScene);
+        loginViewController.prepareFocus();
     }
 
     public void setRegisterScene() {
@@ -270,6 +271,7 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(registerScene);
+        registerViewController.prepareFocus();
     }
 
     public void setRestorePasswordScene() {

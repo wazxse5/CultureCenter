@@ -1,5 +1,6 @@
 package server;
 
+import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -123,9 +124,10 @@ public class ThreadServer {
     }
 
     public void close() {
-        executor.shutdown();
+        if (executor != null) executor.shutdown();
         if (acceptingTask != null) acceptingTask.cancel(true);
         for (Connection c : connectedConnections) c.close();
         for (ReceiveTask r : receiveTasks) r.cancel(true);
+        Platform.exit();
     }
 }
