@@ -83,7 +83,7 @@ public class DBConnect {
         rs = st.executeQuery(query);
     }
 
-    public int addClient(String name, String surname, String mail, String login, String password) throws SQLException {
+    public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {
         String query = "CALL addClient(?, ?, ?, ?, ?);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, name);
@@ -93,17 +93,17 @@ public class DBConnect {
         ps.setString(5, password);
         rs = ps.executeQuery();
         rs.next();
-        return rs.getInt("res");
+        return rs.getString(1);
     }
 
-    public int loginUser(String name, String password) throws SQLException {
+    public String loginUser(String name, String password) throws SQLException {
         String query = "CALL loginClient(?, ?);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, name);
         ps.setString(2, password);
         rs = ps.executeQuery();
         rs.next();
-        return rs.getInt("res");
+        return rs.getString(1);
     }
 
     public ResultSet getLogs(String login)throws SQLException{

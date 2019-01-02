@@ -39,17 +39,19 @@ public class DataLoader {
     }
 
     public synchronized int register(String name, String surname, String login, String password, String mail) throws SQLException {
-        int result = dbConnect.addClient(name, surname, mail, login, password);
-        return result;
+        String result = dbConnect.addClient(name, surname, mail, login, password);
+        if (result.equals("Zarejestrowano!")) return 0;
+        if (result.equals("Podany login już istnieje!")) return 1;
+        else return 4;
     }
 
     public synchronized Client login(String login, String password) throws AuthenticationException, SQLException {
-        int result = dbConnect.loginUser(login, password);
-        if (result == 0) {
+        String result = dbConnect.loginUser(login, password);
+        if (result.startsWith("Zalogowano jako")) {
             for (Client client : knownClients) if (client.getLogin().equals(login)) return client;
         }
-        if (result == 2) throw new NoSuchUserException();
-        if (result == 3) throw new WrongPasswordException();
+        if (result.equals("Nieistniejący login!")) throw new NoSuchUserException();
+        if (result.equals("Niepoprawne hasło!")) throw new WrongPasswordException();
         return null;
     }
 
