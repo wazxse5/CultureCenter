@@ -2,6 +2,7 @@ package client;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import message.GoodbyeMessage;
 import message.Message;
 
 import java.io.IOException;
@@ -43,7 +44,10 @@ public class Connection {
 
     public void close() {
         try {
-            socket.close();
+            if (!socket.isClosed()) {
+                send(new GoodbyeMessage());
+                socket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -125,7 +125,6 @@ public class ThreadClient {
     }
     public void disconnect() {
         if (connection != null) {
-            connection.send(new GoodbyeMessage());
             connection.close();
         }
         if (receiveTask != null) receiveTask.cancel(true);
