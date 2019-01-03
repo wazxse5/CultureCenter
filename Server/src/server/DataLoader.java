@@ -6,6 +6,8 @@ import exception.WrongPasswordException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
+import message.ChangeUserDataAnswerMessage;
+import message.ChangeUserDataRequestMessage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -85,6 +87,7 @@ public class DataLoader {
         }
         return SQLarray;
     }
+
     public synchronized  ArrayList getRepertuar()throws SQLException{
         repertuarCheckData = FXCollections.observableArrayList();
         ResultSet result=null;
@@ -130,6 +133,15 @@ public class DataLoader {
 
     }
 
+    public ChangeUserDataAnswerMessage changeUserData(String userLogin, ChangeUserDataRequestMessage changeMessage) {
+        boolean nameChanged = false, surnameChanged = false, mailChanged = false, passwordChanged = false;
+        if (changeMessage.isChangeName()) nameChanged = dbConnect.changeName(userLogin, changeMessage.getNewName());
+        if (changeMessage.isChangeSurname()) surnameChanged = dbConnect.changeSurname(userLogin, changeMessage.getNewSurname());
+        if (changeMessage.isChangeMail()) mailChanged = dbConnect.changeMail(userLogin, changeMessage.getNewMail());
+        if (changeMessage.isChangePassword()) passwordChanged = dbConnect.changePassword(userLogin, changeMessage.getCurrentPassword(), changeMessage.getNewPassword());
 
+        ChangeUserDataAnswerMessage answerMessage = new ChangeUserDataAnswerMessage(nameChanged, surnameChanged, mailChanged, passwordChanged);
+        return answerMessage;
+    }
 
 }

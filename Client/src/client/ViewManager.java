@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import message.ChangeUserDataAnswerMessage;
 
 import java.io.IOException;
 
@@ -294,6 +295,18 @@ public class ViewManager {
 
     public void clearContentPane() {
         contentPane.setCenter(null);
+    }
+
+    public void handleChangeUserDateAnswet(ChangeUserDataAnswerMessage answerMessage) {
+        StringBuilder builder = new StringBuilder();
+        if (answerMessage.isAnythingChanged()) {
+            builder.append("Zmieniono ");
+            if (answerMessage.isNameChanged()) builder.append("imię ");
+            if (answerMessage.isSurnameChanged()) builder.append("nazwisko ");
+            if (answerMessage.isMailChanged()) builder.append("mail ");
+            if (answerMessage.isPasswordChanged()) builder.append("hasło ");
+        } else builder.append("Nic nie zmieniono");
+        accountSettingsViewController.setAnswerLabelText(builder.toString());
     }
 
 

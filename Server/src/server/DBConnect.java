@@ -127,5 +127,44 @@ public class DBConnect {
         return rs;
     }
 
+    public boolean changeName(String login, String newName) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET Name = (?) WHERE login = (?);");
+            ps.setString(1, newName);
+            ps.setString(2, login);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 
+    public boolean changeSurname(String login, String newSurname) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET Surname = (?) WHERE login = (?);");
+            ps.setString(1, newSurname);
+            ps.setString(2, login);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean changeMail(String login, String newMail) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET mail = (?) WHERE login = (?);");
+            ps.setString(1, newMail);
+            ps.setString(2, login);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean changePassword(String login, String currentPassword, String newPassword) {
+        // FIXME: Tu by się przydała osobna procedura w bazie
+        return false;
+    }
 }

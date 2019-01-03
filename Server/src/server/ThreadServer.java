@@ -113,6 +113,13 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
+        if (message instanceof ChangeUserDataRequestMessage) {
+            ChangeUserDataRequestMessage changeMessage = (ChangeUserDataRequestMessage) message;
+            if (connection.getClient() != null) {
+                ChangeUserDataAnswerMessage answerMessage = dataLoader.changeUserData(connection.getClient().getLogin(), changeMessage);
+                connection.send(answerMessage);
+            }
+        }
     }
 
     public void setViewManager(ViewManager viewManager) {
