@@ -71,16 +71,18 @@ public class DBConnect {
         }
     }
 
-    public void addEmployee(String name, String surname, String department, String login, String password, int salary) throws SQLException {
-        String query = "CALL addEmployee(?, ?, ?, ?, ?, ?, 1)";
+    public String addEmployee(String name, String surname, String department, String login, String password, int salary) throws SQLException {
+        String query = "CALL addEmployee(?, ?, ?, ?, ?, ?, 1);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, name);
         ps.setString(2, surname);
         ps.setString(3, department);
         ps.setString(4, login);
         ps.setString(5, password);
-        ps.setInt(6, salary);
-        rs = st.executeQuery(query);
+        ps.setFloat(6, salary);
+        rs = ps.executeQuery();
+        rs.next();
+        return rs.getString(1);
     }
 
     public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {

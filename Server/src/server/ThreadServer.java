@@ -122,6 +122,10 @@ public class ThreadServer {
         }
     }
 
+    public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
+        return dataLoader.addEmployee(name, surname, department, login, password, salary);
+    }
+
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }

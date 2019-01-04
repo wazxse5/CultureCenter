@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import server.controller.AddEmployeeController;
 import server.controller.InitViewController;
 
 import java.io.IOException;
@@ -13,6 +14,10 @@ public class ViewManager {
     private ThreadServer threadServer;
 
     private Scene initScene;
+    private Scene addEmployeeScene;
+
+    private InitViewController initViewController;
+    private AddEmployeeController addEmployeeController;
 
     public ViewManager(Stage primaryStage, ThreadServer threadServer) {
         this.primaryStage = primaryStage;
@@ -27,8 +32,7 @@ public class ViewManager {
                 initScene = new Scene(parent);
                 initScene.getStylesheets().add("/../commonSources/css/styles.css");
 
-
-                InitViewController initViewController = loader.getController();
+                initViewController = loader.getController();
                 initViewController.setViewManager(this);
                 initViewController.setThreadServer(threadServer);
             } catch (IOException e) {
@@ -36,6 +40,24 @@ public class ViewManager {
             }
         }
         primaryStage.setScene(initScene);
+    }
+
+    public void setAddEmployeeScene() {
+        if (addEmployeeScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addEmployeeView.fxml"));
+                Parent parent = loader.load();
+                addEmployeeScene = new Scene(parent);
+                addEmployeeScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                addEmployeeController = loader.getController();
+                addEmployeeController.setViewManager(this);
+                addEmployeeController.setThreadServer(threadServer);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku addEmployeeView");
+            }
+        }
+        primaryStage.setScene(addEmployeeScene);
     }
 
 

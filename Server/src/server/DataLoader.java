@@ -144,4 +144,13 @@ public class DataLoader {
         return answerMessage;
     }
 
+    public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
+        try {
+            String result = dbConnect.addEmployee(name, surname, department, login, password, salary);
+            if (result.equals("Dodano pracownika!")) return true;
+            else return false;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 }

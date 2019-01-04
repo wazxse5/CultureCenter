@@ -13,6 +13,7 @@ public class InitViewController {
     private ThreadServer threadServer;
 
     @FXML private Button startButton;
+    @FXML private Button addEmployeeButton;
     @FXML private ListView<Connection> connectedConnectionsLV;
 
     public void initialize() {
@@ -29,7 +30,12 @@ public class InitViewController {
 
     public void start() {
         startButton.setDisable(true);
+        addEmployeeButton.setDisable(false);
         threadServer.start(8989);
+    }
+
+    public void addEmployee() {
+        viewManager.setAddEmployeeScene();
     }
 
     public void close() {
