@@ -56,8 +56,8 @@ public class InitViewController {
     }
 
     public void events() {
-        threadClient.sendEventsCheckRequest();
         viewManager.setEventsScene();
+        threadClient.sendEventsCheckRequest();
     }
 
     public void infos() {

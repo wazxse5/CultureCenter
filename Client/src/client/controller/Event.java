@@ -2,7 +2,7 @@ package client.controller;
 
 public class Event {
 
-    private String id;
+    private String idEvent;
     private String name;
     private String date;
     private String startTime;
@@ -11,9 +11,10 @@ public class Event {
     private String ageRestriction;
     private String language;
     private String releaseDate;
+    private String type;
 
-    public Event(String id, String name, String date, String startTime,String title,String duration, String ageRestriction, String language, String releaseDate){
-            this.id=id;
+    public Event(String id, String name, String date, String startTime,String title,String duration, String ageRestriction, String language, String releaseDate, String type){
+            this.idEvent=id;
             this.name=name;
             this.date=date;
             this.startTime=startTime;
@@ -22,10 +23,11 @@ public class Event {
             this.ageRestriction=ageRestriction;
             this.language=language;
             this.releaseDate=releaseDate;
+            this.type=type;
         }
 
     public void setId(String id) {
-        this.id = id;
+        this.idEvent = id;
     }
 
     public void setName(String name) {
@@ -59,9 +61,10 @@ public class Event {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+    public void setType(String type){this.type = type;}
 
     public String getId() {
-        return id;
+        return idEvent;
     }
 
     public String getName() {
@@ -92,6 +95,7 @@ public class Event {
         return language;
     }
 
+    public String getType(){return type;}
     public String getReleaseDate() {
         return releaseDate;
     }

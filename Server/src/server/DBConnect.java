@@ -16,8 +16,8 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-    private String password = "";
-   // private String password = "usbw"; -- do mojej bazy usbwebserver
+   // private String password = "";
+    private String password = "usbw";//do mojej bazy usbwebserver
 
     public DBConnect() {
         try {

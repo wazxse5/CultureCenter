@@ -19,22 +19,26 @@ public class EventsViewController {
     @FXML private TableView<Event> tableView;
     @FXML private TableColumn<Event, String> columnId;
     @FXML private TableColumn<Event,String> columnName;
+    @FXML private TableColumn<Event,String> columnDate;
     @FXML private TableColumn<Event,String>columnStartTime;
     @FXML private TableColumn<Event,String>columnTitle;
     @FXML private TableColumn<Event,String>columnDuration;
-    @FXML private TableColumn<Event,Integer>columnAgeRestriction;
+    @FXML private TableColumn<Event, String>columnAgeRestriction;
     @FXML private TableColumn<Event,String>columnLanguage;
     @FXML private TableColumn<Event,String>columnReleaseDate;
+    @FXML private TableColumn<Event,String>columnType;
 
     public void initialize() {
         columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("id"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("startTime"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("title"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("duration"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("ageRestriction"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("language"));
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("releaseDate"));
+        columnName.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
+        columnStartTime.setCellValueFactory(new PropertyValueFactory<Event, String>("startTime"));
+        columnTitle.setCellValueFactory(new PropertyValueFactory<Event, String>("title"));
+        columnDuration.setCellValueFactory(new PropertyValueFactory<Event, String>("duration"));
+        columnAgeRestriction.setCellValueFactory(new PropertyValueFactory<Event, String>("ageRestriction"));
+        columnLanguage.setCellValueFactory(new PropertyValueFactory<Event, String>("language"));
+        columnReleaseDate.setCellValueFactory(new PropertyValueFactory<Event, String>("releaseDate"));
+        columnType.setCellValueFactory(new PropertyValueFactory<Event, String>("type"));
 
     }
 
@@ -61,7 +65,7 @@ public class EventsViewController {
 
         list = FXCollections.observableArrayList();
         for(ArrayList<String> x : threadClient.getEventsCheckData()){
-            list.add(new Event(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6),x.get(7),x.get(8)));
+            list.add(new Event(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6),x.get(7),x.get(8),x.get(9)));
         }
         return list;
     }
