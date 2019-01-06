@@ -29,8 +29,8 @@ public class EventsViewController {
     @FXML private TableColumn<Event,String>columnType;
 
     public void initialize() {
-        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("idEvent"));
         columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("idEventType"));
+        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("idEvent"));
         columnName.setCellValueFactory(new PropertyValueFactory<Event, String>("Name"));
         columnDate.setCellValueFactory(new PropertyValueFactory<Event, String>("Date"));
         columnStartTime.setCellValueFactory(new PropertyValueFactory<Event, String>("StartTime"));
@@ -40,6 +40,14 @@ public class EventsViewController {
         columnAgeRestriction.setCellValueFactory(new PropertyValueFactory<Event, String>("AgeRestriction"));
         columnLanguage.setCellValueFactory(new PropertyValueFactory<Event, String>("Language"));
         columnReleaseDate.setCellValueFactory(new PropertyValueFactory<Event, String>("ReleaseDate"));
+
+
+
+
+
+
+
+
 
 
     }

@@ -16,22 +16,30 @@ public class RepertuarViewController {
     private ThreadClient threadClient;
     private ObservableList<Repertoire> list;
     @FXML private TableView<Repertoire> tableView;
+    @FXML private TableColumn<Repertoire, String> columnIdEvent;
     @FXML private TableColumn<Repertoire, String> columnIdSchedule;
     @FXML private TableColumn<Repertoire, String> columnStatus;
     @FXML private TableColumn<Repertoire, String> columnStartDate;
     @FXML private TableColumn<Repertoire, String> columnEndDate;
     @FXML private TableColumn<Repertoire, String> columnCreationTime;
     @FXML private TableColumn<Repertoire, String> columnIdBranch;
-    @FXML private TableColumn<Repertoire, String> columnIdEvent;
+    @FXML private TableColumn<Repertoire, String> columnName;
+    @FXML private TableColumn<Repertoire, String> columnDate;
+    @FXML private TableColumn<Repertoire, String> columnStartTime;
+    @FXML private TableColumn<Repertoire, String> columnIdEventType;
 
     public void initialize() {
+        columnIdEvent.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEvent"));
         columnIdSchedule.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idSchedule"));
         columnStatus.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Status"));
         columnStartDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartDate"));
         columnEndDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("EndDate"));
         columnCreationTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("CreationTime"));
         columnIdBranch.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idBranch"));
-        columnIdEvent.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEvent"));
+        columnName.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Name"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Date"));
+        columnStartTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartTime"));
+        columnIdEventType.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEventType"));
     }
 
     public void reserve() {
@@ -53,7 +61,7 @@ public class RepertuarViewController {
         // tableView.getItems().clear();
         list = FXCollections.observableArrayList();
         for(ArrayList<String> x : threadClient.getRepertoireCheckData()){
-            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6)));
+            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6),x.get(7),x.get(8),x.get(9),x.get(10)));
         }
         return list;
     }

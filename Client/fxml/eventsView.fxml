@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
    <children>
       <Label alignment="CENTER" layoutX="175.0" layoutY="29.0" prefHeight="30.0" prefWidth="251.0" text="Wydarzenia">
          <font>
@@ -35,8 +35,8 @@
           <TableColumn fx:id="columnName" text="Nazwa" />
             <TableColumn fx:id="columnStartTime" prefWidth="75.0" text="Czas start" />
             <TableColumn fx:id="columnTitle" prefWidth="76.0" text="Tytuł" />
-            <TableColumn fx:id="columnDuration" prefWidth="82.0" text="Czas Trwania" />
             <TableColumn fx:id="columnAgeRestriction" minWidth="0.0" prefWidth="47.0" text="PEGI" />
+            <TableColumn fx:id="columnDuration" prefWidth="82.0" text="Czas Trwania" />
             <TableColumn fx:id="columnLanguage" maxWidth="258.0" prefWidth="98.0" text="Język" />
             <TableColumn fx:id="columnReleaseDate" minWidth="0.0" prefWidth="109.0" text="Premiera" />
             <TableColumn fx:id="columnType" minWidth="0.0" prefWidth="109.0" text="Typ" />

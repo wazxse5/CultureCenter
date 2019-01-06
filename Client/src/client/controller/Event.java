@@ -14,7 +14,7 @@ public class Event {
     private String releaseDate;
     private String type;
 
-    public Event(String id, String idEventType, String name, String date, String startTime,String title,String duration, String ageRestriction, String language, String releaseDate, String type){
+    public Event(String idEventType, String id, String name, String date, String startTime,String title, String type,String duration, String ageRestriction, String language, String releaseDate){
             this.idEvent=id;
             this.idEventType= idEventType;
             this.name=name;

@@ -28,13 +28,18 @@
       </Button>
       <TableView fx:id="tableView" layoutX="17.0" layoutY="67.0" prefHeight="209.0" prefWidth="568.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
         <columns>
+            <TableColumn fx:id="columnIdEvent" prefWidth="38.0" text="idEvent" visible="false" />
           <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
             <TableColumn fx:id="columnStatus" prefWidth="110.0" text="Status" />
-            <TableColumn fx:id="columnStartDate" prefWidth="66.0" text="Godzina" />
-            <TableColumn fx:id="columnEndDate" prefWidth="82.0" text="Koniec" />
-            <TableColumn fx:id="columnCreationTime" prefWidth="119.0" text="Utworzone" />
-            <TableColumn fx:id="columnIdBranch" prefWidth="119.0" text="idBranch" visible="false" />
+            <TableColumn fx:id="columnStartDate" prefWidth="107.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="columnEndDate" minWidth="1.0" prefWidth="123.0" text="Data zakonczenia" />
+            <TableColumn fx:id="columnCreationTime" minWidth="150.0" prefWidth="37.0" text="Godzina Utworzenia" />
+            <TableColumn fx:id="columnIdBranch" minWidth="0.0" prefWidth="119.0" text="idBranch" visible="false" />
             <TableColumn fx:id="columnIdEvent" prefWidth="119.0" text="idEvent" visible="false" />
+            <TableColumn fx:id="columnName" prefWidth="38.0" text="Nazwa" />
+            <TableColumn fx:id="columnDate" prefWidth="38.0" text="Data" visible="false" />
+            <TableColumn fx:id="columnStartTime" prefWidth="38.0" text="Godzina rozpoczecia" visible="false" />
+            <TableColumn fx:id="columnIdEventType" prefWidth="38.0" text="idEventType" visible="false" />
         </columns>
       </TableView>
       <HBox layoutX="250.0" layoutY="10.0" spacing="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="25.0">
@@ -44,7 +49,7 @@
             <Button mnemonicParsing="false" prefWidth="70.0" text="Następny" />
          </children>
       </HBox>
-      <Button fx:id="refreshButton" layoutX="458.0" layoutY="340.0" mnemonicParsing="false" onAction="#refresh" prefHeight="3.0" prefWidth="88.0" text="refresh">
+      <Button fx:id="refreshButton" layoutX="270.0" layoutY="343.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="100.0" text="refresh">
          <font>
             <Font size="10.0" />
          </font>
