@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RepertuarViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RepertuarViewController">
    <children>
       <Label layoutX="176.0" layoutY="25.0" prefHeight="30.0" prefWidth="250.0" text="Repertuar" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
@@ -29,7 +29,7 @@
       <TableView fx:id="tableView" layoutX="17.0" layoutY="67.0" prefHeight="209.0" prefWidth="568.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
         <columns>
           <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
-            <TableColumn fx:id="columnIdStatus" prefWidth="110.0" text="Status" />
+            <TableColumn fx:id="columnStatus" prefWidth="110.0" text="Status" />
             <TableColumn fx:id="columnStartDate" prefWidth="66.0" text="Godzina" />
             <TableColumn fx:id="columnEndDate" prefWidth="82.0" text="Koniec" />
             <TableColumn fx:id="columnCreationTime" prefWidth="119.0" text="Utworzone" />

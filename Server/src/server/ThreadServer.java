@@ -96,6 +96,7 @@ public class ThreadServer {
             ArrayList<ArrayList<String>> result;
             try {
                 result = dataLoader.getEvents();
+                System.out.println(result);
                 connection.send(new EventsCheckAnswerMessage(result));
             } catch (SQLException e) {
                 e.printStackTrace();
