@@ -3,6 +3,7 @@ package client.controller;
 public class Event {
 
     private String idEvent;
+    private String idEventType;
     private String name;
     private String date;
     private String startTime;
@@ -13,8 +14,9 @@ public class Event {
     private String releaseDate;
     private String type;
 
-    public Event(String id, String name, String date, String startTime,String title,String duration, String ageRestriction, String language, String releaseDate, String type){
+    public Event(String id, String idEventType, String name, String date, String startTime,String title,String duration, String ageRestriction, String language, String releaseDate, String type){
             this.idEvent=id;
+            this.idEventType= idEventType;
             this.name=name;
             this.date=date;
             this.startTime=startTime;

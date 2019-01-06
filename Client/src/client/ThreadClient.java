@@ -159,6 +159,10 @@ public class ThreadClient {
     public ArrayList<ArrayList<String>> getLogsCheckData() {
         return logsCheckData;
     }
+    public ArrayList<ArrayList<String>> getRepertoireCheckData() {
+        return repertoireCheckData;
+    }
+
     public ArrayList<ArrayList<String>> getEventsCheckData() {
         return eventsCheckData;
     }

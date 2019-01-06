@@ -47,8 +47,8 @@ public class InitViewController {
     }
 
     public void repertoire() {
-        threadClient.sendRepertoireCheckRequest();
         viewManager.setRepertoireScene();
+        threadClient.sendRepertoireCheckRequest();
     }
 
     public void recommendation() {

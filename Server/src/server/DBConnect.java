@@ -109,21 +109,20 @@ public class DBConnect {
     public ResultSet getLogs(String login)throws SQLException{
         String query = "CALL showLogs(\""+login + "\")";
         rs=st.executeQuery(query);
-        rs.next();
+       // rs.next();
         return rs;
     }
     public ResultSet getEvents() throws SQLException{
-        String query = "CALL showEvents";
+        String query = "CALL showEvents()";
         rs=st.executeQuery(query);
-        System.out.println(rs);
-        rs.next();
+        //rs.next();
         return rs;
     }
     public ResultSet getRepertuar() throws SQLException{
         String query = "CALL showSchedule";
         rs=st.executeQuery(query);
         System.out.println(rs);
-        rs.next();
+       // rs.next();
         return rs;
     }
 

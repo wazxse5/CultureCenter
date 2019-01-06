@@ -2,12 +2,36 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.ArrayList;
 
 public class RepertuarViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
-    public void initialize() {
+    private ObservableList<Repertoire> list;
+    @FXML private TableView<Repertoire> tableView;
+    @FXML private TableColumn<Repertoire, String> columnIdSchedule;
+    @FXML private TableColumn<Repertoire, String> columnStatus;
+    @FXML private TableColumn<Repertoire, String> columnStartDate;
+    @FXML private TableColumn<Repertoire, String> columnEndDate;
+    @FXML private TableColumn<Repertoire, String> columnCreationTime;
+    @FXML private TableColumn<Repertoire, String> columnIdBranch;
+    @FXML private TableColumn<Repertoire, String> columnIdEvent;
 
+    public void initialize() {
+        columnIdSchedule.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idSchedule"));
+        columnStatus.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Status"));
+        columnStartDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartDate"));
+        columnEndDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("EndDate"));
+        columnCreationTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("CreationTime"));
+        columnIdBranch.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idBranch"));
+        columnIdEvent.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEvent"));
     }
 
     public void reserve() {
@@ -16,6 +40,22 @@ public class RepertuarViewController {
 
     public void buy(){
 
+    }
+
+    public void refresh(){
+        tableView.setItems(getValues());
+//        tableView.getColumns().addAll(columnId,columnUser,columnMail,columnDate,columnType,columnAddInfo);
+        tableView.refresh();
+    }
+
+    public ObservableList<Repertoire> getValues(){
+        // list.clear();
+        // tableView.getItems().clear();
+        list = FXCollections.observableArrayList();
+        for(ArrayList<String> x : threadClient.getRepertoireCheckData()){
+            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6)));
+        }
+        return list;
     }
 
 

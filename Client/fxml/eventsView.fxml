@@ -40,6 +40,7 @@
             <TableColumn fx:id="columnLanguage" maxWidth="258.0" prefWidth="98.0" text="Język" />
             <TableColumn fx:id="columnReleaseDate" minWidth="0.0" prefWidth="109.0" text="Premiera" />
             <TableColumn fx:id="columnType" minWidth="0.0" prefWidth="109.0" text="Typ" />
+            <TableColumn fx:id="columnDate" minWidth="0.0" prefWidth="109.0" text="Data" />
         </columns>
       </TableView>
       <Button fx:id="refreshButton" layoutX="38.0" layoutY="343.0" mnemonicParsing="false" onAction="#refresh" prefHeight="17.0" prefWidth="95.0" text="Odśwież" />

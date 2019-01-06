@@ -23,7 +23,7 @@ public class DataLoader {
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
     private ArrayList<ArrayList> SQLEventsarray;
-    private ArrayList<ArrayList> SQLrepertuararray;
+    private ArrayList<ArrayList> SQLRepertuararray;
 
     public DataLoader() {
         dbConnect = new DBConnect();
@@ -77,8 +77,6 @@ public class DataLoader {
                 }
                 SQLarray.add(newal);
             }
-            System.out.println(SQLrepertuararray);
-            System.out.println(SQLrepertuararray.size());
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -89,7 +87,7 @@ public class DataLoader {
         repertuarCheckData = FXCollections.observableArrayList();
         ResultSet result=null;
         try{
-            SQLEventsarray = new ArrayList<ArrayList>();
+            SQLRepertuararray = new ArrayList<ArrayList>();
             result= dbConnect.getRepertuar();
 
             ArrayList<String> tables = new ArrayList<String>();
@@ -98,13 +96,13 @@ public class DataLoader {
                 for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
                     newal.add(result.getString(i));
                 }
-                SQLrepertuararray.add(newal);
+                SQLRepertuararray.add(newal);
             }
 
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return SQLrepertuararray;
+        return SQLRepertuararray;
     }
 
     public synchronized ArrayList getEvents() throws SQLException{
@@ -114,7 +112,6 @@ public class DataLoader {
             SQLEventsarray = new ArrayList<ArrayList>();
             result = dbConnect.getEvents();
             ArrayList<String> tables = new ArrayList<String>();
-
             while(result.next()){
                 ArrayList<String> newal = new ArrayList<String>();
                 for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){

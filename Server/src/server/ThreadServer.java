@@ -101,6 +101,18 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
+
+        if (message instanceof RepertoireCheckRequestMessage) {
+            RepertoireCheckRequestMessage checkRequest = (RepertoireCheckRequestMessage) message;
+            ArrayList<ArrayList<String>> result;
+            try {
+                result = dataLoader.getEvents();
+                connection.send(new RepertoireCheckAnswerMessage(result));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         if (message instanceof RepertoireCheckRequestMessage) {
             RepertoireCheckRequestMessage checkRequest = (RepertoireCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
