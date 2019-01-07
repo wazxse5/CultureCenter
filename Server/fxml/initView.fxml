@@ -7,16 +7,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.controller.InitViewController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.controller.InitViewController">
    <children>
-      <Button fx:id="exitButton" layoutX="164.0" layoutY="319.0" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="100.0" text="Wyjdź" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <Button fx:id="exitButton" layoutX="164.0" layoutY="319.0" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="100.0" text="Wyjdź" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="250.0">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <ListView fx:id="connectedConnectionsLV" editable="true" layoutX="40.0" layoutY="30.0" prefHeight="254.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0" />
+      <ListView fx:id="connectedConnectionsLV" editable="true" layoutX="40.0" layoutY="30.0" prefHeight="254.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="40.0" />
       <Label layoutX="40.0" layoutY="23.0" text="Połączeni klienci" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0" />
       <Button fx:id="startButton" layoutX="36.0" layoutY="319.0" mnemonicParsing="false" onAction="#start" prefHeight="40.0" prefWidth="100.0" text="Start" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="addEmployeeButton" disable="true" layoutX="304.0" layoutY="40.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="40.0" prefWidth="170.0" text="Dodaj pracownika" AnchorPane.rightAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>

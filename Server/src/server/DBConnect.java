@@ -71,16 +71,18 @@ public class DBConnect {
         }
     }
 
-    public void addEmployee(String name, String surname, String department, String login, String password, int salary) throws SQLException {
-        String query = "CALL addEmployee(?, ?, ?, ?, ?, ?, 1)";
+    public String addEmployee(String name, String surname, String department, String login, String password, int salary) throws SQLException {
+        String query = "CALL addEmployee(?, ?, ?, ?, ?, ?, 1);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, name);
         ps.setString(2, surname);
         ps.setString(3, department);
         ps.setString(4, login);
         ps.setString(5, password);
-        ps.setInt(6, salary);
-        rs = st.executeQuery(query);
+        ps.setFloat(6, salary);
+        rs = ps.executeQuery();
+        rs.next();
+        return rs.getString(1);
     }
 
     public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {
@@ -126,5 +128,44 @@ public class DBConnect {
         return rs;
     }
 
+    public boolean changeName(String login, String newName) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET Name = (?) WHERE login = (?);");
+            ps.setString(1, newName);
+            ps.setString(2, login);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 
+    public boolean changeSurname(String login, String newSurname) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET Surname = (?) WHERE login = (?);");
+            ps.setString(1, newSurname);
+            ps.setString(2, login);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean changeMail(String login, String newMail) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET mail = (?) WHERE login = (?);");
+            ps.setString(1, newMail);
+            ps.setString(2, login);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean changePassword(String login, String currentPassword, String newPassword) {
+        // FIXME: Tu by się przydała osobna procedura w bazie
+        return false;
+    }
 }

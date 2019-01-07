@@ -33,31 +33,31 @@
             <Label fx:id="userMailLabel" text="mail" />
          </children>
       </VBox>
-      <TabPane layoutX="261.0" layoutY="45.0" styleClass="caspianbackground" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0">
+      <TabPane fx:id="tabPane" layoutX="261.0" layoutY="45.0" styleClass="caspianbackground" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0">
         <tabs>
           <Tab closable="false" text="Zmiana danych">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="caspianbackground">
                      <children>
-                        <TextField layoutX="31.0" layoutY="30.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowe imię" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                        <TextField layoutX="41.0" layoutY="40.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowe nazwisko" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
-                        <TextField layoutX="51.0" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowy mail" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
-                        <CheckBox layoutX="192.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="20.0">
+                        <TextField fx:id="newNameTF" layoutX="31.0" layoutY="30.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowe imię" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <TextField fx:id="newSurnameTF" layoutX="41.0" layoutY="40.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowe nazwisko" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                        <TextField fx:id="newMailTF" layoutX="51.0" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowy mail" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
+                        <CheckBox fx:id="changeNameCheck" layoutX="192.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox layoutX="202.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="60.0">
+                        <CheckBox fx:id="changeSurnameCheck" layoutX="202.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="60.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox layoutX="212.0" layoutY="40.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="100.0">
+                        <CheckBox fx:id="changeMailCheck" layoutX="212.0" layoutY="40.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="100.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </CheckBox>
-                        <Button fx:id="ChangePasswordButton1" layoutX="20.0" layoutY="136.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="30.0" text="Zmień zaznaczone dane" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0" />
+                        <Button fx:id="ChangeUserDateButton" layoutX="20.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeUserData" prefHeight="30.0" text="Zmień zaznaczone dane" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -66,10 +66,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="297.0">
                      <children>
-                        <TextField prefHeight="30.0" prefWidth="150.0" promptText="Aktualne hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                        <TextField layoutX="292.0" layoutY="40.0" prefHeight="30.0" prefWidth="150.0" promptText="Powtórz hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
                         <Button fx:id="ChangePasswordButton" layoutX="379.0" layoutY="97.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="30.0" text="Zmień hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0" />
-                        <TextField layoutX="20.0" layoutY="60.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowe hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                        <PasswordField fx:id="currentPasswordPF" layoutX="36.0" layoutY="24.0" prefHeight="30.0" prefWidth="150.0" promptText="Aktualne hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <PasswordField fx:id="newPasswordPF" layoutX="45.0" layoutY="66.0" prefHeight="30.0" prefWidth="150.0" promptText="Nowe hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                        <PasswordField fx:id="newPassword1PF" layoutX="45.0" layoutY="106.0" prefHeight="30.0" prefWidth="150.0" promptText="Powtórz nowe hasło" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -92,5 +92,6 @@
             </Tab>
         </tabs>
       </TabPane>
+      <Label fx:id="answerLabel" layoutX="30.0" layoutY="369.0" prefHeight="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

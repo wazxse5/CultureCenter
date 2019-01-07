@@ -126,6 +126,17 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
+        if (message instanceof ChangeUserDataRequestMessage) {
+            ChangeUserDataRequestMessage changeMessage = (ChangeUserDataRequestMessage) message;
+            if (connection.getClient() != null) {
+                ChangeUserDataAnswerMessage answerMessage = dataLoader.changeUserData(connection.getClient().getLogin(), changeMessage);
+                connection.send(answerMessage);
+            }
+        }
+    }
+
+    public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
+        return dataLoader.addEmployee(name, surname, department, login, password, salary);
     }
 
     public void setViewManager(ViewManager viewManager) {

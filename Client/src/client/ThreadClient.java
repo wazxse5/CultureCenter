@@ -86,6 +86,10 @@ public class ThreadClient {
             RepertoireCheckAnswerMessage repertoireAnswer = (RepertoireCheckAnswerMessage) message;
             repertoireCheckData = repertoireAnswer.getResult();
         }
+        if (message instanceof ChangeUserDataAnswerMessage) {
+            ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
+            viewManager.handleChangeUserDateAnswet(answerMessage);
+        }
     }
 
     public void sendLoginRequest(String name, String password) {
@@ -123,6 +127,11 @@ public class ThreadClient {
             connection.send(new RepertoireCheckRequestMessage());
         }
     }
+
+    public void sendChangeUserDataRequest(ChangeUserDataRequestMessage changeMessage) {
+        connection.send(changeMessage);
+    }
+
     public void disconnect() {
         if (connection != null) {
             connection.close();

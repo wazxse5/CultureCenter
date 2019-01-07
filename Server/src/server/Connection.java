@@ -72,6 +72,10 @@ public class Connection {
         Platform.runLater(() -> description.setValue(finalText));
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     public StringProperty descriptionProperty() {
         return description;
     }
