@@ -40,15 +40,6 @@ public class RepertuarViewController {
         columnLanguage.setCellValueFactory(new PropertyValueFactory<Event, String>("Language"));
         columnReleaseDate.setCellValueFactory(new PropertyValueFactory<Event, String>("ReleaseDate"));
 
-
-
-
-
-
-
-
-
-
     }
 
     public void reserve() {

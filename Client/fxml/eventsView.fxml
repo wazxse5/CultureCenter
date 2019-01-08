@@ -7,20 +7,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RepertuarViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
    <children>
       <TableView fx:id="tableView" layoutX="27.0" layoutY="78.0" prefHeight="209.0" prefWidth="568.0">
          <columns>
-            <TableColumn fx:id="columnId" prefWidth="122.0" text="Id wydarzenia" visible="false" />
-            <TableColumn fx:id="columnName" text="Nazwa" />
-            <TableColumn fx:id="columnStartTime" prefWidth="75.0" text="Czas start" />
-            <TableColumn fx:id="columnTitle" prefWidth="76.0" text="Tytuł" />
-            <TableColumn fx:id="columnAgeRestriction" minWidth="0.0" prefWidth="47.0" text="PEGI" />
-            <TableColumn fx:id="columnDuration" prefWidth="82.0" text="Czas Trwania" />
-            <TableColumn fx:id="columnLanguage" maxWidth="258.0" prefWidth="98.0" text="Język" />
-            <TableColumn fx:id="columnReleaseDate" minWidth="0.0" prefWidth="109.0" text="Premiera" />
-            <TableColumn fx:id="columnType" minWidth="0.0" prefWidth="109.0" text="Typ" />
-            <TableColumn fx:id="columnDate" minWidth="0.0" prefWidth="109.0" text="Data" />
+            <TableColumn fx:id="columnIdEvent" prefWidth="38.0" text="idEvent" visible="false" />
+            <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
+            <TableColumn fx:id="columnStatus" prefWidth="110.0" text="Status" />
+            <TableColumn fx:id="columnStartDate" prefWidth="107.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="columnEndDate" minWidth="1.0" prefWidth="123.0" text="Data zakonczenia" />
+            <TableColumn fx:id="columnCreationTime" minWidth="150.0" prefWidth="37.0" text="Godzina Utworzenia" />
+            <TableColumn fx:id="columnIdBranch" minWidth="0.0" prefWidth="119.0" text="idBranch" visible="false" />
+            <TableColumn fx:id="columnName" prefWidth="38.0" text="Nazwa" />
+            <TableColumn fx:id="columnDate" prefWidth="38.0" text="Data" visible="false" />
+            <TableColumn fx:id="columnStartTime" prefWidth="38.0" text="Godzina rozpoczecia" visible="false" />
+            <TableColumn fx:id="columnIdEventType" prefWidth="38.0" text="idEventType" visible="false" />
          </columns>
       </TableView>
       <Button fx:id="BuyButton" layoutX="41.0" layoutY="313.0" mnemonicParsing="false" onAction="#buy" prefHeight="24.0" prefWidth="82.0" text="Kup">

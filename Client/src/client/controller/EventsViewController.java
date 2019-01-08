@@ -51,6 +51,10 @@ public class EventsViewController {
     public void buy(){
 
     }
+    public void back(){
+
+
+    }
 
     public void refresh(){
         tableView.setItems(getValues());
