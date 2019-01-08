@@ -9,27 +9,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RepertuarViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
    <children>
-      <Label layoutX="176.0" layoutY="25.0" prefHeight="30.0" prefWidth="250.0" text="Repertuar" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <Label layoutX="257.0" layoutY="6.0" prefHeight="0.0" prefWidth="109.0" text="Repertuar">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="ReserveButton" layoutX="20.0" layoutY="344.0" mnemonicParsing="false" onAction="#reserve" prefHeight="30.0" prefWidth="100.0" text="Zarezerwuj" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0">
+      <Button fx:id="ReserveButton" layoutX="137.0" layoutY="325.0" mnemonicParsing="false" onAction="#reserve" prefHeight="30.0" prefWidth="100.0" text="Zarezerwuj">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="BuyButton" layoutX="145.0" layoutY="344.0" mnemonicParsing="false" onAction="#buy" prefHeight="30.0" prefWidth="100.0" text="Kup" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="150.0">
+      <Button fx:id="BuyButton" layoutX="14.0" layoutY="325.0" mnemonicParsing="false" onAction="#buy" prefHeight="30.0" prefWidth="100.0" text="Kup">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <TableView fx:id="tableView" layoutX="17.0" layoutY="67.0" prefHeight="209.0" prefWidth="568.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
-        <columns>
+      <TableView fx:id="tableView" layoutX="27.0" layoutY="77.0" prefHeight="209.0" prefWidth="568.0">
+         <columns>
             <TableColumn fx:id="columnIdEvent" prefWidth="38.0" text="idEvent" visible="false" />
-          <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
+            <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
             <TableColumn fx:id="columnStatus" prefWidth="110.0" text="Status" />
             <TableColumn fx:id="columnStartDate" prefWidth="107.0" text="Data rozpoczecia" />
             <TableColumn fx:id="columnEndDate" minWidth="1.0" prefWidth="123.0" text="Data zakonczenia" />
@@ -40,19 +40,15 @@
             <TableColumn fx:id="columnDate" prefWidth="38.0" text="Data" visible="false" />
             <TableColumn fx:id="columnStartTime" prefWidth="38.0" text="Godzina rozpoczecia" visible="false" />
             <TableColumn fx:id="columnIdEventType" prefWidth="38.0" text="idEventType" visible="false" />
-        </columns>
+         </columns>
       </TableView>
-      <HBox layoutX="250.0" layoutY="10.0" spacing="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="25.0">
+      <HBox layoutX="237.0" layoutY="44.0" spacing="10.0">
          <children>
             <Button mnemonicParsing="false" prefWidth="70.0" text="Poprzedni" />
             <DatePicker prefWidth="180.0" promptText="Wybierz dzień" />
             <Button mnemonicParsing="false" prefWidth="70.0" text="Następny" />
          </children>
       </HBox>
-      <Button fx:id="refreshButton" layoutX="270.0" layoutY="343.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="100.0" text="refresh">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
+      <Button fx:id="refreshButton" layoutX="398.0" layoutY="328.0" mnemonicParsing="false" onAction="#refresh" prefHeight="17.0" prefWidth="95.0" text="Odśwież" />
    </children>
 </AnchorPane>

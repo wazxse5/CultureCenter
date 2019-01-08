@@ -122,7 +122,7 @@ public class ViewManager {
     public void setEventsScene() {
         if (eventsScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/eventsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertoireView.fxml"));
                 eventsScene = loader.load();
                 eventsScene.getStylesheets().add("/../commonSources/css/styles.css");
 
@@ -190,7 +190,7 @@ public class ViewManager {
     public void setRepertoireScene() {
         if (repertoireScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertoireView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/eventsView.fxml"));
                 repertoireScene = loader.load();
                 repertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
 
