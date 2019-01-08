@@ -150,4 +150,14 @@ public class DataLoader {
             return false;
         }
     }
+    public boolean addRepertoire(String name){
+        try{
+            ResultSet result = null;
+            result = dbConnect.addRepertoire(name);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

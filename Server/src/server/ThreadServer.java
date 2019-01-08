@@ -133,6 +133,10 @@ public class ThreadServer {
                 connection.send(answerMessage);
             }
         }
+        if(message instanceof AddRepertuarRequestMessage){
+            AddRepertuarRequestMessage addRepertuarMessage = (AddRepertuarRequestMessage) message;
+                dataLoader.addRepertoire(((AddRepertuarRequestMessage) message).getName());
+        }
     }
 
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {

@@ -33,6 +33,7 @@ public class ViewManager {
     private Region eventsScene;
     private Region infosScene;
     private Region contactScene;
+    private Region addRepertoireScene;
 
 
     private InitViewController initViewController;
@@ -48,6 +49,7 @@ public class ViewManager {
     private EventsViewController eventsViewController;
     private InfosViewController infosViewController;
     private ContactViewController contactViewController;
+    private AddRepertoireViewController addRepertoireViewController;
 
 
     private final String mainCssPath = "/../commonSources/css/styles.css";
@@ -203,6 +205,23 @@ public class ViewManager {
         }
         contentPane.setCenter(repertoireScene);
     }
+    public void setAddRepertoireScene() {
+        if (addRepertoireScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addRepertoireView.fxml"));
+                addRepertoireScene = loader.load();
+                addRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                addRepertoireViewController = loader.getController();
+                addRepertoireViewController.setViewManager(this);
+                addRepertoireViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku addRepertoireView");
+            }
+        }
+        contentPane.setCenter(addRepertoireScene);
+    }
+
 
     public void setAccountSettingsScene() {
         if (accountSettingsScene == null) {
@@ -345,6 +364,9 @@ public class ViewManager {
 
     public RegisterViewController getRegisterViewController() {
         return registerViewController;
+    }
+    public AddRepertoireViewController getAddRepertoireViewController() {
+        return addRepertoireViewController;
     }
 
     public RepertuarViewController getRepertuarViewController() {

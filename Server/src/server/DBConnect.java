@@ -97,6 +97,11 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
+    public ResultSet addRepertoire(String name) throws SQLException{
+        String query = "CALL addClient(?,?,?,?,?);";
+        rs=st.executeQuery(query);
+        return rs;
+    }
 
     public String loginUser(String name, String password) throws SQLException {
         String query = "CALL loginClient(?, ?);";
@@ -163,6 +168,7 @@ public class DBConnect {
             return false;
         }
     }
+
 
     public boolean changePassword(String login, String currentPassword, String newPassword) {
         // FIXME: Tu by się przydała osobna procedura w bazie

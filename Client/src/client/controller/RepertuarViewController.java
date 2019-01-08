@@ -49,6 +49,14 @@ public class RepertuarViewController {
     public void buy(){
 
     }
+    public void add(){
+        viewManager.setAddRepertoireScene();
+    }
+
+    public void edit(){
+
+
+    }
 
     public void back(){
         if(threadClient.isConnected()) {
