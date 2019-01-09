@@ -117,7 +117,7 @@ public class AddRepertoireViewController {
     }
 
     public void back() {
-        viewManager.setRepertoireScene();
+        viewManager.setEventsScene();
     }
 
 

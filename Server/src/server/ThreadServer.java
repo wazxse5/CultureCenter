@@ -96,7 +96,6 @@ public class ThreadServer {
             ArrayList<ArrayList<String>> result;
             try {
                 result = dataLoader.getEvents();
-                System.out.println(result);
                 connection.send(new EventsCheckAnswerMessage(result));
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -136,7 +135,7 @@ public class ThreadServer {
         if(message instanceof AddRepertuarRequestMessage){
             AddRepertuarRequestMessage addRepertuarMessage = (AddRepertuarRequestMessage) message;
                 dataLoader.addRepertoire(addRepertuarMessage.getImagePath(),addRepertuarMessage.getTitle(),addRepertuarMessage.getDuration(),addRepertuarMessage.getAgeRestriction(),addRepertuarMessage.getLanguage(),addRepertuarMessage.getReleaseDate(),addRepertuarMessage.getType());
-
+                System.out.println(((AddRepertuarRequestMessage) message).getTitle());
         }
     }
 
