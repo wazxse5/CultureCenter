@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import message.ChangeUserDataAnswerMessage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ViewManager {
     private ThreadClient threadClient;
@@ -33,6 +34,7 @@ public class ViewManager {
     private Region eventsScene;
     private Region infosScene;
     private Region contactScene;
+    private Region choosingSeatScene;
     private Region addRepertoireScene;
 
 
@@ -49,6 +51,7 @@ public class ViewManager {
     private EventsViewController eventsViewController;
     private InfosViewController infosViewController;
     private ContactViewController contactViewController;
+    private ChoosingSeatViewController choosingSeatViewController;
     private AddRepertoireViewController addRepertoireViewController;
 
 
@@ -309,6 +312,24 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(restorePasswordScene);
+    }
+
+    public void setChoosingSeatScene(List<List<Integer>> seats) {
+        if (choosingSeatScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChoosingSeatView.fxml"));
+                choosingSeatScene = loader.load();
+                choosingSeatScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                choosingSeatViewController = loader.getController();
+                choosingSeatViewController.setViewManager(this);
+                choosingSeatViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku repertuarView");
+            }
+        }
+        choosingSeatViewController.setLayout(seats);
+        contentPane.setCenter(choosingSeatScene);
     }
 
 
