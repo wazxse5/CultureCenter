@@ -3,9 +3,10 @@ package message;
 public class AddRepertuarRequestMessage extends Message {
     private static final long serialVersionUID = -7066000756945334003L;
 
-    private String name;
-    private String date;
-    private String startTime;
+    private String imagePath;
+
+
+
     private String title;
     private String duration;
     private String ageRestriction;
@@ -15,18 +16,6 @@ public class AddRepertuarRequestMessage extends Message {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getStartTime() {
-        return startTime;
     }
 
     public String getTitle() {
@@ -52,11 +41,11 @@ public class AddRepertuarRequestMessage extends Message {
     public String getType() {
         return type;
     }
-
-    public AddRepertuarRequestMessage(String name, String date, String startTime, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
-        this.name=name;
-        this.date=date;
-        this.startTime=startTime;
+    public String getImagePath() {
+        return imagePath;
+    }
+    public AddRepertuarRequestMessage(String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
+        this.imagePath=imagePath;
         this.title=title;
         this.duration=duration;
         this.ageRestriction=ageRestriction;

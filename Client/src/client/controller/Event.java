@@ -2,47 +2,36 @@ package client.controller;
 
 public class Event {
 
-    private String idEvent;
     private String idEventType;
-    private String name;
-    private String date;
-    private String startTime;
     private String title;
     private String duration;
     private String ageRestriction;
     private String language;
     private String releaseDate;
     private String type;
+    private String imagePath;
 
-    public Event(String idEventType, String id, String name, String date, String startTime,String title, String type,String duration, String ageRestriction, String language, String releaseDate){
-            this.idEvent=id;
+    public String getIdEventType() {
+        return idEventType;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public Event(String idEventType, String title, String type, String duration, String ageRestriction, String language, String releaseDate, String imagePath){
+            this.imagePath=imagePath;
             this.idEventType= idEventType;
-            this.name=name;
-            this.date=date;
-            this.startTime=startTime;
             this.title=title;
             this.duration=duration;
             this.ageRestriction=ageRestriction;
             this.language=language;
             this.releaseDate=releaseDate;
             this.type=type;
+
         }
 
-    public void setId(String id) {
-        this.idEvent = id;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -64,22 +53,6 @@ public class Event {
         this.releaseDate = releaseDate;
     }
     public void setType(String type){this.type = type;}
-
-    public String getId() {
-        return idEvent;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
 
     public String getTitle() {
         return title;

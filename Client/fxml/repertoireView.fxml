@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,70 +16,56 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="27.0" layoutY="77.0" prefHeight="209.0" prefWidth="568.0">
+      <TableView fx:id="tableView" layoutX="16.0" layoutY="54.0" prefHeight="209.0" prefWidth="568.0">
          <columns>
-            <TableColumn fx:id="columnId" prefWidth="122.0" text="Id wydarzenia" visible="false" />
-            <TableColumn fx:id="columnName" text="Nazwa" />
-            <TableColumn fx:id="columnStartTime" prefWidth="75.0" text="Czas start" />
-            <TableColumn fx:id="columnTitle" prefWidth="76.0" text="Tytuł" />
-            <TableColumn fx:id="columnAgeRestriction" minWidth="0.0" prefWidth="47.0" text="PEGI" />
-            <TableColumn fx:id="columnDuration" prefWidth="82.0" text="Czas Trwania" />
-            <TableColumn fx:id="columnLanguage" maxWidth="258.0" prefWidth="98.0" text="Język" />
-            <TableColumn fx:id="columnReleaseDate" minWidth="0.0" prefWidth="109.0" text="Premiera" />
-            <TableColumn fx:id="columnType" minWidth="0.0" prefWidth="109.0" text="Typ" />
-            <TableColumn fx:id="columnDate" minWidth="0.0" prefWidth="109.0" text="Data" />
+            <TableColumn fx:id="columnIdEvent" prefWidth="38.0" text="idEvent" visible="false" />
+            <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
+            <TableColumn fx:id="columnStatus" prefWidth="110.0" text="Status" />
+            <TableColumn fx:id="columnStartDate" prefWidth="107.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="columnEndDate" minWidth="1.0" prefWidth="123.0" text="Data zakonczenia" />
+            <TableColumn fx:id="columnCreationTime" minWidth="150.0" prefWidth="37.0" text="Godzina Utworzenia" />
+            <TableColumn fx:id="columnIdBranch" minWidth="0.0" prefWidth="119.0" text="idBranch" visible="false" />
+            <TableColumn fx:id="columnName" prefWidth="38.0" text="Nazwa" />
+            <TableColumn fx:id="columnDate" prefWidth="38.0" text="Data" visible="false" />
+            <TableColumn fx:id="columnStartTime" prefWidth="38.0" text="Godzina rozpoczecia" visible="false" />
+            <TableColumn fx:id="columnIdEventType" prefWidth="38.0" text="idEventType" visible="false" />
          </columns>
       </TableView>
-      <HBox layoutX="237.0" layoutY="44.0" spacing="10.0">
+      <HBox layoutX="69.0" layoutY="301.0" prefHeight="49.0" prefWidth="404.0">
          <children>
-            <Button mnemonicParsing="false" prefWidth="70.0" text="Poprzedni" />
-            <DatePicker prefWidth="180.0" promptText="Wybierz dzień" />
-            <Button mnemonicParsing="false" prefWidth="70.0" text="Następny" />
+            <Button fx:id="ReserveButton" mnemonicParsing="false" onAction="#reserve" prefHeight="24.0" prefWidth="82.0" text="Zarezerwuj">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="BuyButton" mnemonicParsing="false" onAction="#buy" prefHeight="24.0" prefWidth="82.0" text="Kup">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="100.0" text="refresh">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="backToLoginButton" mnemonicParsing="false" onAction="#back" prefHeight="0.0" prefWidth="87.0" text="Cofnij">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
-      <HBox layoutX="41.0" layoutY="325.0" prefHeight="30.0" prefWidth="357.0">
-         <children>
-            <Button fx:id="ReserveButton" mnemonicParsing="false" onAction="#reserve" prefHeight="30.0" prefWidth="100.0" text="Zarezerwuj">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="BuyButton" mnemonicParsing="false" onAction="#buy" prefHeight="30.0" prefWidth="100.0" text="Kup">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="103.0" text="Odśwież">
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <HBox layoutX="27.0" layoutY="42.0" prefHeight="30.0" prefWidth="180.0">
-         <children>
-            <Button fx:id="AddButton" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="100.0" text="Dodaj">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="EditButton" mnemonicParsing="false" onAction="#edit" prefHeight="30.0" prefWidth="77.0" text="Edytuj">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-         </children></HBox>
    </children>
 </AnchorPane>

@@ -97,9 +97,9 @@ public class ThreadClient {
         }
 
     }
-    public void sendAddRepertuarRequest(String name, String date, String startTime, String title, String duration, String ageRestriction, String language, String releaseDate, String type){
+    public void sendAddRepertuarRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
         if(connected.get()){
-            connection.send(new AddRepertuarRequestMessage(name,date,startTime,title,duration,ageRestriction,language,releaseDate,type));
+            connection.send(new AddRepertuarRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
         }
     }
     public void sendLoginRequest(String name, String password) {

@@ -135,7 +135,8 @@ public class ThreadServer {
         }
         if(message instanceof AddRepertuarRequestMessage){
             AddRepertuarRequestMessage addRepertuarMessage = (AddRepertuarRequestMessage) message;
-                dataLoader.addRepertoire(((AddRepertuarRequestMessage) message).getName());
+                dataLoader.addRepertoire(addRepertuarMessage.getImagePath(),addRepertuarMessage.getTitle(),addRepertuarMessage.getDuration(),addRepertuarMessage.getAgeRestriction(),addRepertuarMessage.getLanguage(),addRepertuarMessage.getReleaseDate(),addRepertuarMessage.getType());
+
         }
     }
 

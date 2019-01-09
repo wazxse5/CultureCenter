@@ -150,10 +150,10 @@ public class DataLoader {
             return false;
         }
     }
-    public boolean addRepertoire(String name){
+    public boolean addRepertoire(String imagePath, String title, String duration, String ageRestriction,String language, String releaseDate, String type){
         try{
             ResultSet result = null;
-            result = dbConnect.addRepertoire(name);
+            result = dbConnect.addRepertoire(imagePath,title,duration,ageRestriction,language,releaseDate,type);
         }catch (SQLException e){
             e.printStackTrace();
             return false;

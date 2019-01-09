@@ -97,9 +97,19 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
-    public ResultSet addRepertoire(String name) throws SQLException{
-        String query = "CALL addClient(?,?,?,?,?);";
-        rs=st.executeQuery(query);
+    public ResultSet addRepertoire(String imagePath, String title, String duration, String ageRestriction,String language, String releaseDate, String type) throws SQLException{
+        //String query = "CALL addEventType("+imagePath+","+title+","+duration+","+ageRestriction+","+language+","+releaseDate+","+type+");";
+        String query = "CALL addEventType(?, ?, ?, ?, ?,?,?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,title);
+        ps.setTime( 3,java.sql.Time.valueOf(duration));
+        ps.setInt(4, Integer.valueOf(ageRestriction));
+        ps.setString(5,language);
+        ps.setDate(6,java.sql.Date.valueOf(releaseDate));
+        ps.setString(2,type);
+        ps.setString(7,imagePath);
+        rs=ps.executeQuery();
+        rs.next();
         return rs;
     }
 
