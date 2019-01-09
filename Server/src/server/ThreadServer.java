@@ -133,6 +133,11 @@ public class ThreadServer {
                 connection.send(answerMessage);
             }
         }
+        if(message instanceof AddRepertuarRequestMessage){
+            AddRepertuarRequestMessage addRepertuarMessage = (AddRepertuarRequestMessage) message;
+                dataLoader.addRepertoire(addRepertuarMessage.getImagePath(),addRepertuarMessage.getTitle(),addRepertuarMessage.getDuration(),addRepertuarMessage.getAgeRestriction(),addRepertuarMessage.getLanguage(),addRepertuarMessage.getReleaseDate(),addRepertuarMessage.getType());
+
+        }
     }
 
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {

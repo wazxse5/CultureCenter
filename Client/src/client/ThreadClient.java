@@ -67,6 +67,11 @@ public class ThreadClient {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
         }
+
+        if (message instanceof AddRepertuarAnswerMessage){
+            AddRepertuarAnswerMessage answerMessage = (AddRepertuarAnswerMessage) message;
+
+        }
         if (message instanceof RegisterAnswerMessage) {
             RegisterAnswerMessage registerAnswer = (RegisterAnswerMessage) message;
         }
@@ -90,8 +95,13 @@ public class ThreadClient {
             ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
             viewManager.handleChangeUserDateAnswet(answerMessage);
         }
-    }
 
+    }
+    public void sendAddRepertuarRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
+        if(connected.get()){
+            connection.send(new AddRepertuarRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
+        }
+    }
     public void sendLoginRequest(String name, String password) {
         if (connected.get()) {
             connection.send(new LoginRequestMessage(name, password));

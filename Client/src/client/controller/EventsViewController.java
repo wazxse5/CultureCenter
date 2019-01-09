@@ -1,47 +1,38 @@
 package client.controller;
 
 import client.ThreadClient;
-import client.ViewManager;
-import javafx.fxml.FXML;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+        import client.ViewManager;
+        import javafx.collections.FXCollections;
+        import javafx.collections.ObservableList;
+        import javafx.fxml.FXML;
+        import javafx.scene.control.TableColumn;
+        import javafx.scene.control.TableView;
+        import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.ArrayList;
-
+        import java.util.ArrayList;
 
 public class EventsViewController {
-
     private ViewManager viewManager;
     private ThreadClient threadClient;
-    private ObservableList<Repertoire> list;
-    @FXML private TableView<Repertoire> tableView;
-    @FXML private TableColumn<Repertoire, String> columnIdEvent;
-    @FXML private TableColumn<Repertoire, String> columnIdSchedule;
-    @FXML private TableColumn<Repertoire, String> columnStatus;
-    @FXML private TableColumn<Repertoire, String> columnStartDate;
-    @FXML private TableColumn<Repertoire, String> columnEndDate;
-    @FXML private TableColumn<Repertoire, String> columnCreationTime;
-    @FXML private TableColumn<Repertoire, String> columnIdBranch;
-    @FXML private TableColumn<Repertoire, String> columnName;
-    @FXML private TableColumn<Repertoire, String> columnDate;
-    @FXML private TableColumn<Repertoire, String> columnStartTime;
-    @FXML private TableColumn<Repertoire, String> columnIdEventType;
+    private ObservableList<Event> list;
+    @FXML private TableView<Event> tableView;
+    @FXML private TableColumn<Event, String> columnId;
+    @FXML private TableColumn<Event,String>columnTitle;
+    @FXML private TableColumn<Event,String>columnDuration;
+    @FXML private TableColumn<Event,String>columnAgeRestriction;
+    @FXML private TableColumn<Event,String>columnLanguage;
+    @FXML private TableColumn<Event,String>columnReleaseDate;
+    @FXML private TableColumn<Event,String>columnType;
 
     public void initialize() {
-        columnIdEvent.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEvent"));
-        columnIdSchedule.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idSchedule"));
-        columnStatus.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Status"));
-        columnStartDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartDate"));
-        columnEndDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("EndDate"));
-        columnCreationTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("CreationTime"));
-        columnIdBranch.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idBranch"));
-        columnName.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Name"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Date"));
-        columnStartTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartTime"));
-        columnIdEventType.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEventType"));
+        columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("idEventType"));
+        columnTitle.setCellValueFactory(new PropertyValueFactory<Event, String>("Title"));
+        columnType.setCellValueFactory(new PropertyValueFactory<Event, String>("Type"));
+        columnDuration.setCellValueFactory(new PropertyValueFactory<Event, String>("Duration"));
+        columnAgeRestriction.setCellValueFactory(new PropertyValueFactory<Event, String>("AgeRestriction"));
+        columnLanguage.setCellValueFactory(new PropertyValueFactory<Event, String>("Language"));
+        columnReleaseDate.setCellValueFactory(new PropertyValueFactory<Event, String>("ReleaseDate"));
+
     }
 
     public void reserve() {
@@ -51,26 +42,38 @@ public class EventsViewController {
     public void buy(){
 
     }
+    public void add(){
+        viewManager.setAddRepertoireScene();
+    }
+
+    public void edit(){
+
+
+    }
+
     public void back(){
+        if(threadClient.isConnected()) {
 
-
+        }
+        else viewManager.setInitScene();
     }
 
     public void refresh(){
+        threadClient.sendEventsCheckRequest();
         tableView.setItems(getValues());
-//        tableView.getColumns().addAll(columnId,columnUser,columnMail,columnDate,columnType,columnAddInfo);
         tableView.refresh();
+
     }
 
-    public ObservableList<Repertoire> getValues(){
-        // list.clear();
-        // tableView.getItems().clear();
+    public ObservableList<Event> getValues(){
         list = FXCollections.observableArrayList();
-        for(ArrayList<String> x : threadClient.getRepertoireCheckData()){
-            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6),x.get(7),x.get(8),x.get(9),x.get(10)));
+        for(ArrayList<String> x : threadClient.getEventsCheckData()){
+            list.add(new Event(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6),x.get(7)));
         }
         return list;
     }
+
+
 
 
     public void setThreadClient(ThreadClient threadClient) {
