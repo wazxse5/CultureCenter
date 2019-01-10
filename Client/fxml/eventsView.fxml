@@ -17,7 +17,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="16.0" layoutY="96.0" prefHeight="209.0" prefWidth="568.0">
+      <TableView fx:id="tableView" layoutX="16.0" layoutY="96.0" onMousePressed="#getTableValues" prefHeight="209.0" prefWidth="568.0">
          <columns>
             <TableColumn fx:id="columnId" prefWidth="122.0" text="Id wydarzenia" visible="false" />
             <TableColumn fx:id="columnTitle" prefWidth="76.0" text="Tytuł" />
@@ -26,7 +26,7 @@
             <TableColumn fx:id="columnLanguage" maxWidth="258.0" prefWidth="98.0" text="Język" />
             <TableColumn fx:id="columnReleaseDate" minWidth="0.0" prefWidth="109.0" text="Premiera" />
             <TableColumn fx:id="columnType" minWidth="0.0" prefWidth="109.0" text="Typ" />
-            <TableColumn fx:id="columnDate" minWidth="0.0" prefWidth="109.0" text="Data" />
+            <TableColumn fx:id="columnImagePath" minWidth="0.0" prefWidth="109.0" text="imagePath" visible="false" />
          </columns>
       </TableView>
       <HBox layoutX="246.0" layoutY="63.0" spacing="10.0">
@@ -55,7 +55,7 @@
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="EditButton" mnemonicParsing="false" onAction="#edit" prefHeight="30.0" prefWidth="77.0" text="Edytuj">
+            <Button fx:id="EditButton" disable="true" mnemonicParsing="false" onAction="#edit" prefHeight="30.0" prefWidth="77.0" text="Edytuj">
                <font>
                   <Font size="14.0" />
                </font>

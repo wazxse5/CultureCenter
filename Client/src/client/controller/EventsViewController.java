@@ -5,11 +5,15 @@ import client.ThreadClient;
         import javafx.collections.FXCollections;
         import javafx.collections.ObservableList;
         import javafx.fxml.FXML;
-        import javafx.scene.control.TableColumn;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
         import javafx.scene.control.TableView;
         import javafx.scene.control.cell.PropertyValueFactory;
-
         import java.util.ArrayList;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.geometry.Insets;
 
 public class EventsViewController {
     private ViewManager viewManager;
@@ -23,6 +27,10 @@ public class EventsViewController {
     @FXML private TableColumn<Event,String>columnLanguage;
     @FXML private TableColumn<Event,String>columnReleaseDate;
     @FXML private TableColumn<Event,String>columnType;
+    @FXML private TableColumn<Event,String>columnImagePath;
+
+    @FXML private Button EditButton;
+
 
     public void initialize() {
         columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("idEventType"));
@@ -32,22 +40,17 @@ public class EventsViewController {
         columnAgeRestriction.setCellValueFactory(new PropertyValueFactory<Event, String>("AgeRestriction"));
         columnLanguage.setCellValueFactory(new PropertyValueFactory<Event, String>("Language"));
         columnReleaseDate.setCellValueFactory(new PropertyValueFactory<Event, String>("ReleaseDate"));
+        columnImagePath.setCellValueFactory(new PropertyValueFactory<Event, String>("imagePath"));
 
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
-    public void reserve() {
-
-    }
-
-    public void buy(){
-
-    }
     public void add(){
         viewManager.setAddRepertoireScene();
     }
 
     public void edit(){
-
+        viewManager.setEditEventsScene();
 
     }
 
@@ -62,7 +65,6 @@ public class EventsViewController {
         threadClient.sendEventsCheckRequest();
         tableView.setItems(getValues());
         tableView.refresh();
-
     }
 
     public ObservableList<Event> getValues(){
@@ -72,6 +74,13 @@ public class EventsViewController {
         }
         return list;
     }
+
+    public void getTableValues(){
+        EditButton.setDisable(false);
+
+    }
+
+
 
 
 

@@ -2,38 +2,22 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.DatePicker;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
-import javafx.util.converter.DateTimeStringConverter;
-import javafx.util.converter.IntegerStringConverter;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.text.*;
-import javax.swing.event.ChangeListener;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.util.Locale;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
-
-public class AddRepertoireViewController {
+public class EditEventsViewController {
 
 
 
@@ -101,18 +85,8 @@ public class AddRepertoireViewController {
         String  type = typeTF.getText();
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
-            threadClient.sendAddRepertuarRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
-            ArrayList<String> al = new ArrayList<>();
-            al.add("");
-            al.add(imagePath);
-            al.add(title);
-            al.add(duration);
-            al.add(ageRestriction);
-            al.add(language);
-            al.add(releaseDate);
-            al.add(type);
-            //threadClient.getEventsCheckData().add(al);
-            infoLabel.setText("Dodano nowy film");
+            //threadClient.sendAddRepertuarRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
+            infoLabel.setText("Zmieniono dane");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 
@@ -133,7 +107,7 @@ public class AddRepertoireViewController {
 
     public void singleFileChooser(javafx.event.ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Obrazy",lstFile));
+        fc.getExtensionFilters().add(new ExtensionFilter("Obrazy",lstFile));
         File f = fc.showOpenDialog(null);
 
         if(f!=null){

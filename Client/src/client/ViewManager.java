@@ -36,6 +36,7 @@ public class ViewManager {
     private Region contactScene;
     private Region choosingSeatScene;
     private Region addRepertoireScene;
+    private Region editEventsScene;
 
 
     private InitViewController initViewController;
@@ -52,7 +53,8 @@ public class ViewManager {
     private InfosViewController infosViewController;
     private ContactViewController contactViewController;
     private ChoosingSeatViewController choosingSeatViewController;
-    private AddRepertoireViewController addRepertoireViewController;
+    private AddEventsViewController addEventsViewController;
+    private EditEventsViewController editEventsViewController;
 
 
     private final String mainCssPath = "/../commonSources/css/styles.css";
@@ -89,6 +91,23 @@ public class ViewManager {
         }
         contentPane.setCenter(contactScene);
     }
+    public void setEditEventsScene() {
+        if (editEventsScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editEventsView.fxml"));
+                editEventsScene = loader.load();
+                editEventsScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                editEventsViewController = loader.getController();
+                editEventsViewController.setViewManager(this);
+                editEventsViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku EditEventsView");
+            }
+        }
+        contentPane.setCenter(editEventsScene);
+    }
+
 
     public void setInfosScene() {
         if (infosScene == null) {
@@ -211,13 +230,13 @@ public class ViewManager {
     public void setAddRepertoireScene() {
         if (addRepertoireScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addRepertoireView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addEventsView.fxml"));
                 addRepertoireScene = loader.load();
                 addRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
 
-                addRepertoireViewController = loader.getController();
-                addRepertoireViewController.setViewManager(this);
-                addRepertoireViewController.setThreadClient(threadClient);
+                addEventsViewController = loader.getController();
+                addEventsViewController.setViewManager(this);
+                addEventsViewController.setThreadClient(threadClient);
             } catch (IOException e) {
                 setTitle("Nie można załadować widoku addRepertoireView");
             }
@@ -374,6 +393,7 @@ public class ViewManager {
     public EventsViewController getEventsViewController() {
         return eventsViewController;
     }
+    public EditEventsViewController getEditEventsViewController(){return editEventsViewController;}
 
     public RestorePasswordController getRestorePasswordViewController(){
         return restorePasswordViewController;
@@ -386,8 +406,8 @@ public class ViewManager {
     public RegisterViewController getRegisterViewController() {
         return registerViewController;
     }
-    public AddRepertoireViewController getAddRepertoireViewController() {
-        return addRepertoireViewController;
+    public AddEventsViewController getAddEventsViewController() {
+        return addEventsViewController;
     }
 
     public RepertuarViewController getRepertuarViewController() {
