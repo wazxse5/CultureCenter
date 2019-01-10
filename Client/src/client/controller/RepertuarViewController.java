@@ -58,7 +58,6 @@ public class RepertuarViewController {
 
     public void refresh(){
         tableView.setItems(getValues());
-//        tableView.getColumns().addAll(columnId,columnUser,columnMail,columnDate,columnType,columnAddInfo);
         tableView.refresh();
     }
 

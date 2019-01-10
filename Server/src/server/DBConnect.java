@@ -93,6 +93,23 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
+    public ResultSet editEvent(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath)throws SQLException{
+        String query = "CALL editEventType(?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1,Integer.valueOf(idEvent));
+        ps.setString(2,title);
+        ps.setTime( 4,java.sql.Time.valueOf(duration));
+        ps.setInt(5, Integer.valueOf(ageRestriction));
+        ps.setString(6,language);
+        ps.setDate(7,java.sql.Date.valueOf(releaseDate));
+        ps.setString(3,type);
+        ps.setString(8,imagePath);
+        rs=ps.executeQuery();
+        rs.next();
+        return rs;
+
+    }
+
 
     public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {
         String query = "CALL addClient(?, ?, ?, ?, ?);";
@@ -139,7 +156,7 @@ public class DBConnect {
         return rs;
     }
     public ResultSet getEvents() throws SQLException{
-        String query = "CALL showEvents()";
+        String query = "CALL showEventType()";
         rs=st.executeQuery(query);
         //rs.next();
         return rs;
@@ -187,6 +204,7 @@ public class DBConnect {
             return false;
         }
     }
+
 
 
     public boolean changePassword(String login, String currentPassword, String newPassword) {

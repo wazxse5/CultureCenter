@@ -23,6 +23,43 @@ public class RegisterViewController {
     @FXML private Button connectButton;
 
 
+    public void RestrictionEmail(){
+        mailTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegexEmail())){
+                mailTF.setText(oldValue);
+            }
+        });
+
+    }
+    public void RestrictionText(){
+        nameTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                nameTF.setText(oldValue);
+            }
+        });
+        surnameTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                surnameTF.setText(oldValue);
+            }
+        });
+        loginTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                loginTF.setText(oldValue);
+            }
+        });
+        passwordTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                passwordTF.setText(oldValue);
+            }
+        });
+        password1TF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                password1TF.setText(oldValue);
+            }
+        });
+
+    }
+
     public void initialize() {
 
     }

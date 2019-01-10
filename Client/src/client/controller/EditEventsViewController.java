@@ -2,38 +2,22 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.DatePicker;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
-import javafx.util.converter.DateTimeStringConverter;
-import javafx.util.converter.IntegerStringConverter;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.text.*;
-import javax.swing.event.ChangeListener;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.util.Locale;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
-
-public class AddRepertoireViewController {
+public class EditEventsViewController {
 
 
 
@@ -41,6 +25,8 @@ public class AddRepertoireViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
     private List <String> lstFile;
+    private EventsViewController eventsViewController;
+
 
     @FXML private TextField imagePathTF;
     @FXML private TextField titleTF;
@@ -49,10 +35,8 @@ public class AddRepertoireViewController {
     @FXML private TextField languageTF;
     @FXML private DatePicker releaseDateTF;
     @FXML private TextField typeTF;
-
-
-
     @FXML private Label infoLabel;
+    @FXML private TextField idEventTF;
     @FXML private Button confirmButton;
     @FXML private Button backButton;
     @FXML private Button clearButton;
@@ -63,7 +47,7 @@ public class AddRepertoireViewController {
         lstFile.add("*.jpg");
         lstFile.add("*.png");
         lstFile.add("*.jpeg");
-        releaseDateTF.setValue( LocalDate.now());
+
     }
     public void numOnly(){
         ageRestrictionTF.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -73,10 +57,8 @@ public class AddRepertoireViewController {
         });
 
     }
-    public void numPlus(){
 
 
-    }
     public void RestrictionAge(){
         durationTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.matches("[0-9:]*")){
@@ -84,14 +66,30 @@ public class AddRepertoireViewController {
             }
         });
 
-       // SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-       // durationTF.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
+
 
     }
+    public void RestrictionText(){
+        titleTF.textProperty().addListener((observable, oldValue, newValue) -> {
+         if(!newValue.matches(threadClient.getRegex())){
+             titleTF.setText(oldValue);
+         }
+        });
+        languageTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                languageTF.setText(oldValue);
+            }
+        });
+        typeTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                typeTF.setText(oldValue);
+            }
+        });
 
-
+    }
     public void confirm() {
 
+        String idEvent = idEventTF.getText();
         String imagePath=imagePathTF.getText();
         String  title = titleTF.getText();
         String  duration = durationTF.getText();
@@ -101,23 +99,13 @@ public class AddRepertoireViewController {
         String  type = typeTF.getText();
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
-            threadClient.sendAddRepertuarRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
-            ArrayList<String> al = new ArrayList<>();
-            al.add("");
-            al.add(imagePath);
-            al.add(title);
-            al.add(duration);
-            al.add(ageRestriction);
-            al.add(language);
-            al.add(releaseDate);
-            al.add(type);
-            //threadClient.getEventsCheckData().add(al);
-            infoLabel.setText("Dodano nowy film");
+            threadClient.sendEditEventsRequest(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath);
+            infoLabel.setText("Zmieniono dane");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 
     public void back() {
-        viewManager.setRepertoireScene();
+        viewManager.setEventsScene();
     }
 
 
@@ -133,7 +121,7 @@ public class AddRepertoireViewController {
 
     public void singleFileChooser(javafx.event.ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Obrazy",lstFile));
+        fc.getExtensionFilters().add(new ExtensionFilter("Obrazy",lstFile));
         File f = fc.showOpenDialog(null);
 
         if(f!=null){
@@ -164,8 +152,37 @@ public class AddRepertoireViewController {
 
     }
 
+    public TextField getImagePathTF() {
+        return imagePathTF;
+    }
 
+    public TextField getTitleTF() {
+        return titleTF;
+    }
 
+    public TextField getDurationTF() {
+        return durationTF;
+    }
+
+    public TextField getAgeRestrictionTF() {
+        return ageRestrictionTF;
+    }
+
+    public TextField getLanguageTF() {
+        return languageTF;
+    }
+
+    public DatePicker getReleaseDateTF() {
+        return releaseDateTF;
+    }
+
+    public TextField getTypeTF() {
+        return typeTF;
+    }
+
+    public TextField getIdEventTF() {
+        return idEventTF;
+    }
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }
