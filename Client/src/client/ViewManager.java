@@ -10,8 +10,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import message.ChangeUserDataAnswerMessage;
-
+import java.time.LocalDate;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ViewManager {
@@ -55,8 +56,7 @@ public class ViewManager {
     private ChoosingSeatViewController choosingSeatViewController;
     private AddEventsViewController addEventsViewController;
     private EditEventsViewController editEventsViewController;
-
-
+    private LocalDate dt;
     private final String mainCssPath = "/../commonSources/css/styles.css";
 
 
@@ -106,6 +106,7 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(editEventsScene);
+        prepareFields();
     }
 
 
@@ -416,6 +417,17 @@ public class ViewManager {
 
     public void setContentPane(BorderPane contentPane) {
         this.contentPane = contentPane;
+    }
+    public void prepareFields(){
+        editEventsViewController.getImagePathTF().setText(eventsViewController.getRowData().getImagePath());
+        editEventsViewController.getTitleTF().setText(eventsViewController.getRowData().getTitle());
+        editEventsViewController.getTypeTF().setText(eventsViewController.getRowData().getType());
+        editEventsViewController.getReleaseDateTF().setValue(LocalDate.parse(eventsViewController.getRowData().getReleaseDate()));
+        editEventsViewController.getLanguageTF().setText(eventsViewController.getRowData().getLanguage());
+        editEventsViewController.getAgeRestrictionTF().setText(eventsViewController.getRowData().getAgeRestriction());
+        editEventsViewController.getDurationTF().setText(eventsViewController.getRowData().getDuration());
+        editEventsViewController.getIdEventTF().setText(eventsViewController.getRowData().getIdEventType());
+
     }
 
 }

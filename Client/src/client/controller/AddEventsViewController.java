@@ -110,7 +110,24 @@ public class AddEventsViewController {
         viewManager.setEventsScene();
     }
 
+    public void RestrictionText(){
+        titleTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                titleTF.setText(oldValue);
+            }
+        });
+        languageTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                languageTF.setText(oldValue);
+            }
+        });
+        typeTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                typeTF.setText(oldValue);
+            }
+        });
 
+    }
     public void clear() {
         titleTF.clear();
         durationTF.clear();

@@ -160,4 +160,15 @@ public class DataLoader {
         }
         return true;
     }
+
+    public boolean editEvents(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath){
+        try{
+            ResultSet result = null;
+            result = dbConnect.editEvent(idEvent,title,duration,ageRestriction,language,releaseDate,type,imagePath);
+            return false;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    return true;
+    }
 }

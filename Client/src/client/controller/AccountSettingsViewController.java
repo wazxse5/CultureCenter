@@ -26,10 +26,58 @@ public class AccountSettingsViewController {
     @FXML private PasswordField currentPasswordPF;
     @FXML private PasswordField newPasswordPF;
     @FXML private PasswordField newPassword1PF;
-
+    @FXML private PasswordField P1RemoveField;
+    @FXML private PasswordField P2RemoveField;
     @FXML private Label answerLabel;
 
+    public void RestrictionEmail(){
+        changeMailCheck.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegexEmail())){
+                changeMailCheck.setText(oldValue);
+            }
+        });
 
+
+    }
+
+    public void RestrictionText(){
+        newNameTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                newNameTF.setText(oldValue);
+            }
+        });
+        newSurnameTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                newSurnameTF.setText(oldValue);
+            }
+        });
+        currentPasswordPF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                currentPasswordPF.setText(oldValue);
+            }
+        });
+        newPasswordPF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                newPasswordPF.setText(oldValue);
+            }
+        });
+        newPassword1PF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                newPassword1PF.setText(oldValue);
+            }
+        });
+        P1RemoveField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                P1RemoveField.setText(oldValue);
+            }
+        });
+        P2RemoveField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                P2RemoveField.setText(oldValue);
+            }
+        });
+
+    }
     public void initialize() {
         tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> {
             changeNameCheck.setSelected(false);

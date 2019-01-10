@@ -28,6 +28,13 @@ public class ThreadClient {
     private ReceiveTask receiveTask;
 
 
+
+    private String regex= String.format("[a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ,._ ]*[_a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ0-9,._ ]*");
+
+
+
+    private String regexEmail=String.format("[a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ_@.]*[_a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ0-9,_@.]*");
+
     public ThreadClient() {
         this.executor = Executors.newCachedThreadPool();
     }
@@ -141,6 +148,11 @@ public class ThreadClient {
     public void sendChangeUserDataRequest(ChangeUserDataRequestMessage changeMessage) {
         connection.send(changeMessage);
     }
+    public void sendEditEventsRequest(String idEvent,String title,String duration,String ageRestriction,String language,String releaseDate,String type,String imagePath){
+        if(connected.get()) {
+            connection.send(new EventsEditRequestMessage(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath));
+        }
+    }
 
     public void disconnect() {
         if (connection != null) {
@@ -189,4 +201,11 @@ public class ThreadClient {
     public Connection getConnection() {
         return connection;
     }
+    public String getRegex() {
+        return regex;
+    }
+    public String getRegexEmail() {
+        return regexEmail;
+    }
+
 }

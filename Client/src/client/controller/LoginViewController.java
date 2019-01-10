@@ -22,6 +22,18 @@ public class LoginViewController {
         threadClient.connect("localhost", 8989);
     }
 
+    public void RestrictionText(){
+        loginTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                loginTF.setText(oldValue);
+            }
+        });
+        passwordTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                passwordTF.setText(oldValue);
+            }
+        });
+    }
     public void sendLoginRequest() {
         String login = loginTF.getText();
         String password = passwordTF.getText();

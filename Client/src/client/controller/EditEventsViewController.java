@@ -25,6 +25,8 @@ public class EditEventsViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
     private List <String> lstFile;
+    private EventsViewController eventsViewController;
+
 
     @FXML private TextField imagePathTF;
     @FXML private TextField titleTF;
@@ -33,10 +35,8 @@ public class EditEventsViewController {
     @FXML private TextField languageTF;
     @FXML private DatePicker releaseDateTF;
     @FXML private TextField typeTF;
-
-
-
     @FXML private Label infoLabel;
+    @FXML private TextField idEventTF;
     @FXML private Button confirmButton;
     @FXML private Button backButton;
     @FXML private Button clearButton;
@@ -47,7 +47,7 @@ public class EditEventsViewController {
         lstFile.add("*.jpg");
         lstFile.add("*.png");
         lstFile.add("*.jpeg");
-        releaseDateTF.setValue( LocalDate.now());
+
     }
     public void numOnly(){
         ageRestrictionTF.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -57,10 +57,8 @@ public class EditEventsViewController {
         });
 
     }
-    public void numPlus(){
 
 
-    }
     public void RestrictionAge(){
         durationTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.matches("[0-9:]*")){
@@ -68,14 +66,30 @@ public class EditEventsViewController {
             }
         });
 
-       // SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-       // durationTF.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
+
 
     }
+    public void RestrictionText(){
+        titleTF.textProperty().addListener((observable, oldValue, newValue) -> {
+         if(!newValue.matches(threadClient.getRegex())){
+             titleTF.setText(oldValue);
+         }
+        });
+        languageTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                languageTF.setText(oldValue);
+            }
+        });
+        typeTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegex())){
+                typeTF.setText(oldValue);
+            }
+        });
 
-
+    }
     public void confirm() {
 
+        String idEvent = idEventTF.getText();
         String imagePath=imagePathTF.getText();
         String  title = titleTF.getText();
         String  duration = durationTF.getText();
@@ -85,7 +99,7 @@ public class EditEventsViewController {
         String  type = typeTF.getText();
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
-            //threadClient.sendAddRepertuarRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
+            threadClient.sendEditEventsRequest(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath);
             infoLabel.setText("Zmieniono dane");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
@@ -138,8 +152,37 @@ public class EditEventsViewController {
 
     }
 
+    public TextField getImagePathTF() {
+        return imagePathTF;
+    }
 
+    public TextField getTitleTF() {
+        return titleTF;
+    }
 
+    public TextField getDurationTF() {
+        return durationTF;
+    }
+
+    public TextField getAgeRestrictionTF() {
+        return ageRestrictionTF;
+    }
+
+    public TextField getLanguageTF() {
+        return languageTF;
+    }
+
+    public DatePicker getReleaseDateTF() {
+        return releaseDateTF;
+    }
+
+    public TextField getTypeTF() {
+        return typeTF;
+    }
+
+    public TextField getIdEventTF() {
+        return idEventTF;
+    }
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }

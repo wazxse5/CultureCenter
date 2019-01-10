@@ -2,12 +2,15 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class RestorePasswordController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
 
-
+    @FXML private TextField emailRestoreTF;
     public void initialize() {
 
     }
@@ -20,7 +23,14 @@ public class RestorePasswordController {
         viewManager.setLoginScene();
 
     }
+    public void RestrictionEmail(){
+        emailRestoreTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.matches(threadClient.getRegexEmail())){
+                emailRestoreTF.setText(oldValue);
+            }
+        });
 
+    }
 
 
 

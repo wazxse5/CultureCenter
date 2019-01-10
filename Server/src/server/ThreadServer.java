@@ -135,7 +135,10 @@ public class ThreadServer {
         if(message instanceof AddRepertuarRequestMessage){
             AddRepertuarRequestMessage addRepertuarMessage = (AddRepertuarRequestMessage) message;
                 dataLoader.addRepertoire(addRepertuarMessage.getImagePath(),addRepertuarMessage.getTitle(),addRepertuarMessage.getDuration(),addRepertuarMessage.getAgeRestriction(),addRepertuarMessage.getLanguage(),addRepertuarMessage.getReleaseDate(),addRepertuarMessage.getType());
-                System.out.println(((AddRepertuarRequestMessage) message).getTitle());
+        }
+        if(message instanceof  EventsEditRequestMessage){
+            EventsEditRequestMessage eventsEditRequestMessage = (EventsEditRequestMessage) message;
+                dataLoader.editEvents(eventsEditRequestMessage.getIdEvent(),eventsEditRequestMessage.getTitle(),eventsEditRequestMessage.getDuration(),eventsEditRequestMessage.getAgeRestriction(),eventsEditRequestMessage.getLanguage(),eventsEditRequestMessage.getReleaseDate(),eventsEditRequestMessage.getType(),eventsEditRequestMessage.getImagePath());
         }
     }
 

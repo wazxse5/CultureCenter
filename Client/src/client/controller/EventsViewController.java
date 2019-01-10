@@ -14,6 +14,26 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.geometry.Insets;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+
+
+import java.util.Random;
+import java.util.function.Function;
+
+import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+
+
 
 public class EventsViewController {
     private ViewManager viewManager;
@@ -31,6 +51,12 @@ public class EventsViewController {
 
     @FXML private Button EditButton;
 
+    public Event getRowData() {
+        return rowData;
+    }
+    private EditEventsViewController editEventsViewController;
+    private Event rowData;
+
 
     public void initialize() {
         columnId.setCellValueFactory(new PropertyValueFactory<Event, String>("idEventType"));
@@ -43,6 +69,17 @@ public class EventsViewController {
         columnImagePath.setCellValueFactory(new PropertyValueFactory<Event, String>("imagePath"));
 
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        tableView.setRowFactory(tv -> {
+            TableRow<Event> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (!row.isEmpty())) {
+                    if(EditButton.isDisabled())EditButton.setDisable(false);
+                     rowData = row.getItem();
+                }
+            });
+            return row;
+        });
     }
 
     public void add(){
@@ -51,8 +88,9 @@ public class EventsViewController {
 
     public void edit(){
         viewManager.setEditEventsScene();
-
+        if(EditButton.isDisabled()==false)EditButton.setDisable(true);
     }
+
 
     public void back(){
         if(threadClient.isConnected()) {
@@ -79,10 +117,9 @@ public class EventsViewController {
         EditButton.setDisable(false);
 
     }
+    public void xd() {
 
-
-
-
+    }
 
 
     public void setThreadClient(ThreadClient threadClient) {
