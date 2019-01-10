@@ -5,6 +5,7 @@ public class LoginAnswerMessage extends Message {
     private final boolean good;
     private final int infoCode;
 
+    private int userID;
     private String userLogin;
     private String userName;
     private String userSurName;
@@ -20,9 +21,10 @@ public class LoginAnswerMessage extends Message {
         this.infoCode = infoCode;
     }
 
-    public LoginAnswerMessage(boolean good, String userLogin, String userName, String userSurName, String userMail) {
+    public LoginAnswerMessage(boolean good, int userID, String userLogin, String userName, String userSurName, String userMail) {
         this.good = good;
         this.infoCode = 0;
+        this.userID = userID;
         this.userLogin = userLogin;
         this.userName = userName;
         this.userSurName = userSurName;
@@ -35,6 +37,10 @@ public class LoginAnswerMessage extends Message {
 
     public int getInfoCode() {
         return infoCode;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public String getUserLogin() {

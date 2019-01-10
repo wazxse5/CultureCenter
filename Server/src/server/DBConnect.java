@@ -16,8 +16,8 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-   // private String password = "";
-    private String password = "usbw";//do mojej bazy usbwebserver
+    private String password = "";
+//    private String password = "usbw";//do mojej bazy usbwebserver
 
     public DBConnect() {
         try {
@@ -32,16 +32,25 @@ public class DBConnect {
 
     public List<Client> getAllClients() throws SQLException {
         List<Client> clients = new ArrayList<>();
-        String query = "SELECT Name, Surname, mail, login FROM client";
+        String query = "SELECT idClient, Name, Surname, mail, login FROM client";
         rs = st.executeQuery(query);
         while (rs.next()) {
+            int idClient = rs.getInt("idClient");
             String name = rs.getString("Name");
             String surname = rs.getString("Surname");
             String mail = rs.getString("mail");
             String login = rs.getString("login");
-            clients.add(new Client(name, surname, mail, login));
+            clients.add(new Client(idClient, name, surname, mail, login));
         }
         return clients;
+    }
+
+    public int getClientID(String userLogin) throws SQLException {
+        PreparedStatement st = con.prepareStatement("SELECT idClient FROM client WHERE login = ?");
+        st.setString(1, userLogin);
+        rs = st.executeQuery();
+        if (rs.next()) return rs.getInt(1);
+        else return -1;
     }
 
     public void getData() {
