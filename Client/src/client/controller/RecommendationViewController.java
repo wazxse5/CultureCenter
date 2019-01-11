@@ -1,14 +1,18 @@
 package client.controller;
 
+import client.DataLoader;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.List;
+
 public class RecommendationViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
+    private DataLoader dataLoader;
 
     @FXML private ImageView imageview1;
     @FXML private ImageView imageview2;
@@ -20,20 +24,35 @@ public class RecommendationViewController {
     @FXML private ImageView imageview8;
 
     public void initialize() {
-        Image image = new Image(String.valueOf(getClass().getResource("/../commonSources/images/no-image.jpg")));
-        imageview1.setImage(image);
-        imageview2.setImage(image);
-        imageview3.setImage(image);
-        imageview4.setImage(image);
-        imageview5.setImage(image);
-        imageview6.setImage(image);
-        imageview7.setImage(image);
-        imageview8.setImage(image);
 
+    }
+
+    public void refresh() {
+        List<Integer> recommended = dataLoader.getRecommendation();
+        for (int i = 0; i < recommended.size(); i++) {
+            int eventTypeId = recommended.get(i);
+            if (eventTypeId != -1) {
+                threadClient.sendImageEventTypeRequest(eventTypeId);
+            }
+        }
+    }
+
+    public void rebindImageViews() {
+        List<Integer> recommended = dataLoader.getRecommendation();
+        imageview1.imageProperty().bind(dataLoader.getImageProperty(recommended.get(0)));
+        imageview2.imageProperty().bind(dataLoader.getImageProperty(recommended.get(1)));
+        imageview3.imageProperty().bind(dataLoader.getImageProperty(recommended.get(2)));
+        imageview4.imageProperty().bind(dataLoader.getImageProperty(recommended.get(3)));
+        imageview5.imageProperty().bind(dataLoader.getImageProperty(recommended.get(4)));
+        imageview6.imageProperty().bind(dataLoader.getImageProperty(recommended.get(5)));
+        imageview7.imageProperty().bind(dataLoader.getImageProperty(recommended.get(6)));
+        imageview8.imageProperty().bind(dataLoader.getImageProperty(recommended.get(7)));
     }
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        this.dataLoader = threadClient.getDataLoader();
+        rebindImageViews();
     }
 
     public void setViewManager(ViewManager viewManager) {

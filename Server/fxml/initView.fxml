@@ -26,5 +26,7 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Label fx:id="imagesDirPathLabel" alignment="TOP_LEFT" layoutX="328.0" layoutY="292.0" prefHeight="60.0" prefWidth="160.0" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0" />
+      <Button layoutX="332.0" layoutY="288.0" mnemonicParsing="false" onAction="#chooseDirectory" text="Wybierz folder z plikami" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

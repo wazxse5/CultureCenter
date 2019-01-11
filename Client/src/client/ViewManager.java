@@ -1,6 +1,7 @@
 package client;
 
 import client.controller.*;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -176,6 +177,7 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(recommendationScene);
+        Platform.runLater(() -> recommendationViewController.refresh());
     }
 
     public void setActualReservedScene() {
@@ -413,6 +415,10 @@ public class ViewManager {
 
     public RepertuarViewController getRepertuarViewController() {
         return repertuarViewController;
+    }
+
+    public RecommendationViewController getRecommendationViewController() {
+        return recommendationViewController;
     }
 
     public void setContentPane(BorderPane contentPane) {

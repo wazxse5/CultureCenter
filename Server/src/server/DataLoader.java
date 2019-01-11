@@ -9,12 +9,18 @@ import javafx.scene.control.TableView;
 import message.ChangeUserDataAnswerMessage;
 import message.ChangeUserDataRequestMessage;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataLoader {
+    private File eventTypeImagesDir;
+    private ArrayList<Integer> recommended;
+
     private List<Client> knownClients;
     private DBConnect dbConnect;
     private ObservableList<ObservableList>logsCheckData;
@@ -34,6 +40,7 @@ public class DataLoader {
         } catch (SQLException e) { e.printStackTrace(); }
         logsCheckData = FXCollections.observableArrayList();
         tableview = new TableView();
+        recommended = new ArrayList<>();
     }
 
     public List<Client> getKnownClients() {
@@ -174,5 +181,40 @@ public class DataLoader {
             e.printStackTrace();
         }
     return true;
+    }
+
+    public byte[] getEvenTypeImage(int idEventType) {
+        File image = new File(eventTypeImagesDir, idEventType + ".jpg");
+        try {
+            return Files.readAllBytes(Paths.get(image.getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void loadRecommended() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        File recommended = new File(eventTypeImagesDir, "recommended.txt");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(recommended));
+            String line;
+            while ((line = br.readLine()) != null) {
+                int r = Integer.parseInt(line);
+                arrayList.add(r);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.recommended = arrayList;
+    }
+
+    public ArrayList<Integer> getRecommended() {
+        return recommended;
+    }
+
+    public void setEventTypeImagesDir(File eventTypeImagesDir) {
+        this.eventTypeImagesDir = eventTypeImagesDir;
+        loadRecommended();
     }
 }

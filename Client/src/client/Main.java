@@ -18,6 +18,7 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(event -> threadClient.disconnect());
         primaryStage.setTitle("Client");
         viewManager.setInitScene();
+        viewManager.setRecommendationsScene();
         primaryStage.show();
 
         threadClient.connect("localhost", 8989);

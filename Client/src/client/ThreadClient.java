@@ -1,6 +1,7 @@
 package client;
 
 import client.task.ConnectTask;
+import client.task.ImageRequestingTask;
 import client.task.ReceiveTask;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -9,8 +10,7 @@ import javafx.beans.property.StringProperty;
 import message.*;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class ThreadClient {
     private BooleanProperty connected = new SimpleBooleanProperty(false);
@@ -27,17 +27,18 @@ public class ThreadClient {
     private ViewManager viewManager;
     private ExecutorService executor;
     private ReceiveTask receiveTask;
+    private DataLoader dataLoader;
+    private BlockingQueue<ImageEventTypeMessage> imageRequestQueue = new LinkedBlockingDeque<>();
+    private Semaphore imageRequestSemaphore = new Semaphore(1);
+
+    private String regex = String.format("[a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ,._ ]*[_a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ0-9,._ ]*");
 
 
-
-    private String regex= String.format("[a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ,._ ]*[_a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ0-9,._ ]*");
-
-
-
-    private String regexEmail=String.format("[a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ_@.]*[_a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ0-9,_@.]*");
+    private String regexEmail = String.format("[a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ_@.]*[_a-zżźćńłąśóA-ZŻŹĆŃŁĄŚÓ0-9,_@.]*");
 
     public ThreadClient() {
         this.executor = Executors.newCachedThreadPool();
+        this.dataLoader = new DataLoader(this);
     }
 
     public void connect(String host, int port) {
@@ -60,11 +61,17 @@ public class ThreadClient {
 
             receiveTask = new ReceiveTask(newConnection.getInput());
             receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(newValue));
+            ImageRequestingTask imageRequestingTask = new ImageRequestingTask(this, imageRequestSemaphore, imageRequestQueue);
             executor.execute(receiveTask);
+            executor.execute(imageRequestingTask);
         } else connectionState.setValue("NOT_CONNECTED");
     }
 
     private void handleReceivedMessage(Message message) {
+        if (message instanceof FirstInfoMessage) {
+            FirstInfoMessage firstInfoMessage = (FirstInfoMessage) message;
+            dataLoader.setRecommendationValues(firstInfoMessage.getRecommended());
+        }
         if (message instanceof LoginAnswerMessage) {
             LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
             if (loginAnswer.isGood()) {
@@ -77,8 +84,7 @@ public class ThreadClient {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
         }
-
-        if (message instanceof AddRepertuarAnswerMessage){
+        if (message instanceof AddRepertuarAnswerMessage) {
             AddRepertuarAnswerMessage answerMessage = (AddRepertuarAnswerMessage) message;
 
         }
@@ -87,17 +93,17 @@ public class ThreadClient {
         }
         if (message instanceof LogoutAnswerMessage) {
             logged.setValue(false);
-            connection.setUserData("","","","");
+            connection.setUserData("", "", "", "");
         }
-        if(message instanceof LogsCheckAnswerMessage){
+        if (message instanceof LogsCheckAnswerMessage) {
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
             logsCheckData = logsAnswer.getResult();
         }
-        if(message instanceof EventsCheckAnswerMessage){
+        if (message instanceof EventsCheckAnswerMessage) {
             EventsCheckAnswerMessage eventsAnswer = (EventsCheckAnswerMessage) message;
             eventsCheckData = eventsAnswer.getResult();
         }
-        if(message instanceof RepertoireCheckAnswerMessage){
+        if (message instanceof RepertoireCheckAnswerMessage) {
             RepertoireCheckAnswerMessage repertoireAnswer = (RepertoireCheckAnswerMessage) message;
             repertoireCheckData = repertoireAnswer.getResult();
         }
@@ -105,13 +111,21 @@ public class ThreadClient {
             ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
             viewManager.handleChangeUserDateAnswet(answerMessage);
         }
+        if (message instanceof ImageEventTypeMessage) {
+            ImageEventTypeMessage imageEventTypeMessage = (ImageEventTypeMessage) message;
+            System.out.println("rec id=" + imageEventTypeMessage.getIdEventType());
+            dataLoader.saveImageEventType(imageEventTypeMessage);
+            imageRequestSemaphore.release();
+        }
 
     }
-    public void sendAddRepertuarRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
-        if(connected.get()){
-            connection.send(new AddRepertuarRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
+
+    public void sendAddRepertuarRequest(String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
+        if (connected.get()) {
+            connection.send(new AddRepertuarRequestMessage(imagePath, title, duration, ageRestriction, language, releaseDate, type));
         }
     }
+
     public void sendLoginRequest(String name, String password) {
         if (connected.get()) {
             connection.send(new LoginRequestMessage(name, password));
@@ -120,8 +134,8 @@ public class ThreadClient {
     }
 
     public void sendRegisterRequest(String name, String surname, String login, String password, String email) {
-        if(connected.get()){
-            connection.send(new RegisterRequestMessage(name, surname, login,password,email));
+        if (connected.get()) {
+            connection.send(new RegisterRequestMessage(name, surname, login, password, email));
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
 
@@ -131,19 +145,21 @@ public class ThreadClient {
         }
     }
 
-    public void sendLogsCheckRequest(String login){
-        if(connected.get()){
+    public void sendLogsCheckRequest(String login) {
+        if (connected.get()) {
             connection.send(new LogsCheckRequestMessage(login));
         }
     }
-    public void sendEventsCheckRequest(){
-        if(connected.get()){
+
+    public void sendEventsCheckRequest() {
+        if (connected.get()) {
             connection.send(new EventsCheckRequestMessage());
         }
 
     }
-    public void sendRepertoireCheckRequest(){
-        if(connected.get()){
+
+    public void sendRepertoireCheckRequest() {
+        if (connected.get()) {
             connection.send(new RepertoireCheckRequestMessage());
         }
     }
@@ -151,8 +167,9 @@ public class ThreadClient {
     public void sendChangeUserDataRequest(ChangeUserDataRequestMessage changeMessage) {
         connection.send(changeMessage);
     }
-    public void sendEditEventsRequest(String idEvent,String title,String duration,String ageRestriction,String language,String releaseDate,String type,String imagePath){
-        if(connected.get()) {
+
+    public void sendEditEventsRequest(String idEvent, String title, String duration, String ageRestriction, String language, String releaseDate, String type, String imagePath) {
+        if (connected.get()) {
             connection.send(new EventsEditRequestMessage(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath));
         }
     }
@@ -161,12 +178,28 @@ public class ThreadClient {
         connection.send(reviewMessage);
     }
 
-    public void disconnect() {
-        if (connection != null) {
-            connection.close();
+    public void sendImageEventTypeRequestDirectly(ImageEventTypeMessage message) {
+        if (connected.get()) {
+            try {
+                imageRequestSemaphore.acquire();
+                connection.send(message);
+                System.out.println("sent id=" + message.getIdEventType());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public void sendImageEventTypeRequest(int idEventType) {
+        imageRequestQueue.add(new ImageEventTypeMessage(idEventType));
+        System.out.println("sub id=" + idEventType);
+    }
+
+    public void disconnect() {
+        if (connection != null) connection.close();
         if (receiveTask != null) receiveTask.cancel(true);
         executor.shutdown();
+        executor.shutdownNow();
     }
 
     public void setViewManager(ViewManager viewManager) {
@@ -201,6 +234,7 @@ public class ThreadClient {
     public ArrayList<ArrayList<String>> getLogsCheckData() {
         return logsCheckData;
     }
+
     public ArrayList<ArrayList<String>> getRepertoireCheckData() {
         return repertoireCheckData;
     }
@@ -212,11 +246,20 @@ public class ThreadClient {
     public Connection getConnection() {
         return connection;
     }
+
     public String getRegex() {
         return regex;
     }
+
     public String getRegexEmail() {
         return regexEmail;
     }
 
+    public DataLoader getDataLoader() {
+        return dataLoader;
+    }
+
+    public ViewManager getViewManager() {
+        return viewManager;
+    }
 }

@@ -47,7 +47,6 @@ public class ThreadServer {
 
     private void handleNewConnection(Connection connection) {
         connectedConnections.add(connection);
-
         ReceiveTask receiveTask = new ReceiveTask(connection);
         receiveTasks.add(receiveTask);
         receiveTask.valueProperty().addListener((observable, oldValue, newValue) -> handleReceivedMessage(connection, newValue));
@@ -57,6 +56,7 @@ public class ThreadServer {
     private void handleReceivedMessage(Connection connection, Message message) {
         if (message instanceof WelcomeMessage) {
             connection.send(new WelcomeAnswerMessage());
+            connection.send(new FirstInfoMessage(dataLoader.getRecommended()));
         }
         if (message instanceof LoginRequestMessage) {
             LoginRequestMessage loginRequest = (LoginRequestMessage) message;
@@ -101,7 +101,6 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-
         if (message instanceof RepertoireCheckRequestMessage) {
             RepertoireCheckRequestMessage checkRequest = (RepertoireCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -112,7 +111,6 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-
         if (message instanceof RepertoireCheckRequestMessage) {
             RepertoireCheckRequestMessage checkRequest = (RepertoireCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -140,6 +138,13 @@ public class ThreadServer {
             EventsEditRequestMessage eventsEditRequestMessage = (EventsEditRequestMessage) message;
                 dataLoader.editEvents(eventsEditRequestMessage.getIdEvent(),eventsEditRequestMessage.getTitle(),eventsEditRequestMessage.getDuration(),eventsEditRequestMessage.getAgeRestriction(),eventsEditRequestMessage.getLanguage(),eventsEditRequestMessage.getReleaseDate(),eventsEditRequestMessage.getType(),eventsEditRequestMessage.getImagePath());
         }
+        if (message instanceof ImageEventTypeMessage) {
+            ImageEventTypeMessage imageEventTypeMessage = (ImageEventTypeMessage) message;
+            System.out.println("dupa " + imageEventTypeMessage.getIdEventType());
+            byte[] image = dataLoader.getEvenTypeImage(imageEventTypeMessage.getIdEventType());
+            imageEventTypeMessage.setImage(image);
+            connection.send(imageEventTypeMessage);
+        }
     }
 
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
@@ -152,6 +157,10 @@ public class ThreadServer {
 
     public ListProperty<Connection> connectedConnectionsProperty() {
         return new SimpleListProperty<>(connectedConnections);
+    }
+
+    public DataLoader getDataLoader() {
+        return dataLoader;
     }
 
     public void close() {

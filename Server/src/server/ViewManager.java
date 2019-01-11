@@ -69,5 +69,7 @@ public class ViewManager {
         return primaryStage.getTitle();
     }
 
-
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
 }
