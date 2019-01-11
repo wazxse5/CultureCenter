@@ -37,8 +37,10 @@ public class ViewManager {
     private Region infosScene;
     private Region contactScene;
     private Region choosingSeatScene;
-    private Region addRepertoireScene;
+    private Region addEventsScene;
     private Region editEventsScene;
+    private Region addRepertoireScene;
+    private Region reviewScene;
 
 
     private InitViewController initViewController;
@@ -57,6 +59,8 @@ public class ViewManager {
     private ChoosingSeatViewController choosingSeatViewController;
     private AddEventsViewController addEventsViewController;
     private EditEventsViewController editEventsViewController;
+    private AddRepertoireViewController addRepertoireViewController;
+    private ReviewViewController reviewViewController;
     private LocalDate dt;
     private final String mainCssPath = "/../commonSources/css/styles.css";
 
@@ -92,6 +96,26 @@ public class ViewManager {
         }
         contentPane.setCenter(contactScene);
     }
+
+
+
+    public void setReviewScene() {
+        if (reviewScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/reviewView.fxml"));
+                reviewScene = loader.load();
+                reviewScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                reviewViewController = loader.getController();
+                reviewViewController.setViewManager(this);
+                reviewViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku ReviewView");
+            }
+        }
+        contentPane.setCenter(reviewScene);
+    }
+
     public void setEditEventsScene() {
         if (editEventsScene == null) {
             try {
@@ -230,16 +254,32 @@ public class ViewManager {
         }
         contentPane.setCenter(repertoireScene);
     }
-    public void setAddRepertoireScene() {
-        if (addRepertoireScene == null) {
+    public void setAddEventsScene() {
+        if (addEventsScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/addEventsView.fxml"));
-                addRepertoireScene = loader.load();
-                addRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+                addEventsScene = loader.load();
+                addEventsScene.getStylesheets().add("/../commonSources/css/styles.css");
 
                 addEventsViewController = loader.getController();
                 addEventsViewController.setViewManager(this);
                 addEventsViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku addEventsView");
+            }
+        }
+        contentPane.setCenter(addEventsScene);
+    }
+    public void setAddRepertoireScene() {
+        if (addRepertoireScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addRepertoireView.fxml"));
+                addRepertoireScene = loader.load();
+                addRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                addRepertoireViewController = loader.getController();
+                addRepertoireViewController.setViewManager(this);
+                addRepertoireViewController.setThreadClient(threadClient);
             } catch (IOException e) {
                 setTitle("Nie można załadować widoku addRepertoireView");
             }
@@ -419,6 +459,10 @@ public class ViewManager {
 
     public RecommendationViewController getRecommendationViewController() {
         return recommendationViewController;
+    }
+
+    public ReviewViewController getReviewViewController() {
+        return reviewViewController;
     }
 
     public void setContentPane(BorderPane contentPane) {

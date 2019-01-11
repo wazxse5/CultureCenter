@@ -26,12 +26,14 @@ public class DataLoader {
     private ObservableList<ObservableList>logsCheckData;
     private ObservableList<ObservableList>eventsCheckData;
     private ObservableList<ObservableList>repertuarCheckData;
+    private ObservableList<ObservableList> idAndNameOfEvents;
 
 
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
     private ArrayList<ArrayList> SQLEventsarray;
     private ArrayList<ArrayList> SQLRepertuararray;
+    private ArrayList<ArrayList> SQLidAndNamesOfEventsarray;
 
     public DataLoader() {
         dbConnect = new DBConnect();
@@ -141,6 +143,27 @@ public class DataLoader {
 
     }
 
+
+    public synchronized ArrayList getIdAndNameOfEvents() throws SQLException{
+        idAndNameOfEvents = FXCollections.observableArrayList();
+        ResultSet result = null;
+        try{
+            SQLidAndNamesOfEventsarray = new ArrayList<ArrayList>();
+            result = dbConnect.getIdAndNameOfEvents();
+            ArrayList<String> tables = new ArrayList<String>();
+            while(result.next()){
+                ArrayList<String> newal = new ArrayList<String>();
+                for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
+                    newal.add(result.getString(i));
+                }
+                SQLidAndNamesOfEventsarray.add(newal);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return SQLidAndNamesOfEventsarray;
+    }
+
     public ChangeUserDataAnswerMessage changeUserData(String userLogin, ChangeUserDataRequestMessage changeMessage) {
         boolean nameChanged = false, surnameChanged = false, mailChanged = false, passwordChanged = false;
         if (changeMessage.isChangeName()) nameChanged = dbConnect.changeName(userLogin, changeMessage.getNewName());
@@ -172,15 +195,28 @@ public class DataLoader {
         return true;
     }
 
-    public boolean editEvents(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath){
+    public boolean addEvent(String name, String time, String date, String idEvent){
         try{
             ResultSet result = null;
-            result = dbConnect.editEvent(idEvent,title,duration,ageRestriction,language,releaseDate,type,imagePath);
-            return false;
+            result = dbConnect.addEvent(name,time,date,idEvent);
         }catch (SQLException e){
             e.printStackTrace();
+            return false;
         }
-    return true;
+
+
+        return true;
+    }
+
+    public String editEvents(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath){
+        String result = null;
+        try{
+            result = dbConnect.editEvent(idEvent,title,duration,ageRestriction,language,releaseDate,type,imagePath).toString();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return "Błąd";
+        }
+        return result;
     }
 
     public byte[] getEvenTypeImage(int idEventType) {

@@ -1,6 +1,6 @@
 package message;
 
-public class AddRepertuarRequestMessage extends Message {
+public class AddEventsRequestMessage extends Message {
     private static final long serialVersionUID = -7066000756945334003L;
 
     private String imagePath;
@@ -44,7 +44,7 @@ public class AddRepertuarRequestMessage extends Message {
     public String getImagePath() {
         return imagePath;
     }
-    public AddRepertuarRequestMessage(String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
+    public AddEventsRequestMessage(String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
         this.imagePath=imagePath;
         this.title=title;
         this.duration=duration;

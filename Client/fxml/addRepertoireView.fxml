@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="440.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.AddRepertoireViewController">
+    <children>
+        <Label layoutX="21.0" layoutY="21.0" text="Dodaj Seans" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <GridPane hgap="5.0" layoutX="37.0" layoutY="98.0" prefHeight="227.0" prefWidth="249.0" vgap="5.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="98.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="106.0" minWidth="10.0" prefWidth="88.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="173.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <TextField fx:id="timeTF" onKeyTyped="#RestrictionTime" prefHeight="30.0" prefWidth="170.0" promptText="h:mm:ss" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="titleTF" onKeyTyped="#RestrictionText" prefHeight="30.0" prefWidth="170.0" GridPane.columnIndex="1" />
+                <Label text="Tytuł" />
+                <Label text="Czas Trwania" GridPane.rowIndex="2" />
+            <Label text="Premiera" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dateTF" editable="false" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Film" GridPane.rowIndex="3" />
+            <ComboBox fx:id="filmID" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="48.0" text="R" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="150.0" />
+               </GridPane.margin>
+            </Button>
+            </children>
+        </GridPane>
+        <Button fx:id="confirmButton" defaultButton="true" layoutX="134.0" layoutY="385.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="133.0" text="Zatwierdź" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="329.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Label fx:id="infoLabel" layoutX="30.0" layoutY="416.0" prefHeight="40.0" prefWidth="120.0" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
+        <Button fx:id="backButton" cancelButton="true" layoutX="100.0" layoutY="340.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="100.0" text="Wróć" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="100.0" />
+        <Button fx:id="clearButton" layoutX="210.0" layoutY="340.0" mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="100.0" text="Wyczyść" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="286.0" />
+    </children>
+</AnchorPane>

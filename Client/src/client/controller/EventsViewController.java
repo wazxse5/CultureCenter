@@ -83,7 +83,7 @@ public class EventsViewController {
     }
 
     public void add(){
-        viewManager.setAddRepertoireScene();
+        viewManager.setAddEventsScene();
     }
 
     public void edit(){
@@ -103,6 +103,7 @@ public class EventsViewController {
         threadClient.sendEventsCheckRequest();
         tableView.setItems(getValues());
         tableView.refresh();
+        if(EditButton.isDisabled()==false)EditButton.setDisable(true);
     }
 
     public ObservableList<Event> getValues(){
@@ -115,11 +116,8 @@ public class EventsViewController {
 
     public void getTableValues(){
         EditButton.setDisable(false);
-
     }
-    public void xd() {
 
-    }
 
 
     public void setThreadClient(ThreadClient threadClient) {

@@ -16,8 +16,8 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-    private String password = "";
-//    private String password = "usbw";//do mojej bazy usbwebserver
+    //private String password = "";
+    private String password = "usbw";//do mojej bazy usbwebserver
 
     public DBConnect() {
         try {
@@ -98,16 +98,15 @@ public class DBConnect {
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1,Integer.valueOf(idEvent));
         ps.setString(2,title);
-        ps.setTime( 4,java.sql.Time.valueOf(duration));
-        ps.setInt(5, Integer.valueOf(ageRestriction));
-        ps.setString(6,language);
-        ps.setDate(7,java.sql.Date.valueOf(releaseDate));
-        ps.setString(3,type);
+        ps.setTime( 3,java.sql.Time.valueOf(duration));
+        ps.setInt(4, Integer.valueOf(ageRestriction));
+        ps.setString(5,language);
+        ps.setDate(6,java.sql.Date.valueOf(releaseDate));
+        ps.setString(7,type);
         ps.setString(8,imagePath);
         rs=ps.executeQuery();
-        rs.next();
+//        rs.next();
         return rs;
-
     }
 
 
@@ -138,6 +137,18 @@ public class DBConnect {
         rs.next();
         return rs;
     }
+    public ResultSet addEvent(String name, String time, String date, String idEvent)throws SQLException{
+        String query = "CALL addEvent(?, ?, ?, ?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,name);
+        ps.setTime(3,java.sql.Time.valueOf(time));
+        ps.setDate(2,java.sql.Date.valueOf(date));
+        ps.setInt(4,Integer.valueOf(idEvent));
+        rs=ps.executeQuery();
+        rs.next();
+        return rs;
+
+    }
 
     public String loginUser(String name, String password) throws SQLException {
         String query = "CALL loginClient(?, ?);";
@@ -161,8 +172,15 @@ public class DBConnect {
         //rs.next();
         return rs;
     }
+    public ResultSet getIdAndNameOfEvents() throws SQLException{
+        String query = "CALL getIdAndNameOfEvents()";
+        rs=st.executeQuery(query);
+        //rs.next();
+        return rs;
+
+    }
     public ResultSet getRepertuar() throws SQLException{
-        String query = "CALL showScheduleEvents";
+        String query = "CALL showEvents";
         rs=st.executeQuery(query);
         System.out.println(rs);
        // rs.next();

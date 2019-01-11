@@ -101,7 +101,7 @@ public class AddEventsViewController {
         String  type = typeTF.getText();
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
-            threadClient.sendAddRepertuarRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
+            threadClient.sendAddEventsRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
             infoLabel.setText("Dodano nowy film");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }

@@ -2,11 +2,9 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import message.ReviewMessage;
 
 public class ReviewViewController {
@@ -20,12 +18,22 @@ public class ReviewViewController {
     @FXML private TextArea opinionTA;
     @FXML private Button confirmButton;
     @FXML private Label infoLabel;
+    @FXML private ChoiceBox choiceBox;
 
     public void refreshWithNewValues(Event event) {
         this.event = event;
         // TODO: dopisać ustawianie nowych wartości zgodnych z aktualnym eventem
     }
 
+    public void initialize(){
+        choiceBox.setItems(FXCollections.observableArrayList("Opinia","Skarga"));
+        choiceBox.setValue("Opinia");
+    }
+    public void check(){
+        if(choiceBox.getValue()=="Opinia")if(!gradeSlider.isDisabled())gradeSlider.setDisable(false);
+        else gradeSlider.setDisable(true);
+
+    }
     public void confirm() {
         int grade = (int) gradeSlider.getValue();
         String opinion = opinionTA.getText();

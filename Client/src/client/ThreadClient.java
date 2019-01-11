@@ -1,5 +1,6 @@
 package client;
 
+import client.controller.EditEventsViewController;
 import client.task.ConnectTask;
 import client.task.ImageRequestingTask;
 import client.task.ReceiveTask;
@@ -22,8 +23,13 @@ public class ThreadClient {
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
-    private Connection connection;
 
+
+
+    private ArrayList<ArrayList<String>> idAndNameOfEvents = new ArrayList<>();
+    private String editEventsAnswerMsg;
+    private Connection connection;
+    private EditEventsViewController editEventsViewController;
     private ViewManager viewManager;
     private ExecutorService executor;
     private ReceiveTask receiveTask;
@@ -84,8 +90,9 @@ public class ThreadClient {
                 viewManager.getLoginViewController().setInfoLabel(loginAnswer.getInfoCode());
             }
         }
-        if (message instanceof AddRepertuarAnswerMessage) {
-            AddRepertuarAnswerMessage answerMessage = (AddRepertuarAnswerMessage) message;
+
+        if (message instanceof AddEventsAnswerMessage){
+            AddEventsAnswerMessage answerMessage = (AddEventsAnswerMessage) message;
 
         }
         if (message instanceof RegisterAnswerMessage) {
@@ -117,15 +124,35 @@ public class ThreadClient {
             dataLoader.saveImageEventType(imageEventTypeMessage);
             imageRequestSemaphore.release();
         }
+        if(message instanceof  EventsEditAnswerMessage){
+            EventsEditAnswerMessage answerMessage = (EventsEditAnswerMessage) message;
+            editEventsAnswerMsg = answerMessage.getOk();
+           if(!answerMessage.equals(""))  viewManager.getEditEventsViewController().getInfoLabel().setText("Zmieniono dane");
+           else viewManager.getEditEventsViewController().getInfoLabel().setText("Błąd po stronie serwera");
+        }
+        if(message instanceof GetIdAndNameOfEventsAnswerMessage){
+            GetIdAndNameOfEventsAnswerMessage answerMessage = (GetIdAndNameOfEventsAnswerMessage) message;
+            idAndNameOfEvents = answerMessage.getResult();
+        }
 
     }
-
-    public void sendAddRepertuarRequest(String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
-        if (connected.get()) {
-            connection.send(new AddRepertuarRequestMessage(imagePath, title, duration, ageRestriction, language, releaseDate, type));
+    public void sendAddEventsRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
+        if(connected.get()){
+            connection.send(new AddEventsRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
         }
     }
+    public void sendAddRepertoireRequest(String title, String time, String date, String idFilm){
+        if(connected.get()){
+            connection.send(new AddRepertoireRequestMessage(title,time,date,idFilm));
+        }
 
+    }
+    public void sendGetIdAndNameOfEvents(){
+        if(connected.get()){
+            connection.send(new GetIdAndNameOfEventsRequestMessage());
+        }
+
+    }
     public void sendLoginRequest(String name, String password) {
         if (connected.get()) {
             connection.send(new LoginRequestMessage(name, password));
@@ -209,6 +236,10 @@ public class ThreadClient {
 
     public BooleanProperty loggedProperty() {
         return logged;
+    }
+
+    public ArrayList<ArrayList<String>> getIdAndNameOfEvents() {
+        return idAndNameOfEvents;
     }
 
     public BooleanProperty connectedProperty() {
