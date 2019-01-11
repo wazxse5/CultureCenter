@@ -20,6 +20,7 @@ public class RepertuarViewController {
     private ThreadClient threadClient;
     private ObservableList<Repertoire> list;
     private Repertoire rowData;
+    private AddRepertoireViewController addRepertoireViewController;
     @FXML private TableView<Repertoire> tableView;
     @FXML private TableColumn<Repertoire, String> columnIdEvent;
     @FXML private TableColumn<Repertoire, String> columnName;
@@ -63,6 +64,10 @@ public class RepertuarViewController {
 
     }
 
+    public void add(){
+        threadClient.sendGetIdAndNameOfEvents();
+        viewManager.setAddRepertoireScene();
+    }
     public Repertoire getRowData() {
         return rowData;
     }
@@ -70,6 +75,7 @@ public class RepertuarViewController {
     public void refresh(){
         tableView.setItems(getValues());
         tableView.refresh();
+        if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
     }
 
     public ObservableList<Repertoire> getValues(){

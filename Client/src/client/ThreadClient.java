@@ -7,7 +7,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.fxml.FXMLLoader;
 import message.*;
 
 import java.util.ArrayList;
@@ -24,6 +23,10 @@ public class ThreadClient {
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
+
+
+
+    private ArrayList<ArrayList<String>> idAndNameOfEvents = new ArrayList<>();
     private String editEventsAnswerMsg;
     private Connection connection;
     private EditEventsViewController editEventsViewController;
@@ -81,8 +84,8 @@ public class ThreadClient {
             }
         }
 
-        if (message instanceof AddRepertuarAnswerMessage){
-            AddRepertuarAnswerMessage answerMessage = (AddRepertuarAnswerMessage) message;
+        if (message instanceof AddEventsAnswerMessage){
+            AddEventsAnswerMessage answerMessage = (AddEventsAnswerMessage) message;
 
         }
         if (message instanceof RegisterAnswerMessage) {
@@ -114,12 +117,28 @@ public class ThreadClient {
            if(!answerMessage.equals(""))  viewManager.getEditEventsViewController().getInfoLabel().setText("Zmieniono dane");
            else viewManager.getEditEventsViewController().getInfoLabel().setText("Błąd po stronie serwera");
         }
+        if(message instanceof GetIdAndNameOfEventsAnswerMessage){
+            GetIdAndNameOfEventsAnswerMessage answerMessage = (GetIdAndNameOfEventsAnswerMessage) message;
+            idAndNameOfEvents = answerMessage.getResult();
+        }
 
     }
-    public void sendAddRepertuarRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
+    public void sendAddEventsRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
         if(connected.get()){
-            connection.send(new AddRepertuarRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
+            connection.send(new AddEventsRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
         }
+    }
+    public void sendAddRepertoireRequest(String title, String time, String date, String idFilm){
+        if(connected.get()){
+            connection.send(new AddRepertoireRequestMessage(title,time,date,idFilm));
+        }
+
+    }
+    public void sendGetIdAndNameOfEvents(){
+        if(connected.get()){
+            connection.send(new GetIdAndNameOfEventsRequestMessage());
+        }
+
     }
     public void sendLoginRequest(String name, String password) {
         if (connected.get()) {
@@ -185,6 +204,10 @@ public class ThreadClient {
 
     public BooleanProperty loggedProperty() {
         return logged;
+    }
+
+    public ArrayList<ArrayList<String>> getIdAndNameOfEvents() {
+        return idAndNameOfEvents;
     }
 
     public BooleanProperty connectedProperty() {

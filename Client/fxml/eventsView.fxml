@@ -17,7 +17,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="16.0" layoutY="96.0" onMousePressed="#getTableValues" prefHeight="209.0" prefWidth="568.0">
+      <TableView fx:id="tableView" layoutX="16.0" layoutY="96.0" onMousePressed="#getTableValues" prefHeight="209.0" prefWidth="570.0">
          <columns>
             <TableColumn fx:id="columnId" prefWidth="122.0" text="Id wydarzenia" visible="false" />
             <TableColumn fx:id="columnTitle" prefWidth="76.0" text="Tytuł" />
@@ -36,7 +36,7 @@
             <Button mnemonicParsing="false" prefWidth="70.0" text="Następny" />
          </children>
       </HBox>
-      <HBox layoutX="26.0" layoutY="328.0" prefHeight="30.0" prefWidth="357.0">
+      <HBox layoutX="464.0" layoutY="313.0" prefHeight="30.0" prefWidth="122.0">
          <children>
             <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="103.0" text="Odśwież">
                <HBox.margin>

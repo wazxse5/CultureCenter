@@ -20,12 +20,14 @@ public class DataLoader {
     private ObservableList<ObservableList>logsCheckData;
     private ObservableList<ObservableList>eventsCheckData;
     private ObservableList<ObservableList>repertuarCheckData;
+    private ObservableList<ObservableList> idAndNameOfEvents;
 
 
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
     private ArrayList<ArrayList> SQLEventsarray;
     private ArrayList<ArrayList> SQLRepertuararray;
+    private ArrayList<ArrayList> SQLidAndNamesOfEventsarray;
 
     public DataLoader() {
         dbConnect = new DBConnect();
@@ -132,6 +134,26 @@ public class DataLoader {
         return SQLEventsarray;
 
 
+    }
+
+    public synchronized ArrayList getIdAndNameOfEvents() throws SQLException{
+        idAndNameOfEvents = FXCollections.observableArrayList();
+        ResultSet result = null;
+        try{
+            SQLidAndNamesOfEventsarray = new ArrayList<ArrayList>();
+            result = dbConnect.getIdAndNameOfEvents();
+            ArrayList<String> tables = new ArrayList<String>();
+            while(result.next()){
+                ArrayList<String> newal = new ArrayList<String>();
+                for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
+                    newal.add(result.getString(i));
+                }
+                SQLidAndNamesOfEventsarray.add(newal);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return SQLidAndNamesOfEventsarray;
     }
 
     public ChangeUserDataAnswerMessage changeUserData(String userLogin, ChangeUserDataRequestMessage changeMessage) {

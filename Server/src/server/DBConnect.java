@@ -160,6 +160,13 @@ public class DBConnect {
         //rs.next();
         return rs;
     }
+    public ResultSet getIdAndNameOfEvents() throws SQLException{
+        String query = "CALL getIdAndNameOfEvents()";
+        rs=st.executeQuery(query);
+        //rs.next();
+        return rs;
+
+    }
     public ResultSet getRepertuar() throws SQLException{
         String query = "CALL showEvents";
         rs=st.executeQuery(query);

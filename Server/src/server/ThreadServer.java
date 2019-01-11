@@ -132,14 +132,24 @@ public class ThreadServer {
                 connection.send(answerMessage);
             }
         }
-        if(message instanceof AddRepertuarRequestMessage){
-            AddRepertuarRequestMessage addRepertuarMessage = (AddRepertuarRequestMessage) message;
+        if(message instanceof AddEventsRequestMessage){
+            AddEventsRequestMessage addRepertuarMessage = (AddEventsRequestMessage) message;
                 dataLoader.addRepertoire(addRepertuarMessage.getImagePath(),addRepertuarMessage.getTitle(),addRepertuarMessage.getDuration(),addRepertuarMessage.getAgeRestriction(),addRepertuarMessage.getLanguage(),addRepertuarMessage.getReleaseDate(),addRepertuarMessage.getType());
         }
         if(message instanceof  EventsEditRequestMessage){
             EventsEditRequestMessage eventsEditRequestMessage = (EventsEditRequestMessage) message;
             String ansMsg = dataLoader.editEvents(eventsEditRequestMessage.getIdEvent(),eventsEditRequestMessage.getTitle(),eventsEditRequestMessage.getDuration(),eventsEditRequestMessage.getAgeRestriction(),eventsEditRequestMessage.getLanguage(),eventsEditRequestMessage.getReleaseDate(),eventsEditRequestMessage.getType(),eventsEditRequestMessage.getImagePath());
             connection.send(new EventsEditAnswerMessage(ansMsg));
+        }
+        if (message instanceof GetIdAndNameOfEventsRequestMessage){
+            GetIdAndNameOfEventsRequestMessage getIdAndNameOfEventsRequestMessage = (GetIdAndNameOfEventsRequestMessage) message;
+            ArrayList<ArrayList<String>> result;
+            try {
+                result = dataLoader.getIdAndNameOfEvents();
+                connection.send(new GetIdAndNameOfEventsAnswerMessage(result));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
