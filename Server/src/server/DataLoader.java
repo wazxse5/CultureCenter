@@ -42,7 +42,11 @@ public class DataLoader {
 
     public synchronized int register(String name, String surname, String login, String password, String mail) throws SQLException {
         String result = dbConnect.addClient(name, surname, mail, login, password);
-        if (result.equals("Zarejestrowano!")) return 0;
+        if (result.equals("Zarejestrowano!")){
+            int id = dbConnect.getClientID(login);
+            knownClients.add(new Client(id, name, surname, mail, login));
+            return 0;
+        }
         if (result.equals("Podany login już istnieje!")) return 1;
         else return 4;
     }

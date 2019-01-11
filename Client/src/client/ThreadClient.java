@@ -17,6 +17,7 @@ public class ThreadClient {
     private StringProperty connectionState = new SimpleStringProperty("NONE");
     private BooleanProperty logged = new SimpleBooleanProperty(false);
     private StringProperty userName = new SimpleStringProperty();
+    private int userID;
 
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
@@ -68,6 +69,8 @@ public class ThreadClient {
             LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
             if (loginAnswer.isGood()) {
                 logged.setValue(true);
+                userName.setValue(loginAnswer.getUserLogin());
+                userID = loginAnswer.getUserID();
                 viewManager.setRecommendationsScene();
                 connection.setUserData(loginAnswer.getUserName(), loginAnswer.getUserSurName(), loginAnswer.getUserMail(), loginAnswer.getUserLogin());
             } else {
@@ -112,7 +115,7 @@ public class ThreadClient {
     public void sendLoginRequest(String name, String password) {
         if (connected.get()) {
             connection.send(new LoginRequestMessage(name, password));
-            this.userName.setValue(name);
+//            this.userName.setValue(name);
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
 
@@ -154,6 +157,10 @@ public class ThreadClient {
         }
     }
 
+    public void sendReview(ReviewMessage reviewMessage) {
+        connection.send(reviewMessage);
+    }
+
     public void disconnect() {
         if (connection != null) {
             connection.close();
@@ -185,6 +192,10 @@ public class ThreadClient {
 
     public String getUserName() {
         return userName.get();
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public ArrayList<ArrayList<String>> getLogsCheckData() {
