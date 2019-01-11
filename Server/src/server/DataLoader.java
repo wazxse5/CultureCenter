@@ -136,6 +136,7 @@ public class DataLoader {
 
     }
 
+
     public synchronized ArrayList getIdAndNameOfEvents() throws SQLException{
         idAndNameOfEvents = FXCollections.observableArrayList();
         ResultSet result = null;
@@ -184,6 +185,19 @@ public class DataLoader {
             e.printStackTrace();
             return false;
         }
+        return true;
+    }
+
+    public boolean addEvent(String name, String time, String date, String idEvent){
+        try{
+            ResultSet result = null;
+            result = dbConnect.addEvent(name,time,date,idEvent);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+
+
         return true;
     }
 

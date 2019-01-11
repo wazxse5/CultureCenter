@@ -151,6 +151,11 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
+        if(message instanceof  AddRepertoireRequestMessage){
+            AddRepertoireRequestMessage addRepertoireRequestMessage = (AddRepertoireRequestMessage) message;
+            dataLoader.addEvent( ((AddRepertoireRequestMessage) message).getTitle(),  ((AddRepertoireRequestMessage) message).getTime(), ((AddRepertoireRequestMessage) message).getDate(), ((AddRepertoireRequestMessage) message).getIdEvent());
+            connection.send(new AddRepertoireAnswerMessage());
+        }
     }
 
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {

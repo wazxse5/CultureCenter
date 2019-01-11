@@ -137,6 +137,18 @@ public class DBConnect {
         rs.next();
         return rs;
     }
+    public ResultSet addEvent(String name, String time, String date, String idEvent)throws SQLException{
+        String query = "CALL addEvent(?, ?, ?, ?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,name);
+        ps.setTime(3,java.sql.Time.valueOf(time));
+        ps.setDate(2,java.sql.Date.valueOf(date));
+        ps.setInt(4,Integer.valueOf(idEvent));
+        rs=ps.executeQuery();
+        rs.next();
+        return rs;
+
+    }
 
     public String loginUser(String name, String password) throws SQLException {
         String query = "CALL loginClient(?, ?);";
