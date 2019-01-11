@@ -165,14 +165,14 @@ public class DataLoader {
         return true;
     }
 
-    public boolean editEvents(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath){
+    public String editEvents(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath){
+        String result = null;
         try{
-            ResultSet result = null;
-            result = dbConnect.editEvent(idEvent,title,duration,ageRestriction,language,releaseDate,type,imagePath);
-            return false;
+            result = dbConnect.editEvent(idEvent,title,duration,ageRestriction,language,releaseDate,type,imagePath).toString();
         }catch (SQLException e){
             e.printStackTrace();
+            return "Błąd";
         }
-    return true;
+        return result;
     }
 }

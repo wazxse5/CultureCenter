@@ -1,11 +1,13 @@
 package client;
 
+import client.controller.EditEventsViewController;
 import client.task.ConnectTask;
 import client.task.ReceiveTask;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXMLLoader;
 import message.*;
 
 import java.util.ArrayList;
@@ -22,8 +24,9 @@ public class ThreadClient {
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
+    private String editEventsAnswerMsg;
     private Connection connection;
-
+    private EditEventsViewController editEventsViewController;
     private ViewManager viewManager;
     private ExecutorService executor;
     private ReceiveTask receiveTask;
@@ -104,6 +107,12 @@ public class ThreadClient {
         if (message instanceof ChangeUserDataAnswerMessage) {
             ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
             viewManager.handleChangeUserDateAnswet(answerMessage);
+        }
+        if(message instanceof  EventsEditAnswerMessage){
+            EventsEditAnswerMessage answerMessage = (EventsEditAnswerMessage) message;
+            editEventsAnswerMsg = answerMessage.getOk();
+           if(!answerMessage.equals(""))  viewManager.getEditEventsViewController().getInfoLabel().setText("Zmieniono dane");
+           else viewManager.getEditEventsViewController().getInfoLabel().setText("Błąd po stronie serwera");
         }
 
     }

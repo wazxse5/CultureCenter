@@ -115,11 +115,8 @@ public class EventsViewController {
 
     public void getTableValues(){
         EditButton.setDisable(false);
-
     }
-    public void xd() {
 
-    }
 
 
     public void setThreadClient(ThreadClient threadClient) {

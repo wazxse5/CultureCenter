@@ -138,7 +138,8 @@ public class ThreadServer {
         }
         if(message instanceof  EventsEditRequestMessage){
             EventsEditRequestMessage eventsEditRequestMessage = (EventsEditRequestMessage) message;
-                dataLoader.editEvents(eventsEditRequestMessage.getIdEvent(),eventsEditRequestMessage.getTitle(),eventsEditRequestMessage.getDuration(),eventsEditRequestMessage.getAgeRestriction(),eventsEditRequestMessage.getLanguage(),eventsEditRequestMessage.getReleaseDate(),eventsEditRequestMessage.getType(),eventsEditRequestMessage.getImagePath());
+            String ansMsg = dataLoader.editEvents(eventsEditRequestMessage.getIdEvent(),eventsEditRequestMessage.getTitle(),eventsEditRequestMessage.getDuration(),eventsEditRequestMessage.getAgeRestriction(),eventsEditRequestMessage.getLanguage(),eventsEditRequestMessage.getReleaseDate(),eventsEditRequestMessage.getType(),eventsEditRequestMessage.getImagePath());
+            connection.send(new EventsEditAnswerMessage(ansMsg));
         }
     }
 

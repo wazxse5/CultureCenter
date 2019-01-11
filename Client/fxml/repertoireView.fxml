@@ -16,24 +16,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="16.0" layoutY="54.0" prefHeight="209.0" prefWidth="568.0">
+      <TableView fx:id="tableView" layoutX="16.0" layoutY="54.0" prefHeight="209.0" prefWidth="570.0">
          <columns>
             <TableColumn fx:id="columnIdEvent" prefWidth="38.0" text="idEvent" visible="false" />
-            <TableColumn fx:id="columnIdSchedule" prefWidth="38.0" text="id" />
-            <TableColumn fx:id="columnStatus" prefWidth="110.0" text="Status" />
-            <TableColumn fx:id="columnStartDate" prefWidth="107.0" text="Data rozpoczecia" />
-            <TableColumn fx:id="columnEndDate" minWidth="1.0" prefWidth="123.0" text="Data zakonczenia" />
-            <TableColumn fx:id="columnCreationTime" minWidth="150.0" prefWidth="37.0" text="Godzina Utworzenia" />
-            <TableColumn fx:id="columnIdBranch" minWidth="0.0" prefWidth="119.0" text="idBranch" visible="false" />
-            <TableColumn fx:id="columnName" prefWidth="38.0" text="Nazwa" />
-            <TableColumn fx:id="columnDate" prefWidth="38.0" text="Data" visible="false" />
-            <TableColumn fx:id="columnStartTime" prefWidth="38.0" text="Godzina rozpoczecia" visible="false" />
+            <TableColumn fx:id="columnName" minWidth="100.0" prefWidth="350.0" text="Nazwa" />
+            <TableColumn fx:id="columnDate" minWidth="60.0" prefWidth="120.0" text="Data" />
+            <TableColumn fx:id="columnStartTime" minWidth="50.0" prefWidth="98.0" text="Godzina" />
             <TableColumn fx:id="columnIdEventType" prefWidth="38.0" text="idEventType" visible="false" />
          </columns>
       </TableView>
       <HBox layoutX="69.0" layoutY="301.0" prefHeight="49.0" prefWidth="404.0">
          <children>
-            <Button fx:id="ReserveButton" mnemonicParsing="false" onAction="#reserve" prefHeight="24.0" prefWidth="82.0" text="Zarezerwuj">
+            <Button fx:id="ChooseButton" mnemonicParsing="false" onAction="#choose" prefHeight="24.0" prefWidth="82.0" text="Wybierz">
                <font>
                   <Font size="11.0" />
                </font>
@@ -41,29 +35,13 @@
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="BuyButton" mnemonicParsing="false" onAction="#buy" prefHeight="24.0" prefWidth="82.0" text="Kup">
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="100.0" text="Odśwież">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
                <font>
                   <Font size="11.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="100.0" text="refresh">
-               <font>
-                  <Font size="10.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="backToLoginButton" mnemonicParsing="false" onAction="#back" prefHeight="0.0" prefWidth="87.0" text="Cofnij">
-               <font>
-                  <Font size="11.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
             </Button>
          </children>
       </HBox>

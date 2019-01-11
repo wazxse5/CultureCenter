@@ -35,6 +35,9 @@ public class EditEventsViewController {
     @FXML private TextField languageTF;
     @FXML private DatePicker releaseDateTF;
     @FXML private TextField typeTF;
+
+
+
     @FXML private Label infoLabel;
     @FXML private TextField idEventTF;
     @FXML private Button confirmButton;
@@ -100,7 +103,7 @@ public class EditEventsViewController {
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
             threadClient.sendEditEventsRequest(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath);
-            infoLabel.setText("Zmieniono dane");
+           // infoLabel.setText("Zmieniono dane");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 
@@ -190,6 +193,14 @@ public class EditEventsViewController {
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
     }
+    public Label getInfoLabel() {
+        return infoLabel;
+    }
+
+    public void setInfoLabel(Label infoLabel) {
+        this.infoLabel = infoLabel;
+    }
+
 
 
 }
