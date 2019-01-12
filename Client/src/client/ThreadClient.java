@@ -239,6 +239,13 @@ public class ThreadClient {
         System.out.println("sub id=" + idEventType);
     }
 
+    public String getNameOfEvent(int id){
+        for( ArrayList<String> x : idAndNameOfEvents){
+            if(Integer.valueOf(x.get(0))==id) return x.get(1);
+        }
+        return "Nie znaleziono";
+    }
+
     public void disconnect() {
         if (connection != null) connection.close();
         if (receiveTask != null) receiveTask.cancel(true);

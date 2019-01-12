@@ -2,10 +2,17 @@ package client.controller;
 
 import client.ThreadClient;
 import client.ViewManager;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class InfosViewController {
     private ViewManager viewManager;
     private ThreadClient threadClient;
+
+    @FXML private Label infoLabel1;
+    @FXML private Label infoLabel2;
+    @FXML private Label infoLabel3;
+    @FXML private Label infoLabel4;
 
 
 

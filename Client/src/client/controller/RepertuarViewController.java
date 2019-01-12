@@ -68,6 +68,9 @@ public class RepertuarViewController {
 
     }
     public void edit(){
+
+        threadClient.sendGetIdAndNameOfEvents();
+        threadClient.sendGetIdOfRooms();
         viewManager.setEditRepertoireScene();
         if(EditButton.isDisabled()==false)EditButton.setDisable(true);
     }
@@ -86,7 +89,9 @@ public class RepertuarViewController {
         tableView.setItems(getValues());
         tableView.refresh();
         if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
-
+        if(EditButton.isDisabled()==false)EditButton.setDisable(true);
+        threadClient.sendGetIdOfRooms();
+        threadClient.sendGetIdAndNameOfEvents();
     }
 
     public ObservableList<Repertoire> getValues(){

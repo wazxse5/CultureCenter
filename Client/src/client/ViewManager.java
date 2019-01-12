@@ -507,9 +507,9 @@ public class ViewManager {
         editRepertoireViewController.getDateTF().setValue(LocalDate.parse((repertuarViewController.getRowData().getDate())));
         editRepertoireViewController.getTimeTF().setText(repertuarViewController.getRowData().getStartTime());
         editRepertoireViewController.getFilmID().setItems(FXCollections.observableArrayList(new ShortEvent(repertuarViewController.getRowData().getIdEventType(),repertuarViewController.getRowData().getName())));
-        editRepertoireViewController.getFilmID().setValue(new ShortEvent(repertuarViewController.getRowData().getIdEventType(),repertuarViewController.getRowData().getName()));
+        editRepertoireViewController.getFilmID().setValue(new ShortEvent(repertuarViewController.getRowData().getIdEventType(),threadClient.getNameOfEvent(Integer.valueOf(repertuarViewController.getRowData().getIdEventType()))));
         editRepertoireViewController.getRoomCB().setItems(editRepertoireViewController.getRoomValues());
-        editRepertoireViewController.getRoomCB().setValue( new Room(repertuarViewController.getRowData().getIdRoom(),"0", "0","0","1"));
+        editRepertoireViewController.getRoomCB().setValue( new Room(repertuarViewController.getRowData().getIdRoom(),"1", "0","0","1"));
         editRepertoireViewController.getIdEventTF().setText(repertuarViewController.getRowData().getIdEvent());
     }
 }
