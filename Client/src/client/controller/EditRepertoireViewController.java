@@ -88,7 +88,7 @@ public class EditRepertoireViewController {
 
 
     public void refresh(){
-       threadClient.getIdAndNameOfEvents();
+       threadClient.sendGetIdAndNameOfEvents();
        filmID.setItems(getValues());
     }
     public void refreshRooms(){
@@ -115,7 +115,7 @@ public class EditRepertoireViewController {
         String  date = dateTF.getValue().toString();
         String  id = filmID.getValue().getIdEventType();
         String room = roomCB.getValue().getNumber();
-
+        System.out.println(room);
         if(!time.equals("")&&!title.equals("")&&!date.equals("")&&!id.equals("")&&!room.equals("")) {
             threadClient.sendEditRepertoireRequest(title, time,date,id,room,eventId);
             infoLabel.setText("Dodano edytowano seans");

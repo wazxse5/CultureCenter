@@ -124,11 +124,11 @@ public class DBConnect {
         String query = "CALL editEvent(?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, Integer.valueOf(idEvent));
-        ps.setInt(6, Integer.valueOf(idEventType));
+        ps.setInt(5, Integer.valueOf(idEventType));
         ps.setString(2,title);
         ps.setDate(3,java.sql.Date.valueOf(date));
         ps.setTime(4,java.sql.Time.valueOf(time));
-        ps.setInt(5,Integer.valueOf(idRoom));
+        ps.setInt(6,Integer.valueOf(idRoom));
         rs=ps.executeQuery();
 //        rs.next();
         return rs;
