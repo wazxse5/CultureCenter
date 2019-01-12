@@ -4,6 +4,7 @@ import client.controller.*;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -41,6 +42,7 @@ public class ViewManager {
     private Region editEventsScene;
     private Region addRepertoireScene;
     private Region reviewScene;
+    private Region editRepertoireScene;
 
 
     private InitViewController initViewController;
@@ -61,6 +63,7 @@ public class ViewManager {
     private EditEventsViewController editEventsViewController;
     private AddRepertoireViewController addRepertoireViewController;
     private ReviewViewController reviewViewController;
+    private EditRepertoireViewController editRepertoireViewController;
     private LocalDate dt;
     private final String mainCssPath = "/../commonSources/css/styles.css";
 
@@ -132,6 +135,23 @@ public class ViewManager {
         }
         contentPane.setCenter(editEventsScene);
         prepareFields();
+    }
+    public void setEditRepertoireScene() {
+        if (editRepertoireScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editRepertoireView.fxml"));
+                editRepertoireScene = loader.load();
+                editRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                editRepertoireViewController = loader.getController();
+                editRepertoireViewController.setViewManager(this);
+                editRepertoireViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku EditRepertoireView");
+            }
+        }
+        contentPane.setCenter(editRepertoireScene);
+        prepareRepertoireFields();
     }
 
 
@@ -464,6 +484,9 @@ public class ViewManager {
     public ReviewViewController getReviewViewController() {
         return reviewViewController;
     }
+    public EditRepertoireViewController getEditRepertoireViewController() {
+        return editRepertoireViewController;
+    }
 
     public void setContentPane(BorderPane contentPane) {
         this.contentPane = contentPane;
@@ -479,5 +502,14 @@ public class ViewManager {
         editEventsViewController.getIdEventTF().setText(eventsViewController.getRowData().getIdEventType());
 
     }
-
+    public void prepareRepertoireFields(){
+        editRepertoireViewController.getTitleTF().setText(repertuarViewController.getRowData().getName());
+        editRepertoireViewController.getDateTF().setValue(LocalDate.parse((repertuarViewController.getRowData().getDate())));
+        editRepertoireViewController.getTimeTF().setText(repertuarViewController.getRowData().getStartTime());
+        editRepertoireViewController.getFilmID().setItems(FXCollections.observableArrayList(new ShortEvent(repertuarViewController.getRowData().getIdEventType(),repertuarViewController.getRowData().getName())));
+        editRepertoireViewController.getFilmID().setValue(new ShortEvent(repertuarViewController.getRowData().getIdEventType(),repertuarViewController.getRowData().getName()));
+        editRepertoireViewController.getRoomCB().setItems(editRepertoireViewController.getRoomValues());
+        editRepertoireViewController.getRoomCB().setValue( new Room(repertuarViewController.getRowData().getIdRoom(),"0", "0","0","1"));
+        editRepertoireViewController.getIdEventTF().setText(repertuarViewController.getRowData().getIdEvent());
+    }
 }

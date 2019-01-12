@@ -139,6 +139,12 @@ public class ThreadServer {
             String ansMsg = dataLoader.editEvents(eventsEditRequestMessage.getIdEvent(),eventsEditRequestMessage.getTitle(),eventsEditRequestMessage.getDuration(),eventsEditRequestMessage.getAgeRestriction(),eventsEditRequestMessage.getLanguage(),eventsEditRequestMessage.getReleaseDate(),eventsEditRequestMessage.getType(),eventsEditRequestMessage.getImagePath());
             connection.send(new EventsEditAnswerMessage(ansMsg));
         }
+        if(message instanceof  RepertoireEditRequestMessage){
+            RepertoireEditRequestMessage repertoireEditRequestMessage = (RepertoireEditRequestMessage) message;
+            String ansMsg = dataLoader.editRepertoire(repertoireEditRequestMessage.getTitle(),repertoireEditRequestMessage.getDate(),repertoireEditRequestMessage.getTime(),repertoireEditRequestMessage.getIdEventType(),repertoireEditRequestMessage.getIdRoom(),repertoireEditRequestMessage.getIdEvent());
+            connection.send(new EventsEditAnswerMessage(ansMsg));
+
+        }
         if (message instanceof GetIdAndNameOfEventsRequestMessage){
             GetIdAndNameOfEventsRequestMessage getIdAndNameOfEventsRequestMessage = (GetIdAndNameOfEventsRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -149,10 +155,22 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
+        if(message instanceof GetIdOfRoomsRequestMessage){
+            GetIdOfRoomsRequestMessage getIdOfRoomsRequestMessage = (GetIdOfRoomsRequestMessage)message;
+            ArrayList<ArrayList<String>> result;
+            try {
+                result = dataLoader.getIdOfRooms();
+                connection.send(new GetIdOfRoomsAnswerMessage(result));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
         if(message instanceof  AddRepertoireRequestMessage){
             AddRepertoireRequestMessage addRepertoireRequestMessage = (AddRepertoireRequestMessage) message;
-            dataLoader.addEvent( ((AddRepertoireRequestMessage) message).getTitle(),  ((AddRepertoireRequestMessage) message).getTime(), ((AddRepertoireRequestMessage) message).getDate(), ((AddRepertoireRequestMessage) message).getIdEvent());
-            connection.send(new AddRepertoireAnswerMessage());
+            dataLoader.addEvent(addRepertoireRequestMessage.getTitle(),addRepertoireRequestMessage.getTime(),addRepertoireRequestMessage.getDate(),addRepertoireRequestMessage.getIdEvent(),addRepertoireRequestMessage.getIdRoom());
+        connection.send(new AddRepertoireAnswerMessage());
         }
         if (message instanceof ImageEventTypeMessage) {
             ImageEventTypeMessage imageEventTypeMessage = (ImageEventTypeMessage) message;
@@ -165,6 +183,10 @@ public class ThreadServer {
 
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
         return dataLoader.addEmployee(name, surname, department, login, password, salary);
+    }
+    public boolean addRoom(Integer number, Integer seats, Integer rows, Integer branchId){
+        return dataLoader.addRoom(number,seats,rows,branchId);
+
     }
 
     public void setViewManager(ViewManager viewManager) {

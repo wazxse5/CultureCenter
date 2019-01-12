@@ -7,11 +7,8 @@ public class ShortEvent {
 
 
     public ShortEvent(String idEventType, String title){
-
             this.idEventType= idEventType;
             this.title=title;
-
-
         }
 
 

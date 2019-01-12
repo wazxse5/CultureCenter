@@ -5,19 +5,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import server.controller.AddEmployeeController;
+import server.controller.AddRoomController;
 import server.controller.InitViewController;
 
 import java.io.IOException;
 
 public class ViewManager {
+
     private Stage primaryStage;
     private ThreadServer threadServer;
 
     private Scene initScene;
     private Scene addEmployeeScene;
-
+    private Scene addRoomScene;
     private InitViewController initViewController;
     private AddEmployeeController addEmployeeController;
+    private AddRoomController addRoomController;
 
     public ViewManager(Stage primaryStage, ThreadServer threadServer) {
         this.primaryStage = primaryStage;
@@ -59,6 +62,24 @@ public class ViewManager {
         }
         primaryStage.setScene(addEmployeeScene);
     }
+    public void setAddRoomScene() {
+        if (addRoomScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addRoomView.fxml"));
+                Parent parent = loader.load();
+                addRoomScene = new Scene(parent);
+                addRoomScene.getStylesheets().add("/../commonSources/css/styles.css");
+
+                addRoomController = loader.getController();
+                addRoomController.setViewManager(this);
+                addRoomController.setThreadServer(threadServer);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku addRoomView");
+            }
+        }
+        primaryStage.setScene(addRoomScene);
+    }
+
 
 
     public void setTitle(String title) {

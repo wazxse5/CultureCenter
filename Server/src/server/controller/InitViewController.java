@@ -24,6 +24,7 @@ public class InitViewController {
     @FXML private Button addEmployeeButton;
     @FXML private ListView<Connection> connectedConnectionsLV;
     @FXML private Label imagesDirPathLabel;
+    @FXML private Button addRoomButton;
 
     public void initialize() {
         connectedConnectionsLV.setCellFactory(param -> new ListCell<Connection>() {
@@ -46,6 +47,7 @@ public class InitViewController {
     public void start() {
         startButton.setDisable(true);
         addEmployeeButton.setDisable(false);
+        addRoomButton.setDisable(false);
         threadServer.getDataLoader().setEventTypeImagesDir(selectedImagesDir);
         threadServer.start(8989);
     }
@@ -53,7 +55,9 @@ public class InitViewController {
     public void addEmployee() {
         viewManager.setAddEmployeeScene();
     }
-
+    public void addRoom(){
+        viewManager.setAddRoomScene();
+    }
     public void chooseDirectory() {
         File file = directoryChooser.showDialog(viewManager.getPrimaryStage());
         if (file != null) {

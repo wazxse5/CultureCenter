@@ -16,8 +16,8 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-    private String password = "";
-//    private String password = "usbw";//do mojej bazy usbwebserver
+   // private String password = "";
+    private String password = "usbw";//do mojej bazy usbwebserver
 
     public DBConnect() {
         try {
@@ -93,6 +93,18 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
+
+    public String addRoom(Integer number, Integer seats, Integer rows, Integer branchId)throws SQLException{
+        String query = "CALL addRoom(?, ?, ?, ?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1,number);
+        ps.setInt(2,seats);
+        ps.setInt(3,rows);
+        ps.setInt(4,branchId);
+        rs = ps.executeQuery();
+        rs.next();
+        return rs.getString(1);
+    }
     public ResultSet editEvent(String idEvent, String title, String duration, String ageRestriction,String language, String releaseDate, String type,String imagePath)throws SQLException{
         String query = "CALL editEventType(?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query);
@@ -108,6 +120,20 @@ public class DBConnect {
 //        rs.next();
         return rs;
     }
+    public ResultSet editRepertoire(String title, String date, String time, String idEventType, String idRoom,String idEvent)throws SQLException{
+        String query = "CALL editEventType(?,?,?,?,?,?)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(6, Integer.valueOf(idEvent));
+        ps.setInt(6, Integer.valueOf(idEventType));
+        ps.setString(2,title);
+        ps.setDate(3,java.sql.Date.valueOf(date));
+        ps.setTime(4,java.sql.Time.valueOf(time));
+        ps.setInt(5,Integer.valueOf(idRoom));
+        rs=ps.executeQuery();
+//        rs.next();
+        return rs;
+    }
+
 
 
     public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {
@@ -137,17 +163,17 @@ public class DBConnect {
         rs.next();
         return rs;
     }
-    public ResultSet addEvent(String name, String time, String date, String idEvent)throws SQLException{
-        String query = "CALL addEvent(?, ?, ?, ?);";
+    public ResultSet addEvent(String name, String date, String time, String idEvent, String idRoom)throws SQLException{
+        String query = "CALL addEvent(?, ?, ?, ?,?);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1,name);
         ps.setTime(3,java.sql.Time.valueOf(time));
         ps.setDate(2,java.sql.Date.valueOf(date));
         ps.setInt(4,Integer.valueOf(idEvent));
+        ps.setInt(5,Integer.valueOf(idRoom));
         rs=ps.executeQuery();
-        rs.next();
+//        rs.next();
         return rs;
-
     }
 
     public String loginUser(String name, String password) throws SQLException {
@@ -178,6 +204,11 @@ public class DBConnect {
         //rs.next();
         return rs;
 
+    }
+    public ResultSet getIdOfRooms()throws SQLException{
+        String query = "CALL showRooms()";
+        rs=st.executeQuery(query);
+        return rs;
     }
     public ResultSet getRepertuar() throws SQLException{
         String query = "CALL showEvents";

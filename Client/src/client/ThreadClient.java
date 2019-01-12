@@ -19,14 +19,12 @@ public class ThreadClient {
     private BooleanProperty logged = new SimpleBooleanProperty(false);
     private StringProperty userName = new SimpleStringProperty();
     private int userID;
-
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
-
-
-
     private ArrayList<ArrayList<String>> idAndNameOfEvents = new ArrayList<>();
+    private ArrayList<ArrayList<String>>  idOfRooms = new ArrayList<>();
+
     private String editEventsAnswerMsg;
     private Connection connection;
     private EditEventsViewController editEventsViewController;
@@ -134,6 +132,10 @@ public class ThreadClient {
             GetIdAndNameOfEventsAnswerMessage answerMessage = (GetIdAndNameOfEventsAnswerMessage) message;
             idAndNameOfEvents = answerMessage.getResult();
         }
+        if(message instanceof GetIdOfRoomsAnswerMessage){
+            GetIdOfRoomsAnswerMessage answerMessage = (GetIdOfRoomsAnswerMessage) message;
+            idOfRooms = answerMessage.getResult();
+        }
 
     }
     public void sendAddEventsRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
@@ -141,15 +143,21 @@ public class ThreadClient {
             connection.send(new AddEventsRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
         }
     }
-    public void sendAddRepertoireRequest(String title, String time, String date, String idFilm){
+    public void sendAddRepertoireRequest(String title, String time, String date, String idFilm,String room){
         if(connected.get()){
-            connection.send(new AddRepertoireRequestMessage(title,time,date,idFilm));
+            connection.send(new AddRepertoireRequestMessage(title,time,date,idFilm,room));
         }
 
     }
     public void sendGetIdAndNameOfEvents(){
         if(connected.get()){
             connection.send(new GetIdAndNameOfEventsRequestMessage());
+        }
+
+    }
+    public void sendGetIdOfRooms(){
+        if(connected.get()){
+            connection.send(new GetIdOfRoomsRequestMessage());
         }
 
     }
@@ -200,6 +208,12 @@ public class ThreadClient {
             connection.send(new EventsEditRequestMessage(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath));
         }
     }
+    public void sendEditRepertoireRequest(String title, String date, String time, String idEventType, String idRoom,String idEvent) {
+        if (connected.get()) {
+            connection.send(new RepertoireEditRequestMessage(title,time,date,idEventType,idRoom,idEvent));
+        }
+    }
+
 
     public void sendReview(ReviewMessage reviewMessage) {
         connection.send(reviewMessage);
@@ -280,6 +294,10 @@ public class ThreadClient {
 
     public String getRegex() {
         return regex;
+    }
+
+    public ArrayList<ArrayList<String>> getIdOfRooms() {
+        return idOfRooms;
     }
 
     public String getRegexEmail() {

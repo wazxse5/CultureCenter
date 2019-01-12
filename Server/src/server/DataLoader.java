@@ -27,13 +27,14 @@ public class DataLoader {
     private ObservableList<ObservableList>eventsCheckData;
     private ObservableList<ObservableList>repertuarCheckData;
     private ObservableList<ObservableList> idAndNameOfEvents;
-
+    private ObservableList<ObservableList> idOfRooms;
 
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
     private ArrayList<ArrayList> SQLEventsarray;
     private ArrayList<ArrayList> SQLRepertuararray;
     private ArrayList<ArrayList> SQLidAndNamesOfEventsarray;
+    private ArrayList<ArrayList> SQLidOfRoomsarray;
 
     public DataLoader() {
         dbConnect = new DBConnect();
@@ -164,6 +165,27 @@ public class DataLoader {
         return SQLidAndNamesOfEventsarray;
     }
 
+    public synchronized ArrayList getIdOfRooms() throws SQLException{
+        idOfRooms = FXCollections.observableArrayList();
+        ResultSet result = null;
+        try{
+            SQLidOfRoomsarray = new ArrayList<ArrayList>();
+            result = dbConnect.getIdOfRooms();
+            ArrayList<String> tables = new ArrayList<String>();
+            while(result.next()){
+                ArrayList<String> newal = new ArrayList<String>();
+                for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
+                    newal.add(result.getString(i));
+                }
+                SQLidOfRoomsarray.add(newal);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return SQLidOfRoomsarray;
+
+    }
+
     public ChangeUserDataAnswerMessage changeUserData(String userLogin, ChangeUserDataRequestMessage changeMessage) {
         boolean nameChanged = false, surnameChanged = false, mailChanged = false, passwordChanged = false;
         if (changeMessage.isChangeName()) nameChanged = dbConnect.changeName(userLogin, changeMessage.getNewName());
@@ -184,6 +206,17 @@ public class DataLoader {
             return false;
         }
     }
+
+    public boolean addRoom(Integer number, Integer seats, Integer rows, Integer branchId){
+        try {
+            String result = dbConnect.addRoom(number,seats,rows,branchId);
+            if (result.equals("Dodano salę!")) return true;
+            else return false;
+        } catch (SQLException e) {
+            return false;
+        }
+
+    }
     public boolean addRepertoire(String imagePath, String title, String duration, String ageRestriction,String language, String releaseDate, String type){
         try{
             ResultSet result = null;
@@ -195,10 +228,11 @@ public class DataLoader {
         return true;
     }
 
-    public boolean addEvent(String name, String time, String date, String idEvent){
+    public boolean addEvent(String name, String time, String date, String idEvent,String idRoom){
         try{
             ResultSet result = null;
-            result = dbConnect.addEvent(name,time,date,idEvent);
+
+            result = dbConnect.addEvent(name,time,date,idEvent,idRoom);
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -216,6 +250,17 @@ public class DataLoader {
             e.printStackTrace();
             return "Błąd";
         }
+        return result;
+    }
+    public String editRepertoire(String title, String date, String time, String idEventType, String idRoom,String idEvent){
+        String result=null;
+        try{
+            result = dbConnect.editRepertoire(title,date,time,idEventType,idRoom,idEvent).toString();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return "Błąd";
+        }
+
         return result;
     }
 

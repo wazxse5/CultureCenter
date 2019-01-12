@@ -7,14 +7,15 @@ public class Repertoire {
     private String date;
     private String startTime;
     private String idEventType;
+    private String idRoom;
 
-    public Repertoire(String idevent, String name,String date, String startTime,String idEventType){
+    public Repertoire(String idevent, String name,String date, String startTime,String idEventType,String idRoom){
             this.idEvent=idevent;
-
             this.name=name;
             this.date=date;
             this.startTime=startTime;
             this.idEventType=idEventType;
+            this.idRoom=idRoom;
 
         }
 
@@ -29,7 +30,9 @@ public class Repertoire {
     }
 
 
-
+    public String getIdRoom() {
+        return idRoom;
+    }
     public String getIdEvent() {
         return idEvent;
     }

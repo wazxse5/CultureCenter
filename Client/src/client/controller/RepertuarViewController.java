@@ -27,7 +27,9 @@ public class RepertuarViewController {
     @FXML private TableColumn<Repertoire, String> columnDate;
     @FXML private TableColumn<Repertoire, String> columnStartTime;
     @FXML private TableColumn<Repertoire, String> columnIdEventType;
+    @FXML private TableColumn<Repertoire, String> columnIdRoom;
     @FXML private Button ChooseButton;
+    @FXML private Button EditButton;
 
 
     public void initialize() {
@@ -36,6 +38,7 @@ public class RepertuarViewController {
         columnDate.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("Date"));
         columnStartTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartTime"));
         columnIdEventType.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEventType"));
+        columnIdRoom.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idRoom"));
 
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -44,6 +47,7 @@ public class RepertuarViewController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (!row.isEmpty())) {
                     if(ChooseButton.isDisabled())ChooseButton.setDisable(false);
+                    if(EditButton.isDisabled())EditButton.setDisable(false);
                     rowData = row.getItem();
                 }
             });
@@ -63,8 +67,13 @@ public class RepertuarViewController {
 
 
     }
-
+    public void edit(){
+        viewManager.setEditRepertoireScene();
+        if(EditButton.isDisabled()==false)EditButton.setDisable(true);
+    }
     public void add(){
+
+        threadClient.sendGetIdOfRooms();
         threadClient.sendGetIdAndNameOfEvents();
         viewManager.setAddRepertoireScene();
     }
@@ -73,15 +82,17 @@ public class RepertuarViewController {
     }
 
     public void refresh(){
+        threadClient.sendRepertoireCheckRequest();
         tableView.setItems(getValues());
         tableView.refresh();
         if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
+
     }
 
     public ObservableList<Repertoire> getValues(){
         list = FXCollections.observableArrayList();
         for(ArrayList<String> x : threadClient.getRepertoireCheckData()){
-            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4)));
+            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5)));
         }
         return list;
     }

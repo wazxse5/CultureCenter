@@ -6,17 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
-import javafx.collections.ObservableList;
-import java.io.File;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddRepertoireViewController {
+public class EditRepertoireViewController {
 
 
 
@@ -28,6 +24,7 @@ public class AddRepertoireViewController {
     private ObservableList<Room> roomList;
     @FXML private TextField titleTF;
     @FXML private TextField timeTF;
+    @FXML private TextField idEventTF;
     @FXML private DatePicker dateTF;
     @FXML private ComboBox<ShortEvent> filmID;
     @FXML private ComboBox<Room> roomCB;
@@ -107,7 +104,7 @@ public class AddRepertoireViewController {
 
 
     public void confirm() {
-
+        String eventId = idEventTF.getText();
         String  title = titleTF.getText();
         String  time = timeTF.getText();
         String  date = dateTF.getValue().toString();
@@ -115,7 +112,7 @@ public class AddRepertoireViewController {
         String room = roomCB.getValue().getNumber();
 
         if(!time.equals("")&&!title.equals("")&&!date.equals("")&&!id.equals("")&&!room.equals("")) {
-            threadClient.sendAddRepertoireRequest(title, time,date,id,room);
+            threadClient.sendEditRepertoireRequest(title, time,date,id,room,eventId);
             infoLabel.setText("Dodano nowy film");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
@@ -144,6 +141,25 @@ public class AddRepertoireViewController {
 
     public ComboBox getFilmID() {
         return filmID;
+    }
+    public TextField getTitleTF() {
+        return titleTF;
+    }
+
+    public TextField getTimeTF() {
+        return timeTF;
+    }
+
+    public DatePicker getDateTF() {
+        return dateTF;
+    }
+
+    public ComboBox<Room> getRoomCB() {
+        return roomCB;
+    }
+
+    public TextField getIdEventTF() {
+        return idEventTF;
     }
 
     public void setViewManager(ViewManager viewManager) {

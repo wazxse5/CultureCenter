@@ -1,11 +1,11 @@
 package message;
 
-public class AddRepertoireRequestMessage extends Message {
+public class RepertoireEditRequestMessage extends Message {
     private static final long serialVersionUID = -7066000756945334003L;
-
     private String title;
     private String time;
     private String date;
+    private String idEventType;
     private String idEvent;
 
 
@@ -18,12 +18,13 @@ public class AddRepertoireRequestMessage extends Message {
 
 
 
-    public AddRepertoireRequestMessage( String title, String date, String time, String idEvent,String idRoom) {
+    public RepertoireEditRequestMessage(String title, String date, String time, String idEventType, String idRoom, String idEvent) {
         this.title=title;
         this.time=time;
         this.date=date;
-        this.idEvent=idEvent;
+        this.idEventType=idEventType;
         this.idRoom=idRoom;
+        this.idEvent=idEvent;
     }
     public String getTitle() {
 
@@ -38,11 +39,14 @@ public class AddRepertoireRequestMessage extends Message {
         return date;
     }
 
-    public String getIdEvent() {
-        return idEvent;
+    public String getIdEventType() {
+        return idEventType;
     }
     public String getIdRoom() {
         return idRoom;
+    }
+    public String getIdEvent() {
+        return idEvent;
     }
 
 }
