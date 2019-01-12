@@ -51,6 +51,7 @@ public class EditRepertoireViewController {
                 return null;
             }
         });
+
         roomCB.setConverter(new StringConverter<Room>(){
             @Override
             public String toString(Room object) {
@@ -63,15 +64,12 @@ public class EditRepertoireViewController {
         });
 
 
+
+
+
     }
 
-    public ObservableList<ShortEvent> getValues(){
-        list = FXCollections.observableArrayList();
-        for(ArrayList<String> x : threadClient.getIdAndNameOfEvents()){
-            list.add(new ShortEvent(x.get(0),x.get(1)));
-        }
-        return list;
-    }
+
 
     public ObservableList<Room> getRoomValues(){
         roomList = FXCollections.observableArrayList();
@@ -79,6 +77,13 @@ public class EditRepertoireViewController {
             roomList.add(new Room(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4)));
         }
         return roomList;
+    }
+    public ObservableList<ShortEvent> getValues(){
+        list = FXCollections.observableArrayList();
+        for(ArrayList<String> x : threadClient.getIdAndNameOfEvents()){
+            list.add(new ShortEvent(x.get(0),x.get(1)));
+        }
+        return list;
     }
 
 
@@ -113,7 +118,7 @@ public class EditRepertoireViewController {
 
         if(!time.equals("")&&!title.equals("")&&!date.equals("")&&!id.equals("")&&!room.equals("")) {
             threadClient.sendEditRepertoireRequest(title, time,date,id,room,eventId);
-            infoLabel.setText("Dodano nowy film");
+            infoLabel.setText("Dodano edytowano seans");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 

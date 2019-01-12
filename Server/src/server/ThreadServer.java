@@ -142,7 +142,7 @@ public class ThreadServer {
         if(message instanceof  RepertoireEditRequestMessage){
             RepertoireEditRequestMessage repertoireEditRequestMessage = (RepertoireEditRequestMessage) message;
             String ansMsg = dataLoader.editRepertoire(repertoireEditRequestMessage.getTitle(),repertoireEditRequestMessage.getDate(),repertoireEditRequestMessage.getTime(),repertoireEditRequestMessage.getIdEventType(),repertoireEditRequestMessage.getIdRoom(),repertoireEditRequestMessage.getIdEvent());
-            connection.send(new EventsEditAnswerMessage(ansMsg));
+            connection.send(new RepertoireEditAnswerMessage(ansMsg));
 
         }
         if (message instanceof GetIdAndNameOfEventsRequestMessage){

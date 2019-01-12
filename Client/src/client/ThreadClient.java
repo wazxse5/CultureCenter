@@ -136,6 +136,9 @@ public class ThreadClient {
             GetIdOfRoomsAnswerMessage answerMessage = (GetIdOfRoomsAnswerMessage) message;
             idOfRooms = answerMessage.getResult();
         }
+        if(message instanceof  RepertoireEditAnswerMessage){
+            RepertoireEditAnswerMessage answerMessage = (RepertoireEditAnswerMessage) message;
+        }
 
     }
     public void sendAddEventsRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){

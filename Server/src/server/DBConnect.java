@@ -121,9 +121,9 @@ public class DBConnect {
         return rs;
     }
     public ResultSet editRepertoire(String title, String date, String time, String idEventType, String idRoom,String idEvent)throws SQLException{
-        String query = "CALL editEventType(?,?,?,?,?,?)";
+        String query = "CALL editEvent(?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setInt(6, Integer.valueOf(idEvent));
+        ps.setInt(1, Integer.valueOf(idEvent));
         ps.setInt(6, Integer.valueOf(idEventType));
         ps.setString(2,title);
         ps.setDate(3,java.sql.Date.valueOf(date));
