@@ -29,8 +29,8 @@ public class LogsViewController {
         columnId.setCellValueFactory(new PropertyValueFactory<Log, String>("id"));
         columnUser.setCellValueFactory(new PropertyValueFactory<Log, String>("user"));
         columnMail.setCellValueFactory(new PropertyValueFactory<Log, String>("mail"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<Log, String>("date"));
         columnType.setCellValueFactory(new PropertyValueFactory<Log, String>("type"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<Log, String>("date"));
         columnAddInfo.setCellValueFactory(new PropertyValueFactory<Log, String>("addInfo"));
     }
 
@@ -54,7 +54,7 @@ public class LogsViewController {
        // tableView.getItems().clear();
         list = FXCollections.observableArrayList();
         for(ArrayList<String> x : threadClient.getLogsCheckData()){
-            list.add(new Log(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5)));
+            list.add(new Log(x.get(0),x.get(1),x.get(2),x.get(4),x.get(3),x.get(5)));
         }
         return list;
     }
