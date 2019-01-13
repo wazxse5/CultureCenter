@@ -4,18 +4,18 @@ public class LoginRequestMessage extends Message {
     private static final long serialVersionUID = -8511670995169064933L;
     private final String login;
     private final String password;
-    private final boolean guest;
+    private final boolean employee;
 
-    public LoginRequestMessage(String login, String password) {
+    public LoginRequestMessage(String login, String password, boolean employee) {
         this.login = login;
         this.password = password;
-        this.guest = false;
+        this.employee = employee;
     }
 
     public LoginRequestMessage(String login) {
         this.login = login;
         this.password = null;
-        this.guest = true;
+        this.employee = true;
     }
 
     public String getLogin() {
@@ -26,7 +26,8 @@ public class LoginRequestMessage extends Message {
         return password;
     }
 
-    public boolean isGuest() {
-        return guest;
+    public boolean isEmployee() {
+        return employee;
     }
+
 }

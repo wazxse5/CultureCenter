@@ -22,6 +22,7 @@ public class DataLoader {
     private ArrayList<Integer> recommended;
 
     private List<Client> knownClients;
+    private List<Employee> knownEmployees;
     private DBConnect dbConnect;
     private ObservableList<ObservableList> logsCheckData;
     private ObservableList<ObservableList> eventsCheckData;
@@ -42,6 +43,7 @@ public class DataLoader {
         dbConnect = new DBConnect();
         try {
             knownClients = dbConnect.getAllClients();
+            knownEmployees = dbConnect.getAllEmployees();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -65,10 +67,15 @@ public class DataLoader {
         else return 4;
     }
 
-    public synchronized Client login(String login, String password) throws AuthenticationException, SQLException {
-        String result = dbConnect.loginUser(login, password);
+    public synchronized Client login(String login, String password, boolean employee) throws AuthenticationException, SQLException {
+        String result = dbConnect.loginUser(login, password, employee);
         if (result.startsWith("Zalogowano jako")) {
-            for (Client client : knownClients) if (client.getLogin().equals(login)) return client;
+            if (employee) {
+                for (Employee employees : knownEmployees) if (employees.getLogin().equals(login)) return employees;
+            }
+            else {
+                for (Client client : knownClients) if (client.getLogin().equals(login)) return client;
+            }
         }
         if (result.equals("Nieistniejący login!")) throw new NoSuchUserException();
         if (result.equals("Niepoprawne hasło!")) throw new WrongPasswordException();

@@ -3,10 +3,7 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class LoginViewController {
     private ViewManager viewManager;
@@ -17,6 +14,7 @@ public class LoginViewController {
     @FXML private Label infoLabel;
     @FXML private Button loginButton;
     @FXML private Button connectButton;
+    @FXML private CheckBox employeeCheck;
 
     public void connect()
     {
@@ -39,7 +37,7 @@ public class LoginViewController {
     public void sendLoginRequest() {
         String login = loginTF.getText();
         String password = passwordTF.getText();
-        threadClient.sendLoginRequest(login, password);
+        threadClient.sendLoginRequest(login, password, employeeCheck.isSelected());
         infoLabel.setText("Nie można nawiązać połączenia");
     }
 

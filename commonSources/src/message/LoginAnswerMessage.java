@@ -10,6 +10,7 @@ public class LoginAnswerMessage extends Message {
     private String userName;
     private String userSurName;
     private String userMail;
+    private boolean employee;
 
     public LoginAnswerMessage(boolean good) {
         this.good = good;
@@ -21,7 +22,7 @@ public class LoginAnswerMessage extends Message {
         this.infoCode = infoCode;
     }
 
-    public LoginAnswerMessage(boolean good, int userID, String userLogin, String userName, String userSurName, String userMail) {
+    public LoginAnswerMessage(boolean good, int userID, String userLogin, String userName, String userSurName, String userMail, boolean employee) {
         this.good = good;
         this.infoCode = 0;
         this.userID = userID;
@@ -29,6 +30,7 @@ public class LoginAnswerMessage extends Message {
         this.userName = userName;
         this.userSurName = userSurName;
         this.userMail = userMail;
+        this.employee = employee;
     }
 
     public boolean isGood() {
@@ -57,5 +59,9 @@ public class LoginAnswerMessage extends Message {
 
     public String getUserMail() {
         return userMail;
+    }
+
+    public boolean isEmployee() {
+        return employee;
     }
 }

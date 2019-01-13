@@ -42,6 +42,9 @@ public class InfosViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        addBT.disableProperty().bind(threadClient.loggedProperty().not());
+        addBT.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        infoTF.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
     }
     public void connect() {
         threadClient.connect("localhost", 8989);

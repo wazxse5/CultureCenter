@@ -5,6 +5,7 @@ import client.ViewManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,6 +24,7 @@ public class LogsViewController {
     @FXML private TableColumn<Log, String> columnDate;
     @FXML private TableColumn<Log, String> columnType;
     @FXML private TableColumn<Log, String> columnAddInfo;
+    @FXML private Button refreshButton;
 
 
     public void initialize() {
@@ -62,6 +64,7 @@ public class LogsViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        refreshButton.disableProperty().bind(threadClient.loggedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {

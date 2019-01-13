@@ -50,6 +50,8 @@ public class EventsViewController {
     @FXML private TableColumn<Event,String>columnImagePath;
 
     @FXML private Button EditButton;
+    @FXML private Button AddButton;
+    @FXML private Button refreshButton;
 
     public Event getRowData() {
         return rowData;
@@ -122,6 +124,11 @@ public class EventsViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        AddButton.disableProperty().bind(threadClient.loggedProperty().not());
+        AddButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        EditButton.disableProperty().bind(threadClient.loggedProperty().not());
+        EditButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        refreshButton.disableProperty().bind(threadClient.loggedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {

@@ -36,6 +36,8 @@ public class RepertuarViewController {
     @FXML private TableColumn<Repertoire, String> columnNumOfRows;
     @FXML private Button ChooseButton;
     @FXML private Button EditButton;
+    @FXML private Button AddButton;
+    @FXML private Button refreshButton;
 
 
     public void initialize() {
@@ -54,17 +56,16 @@ public class RepertuarViewController {
             TableRow<Repertoire> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (!row.isEmpty())) {
-                    if(ChooseButton.isDisabled())ChooseButton.setDisable(false);
-                    if(EditButton.isDisabled())EditButton.setDisable(false);
+                    if (ChooseButton.isDisabled()) ChooseButton.setDisable(false);
+                    if (EditButton.isDisabled()) EditButton.setDisable(false);
                     rowData = row.getItem();
                 }
             });
             return row;
         });
+
+
     }
-
-
-
 
     public void choose() {
         threadClient.sendEventSeatsRequest(Integer.parseInt(rowData.getIdEvent()));
@@ -118,6 +119,12 @@ public class RepertuarViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
+        ChooseButton.disableProperty().bind(threadClient.loggedProperty().not());
+        EditButton.disableProperty().bind(threadClient.loggedProperty().not());
+        EditButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        AddButton.disableProperty().bind(threadClient.loggedProperty().not());
+        AddButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        refreshButton.disableProperty().bind(threadClient.loggedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {

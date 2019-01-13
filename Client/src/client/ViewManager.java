@@ -74,13 +74,19 @@ public class ViewManager {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
 
-        primaryStage.setMinWidth(963);
-        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(400);
 
         connectionState.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("NONE")) setTitle("Client");
             if (newValue.equals("CONNECTING")) setTitle("Client - łączenie");
             if (newValue.equals("CONNECTED")) setTitle("Client - połączono");
+            if (newValue.equals("LOGGED")) {
+                String title = "Client - zalogowano jako ";
+                if (threadClient.isLoggedAsEmployee()) title += "pracownik ";
+                title += threadClient.getUserName();
+                setTitle(title);
+            }
             if (newValue.equals("NOT_CONNECTED")) setTitle("Client - brak połączenia");
         });
     }
