@@ -61,10 +61,12 @@ public class SeatButton extends ToggleButton {
         if (status == 0) {
             setStyle("-fx-background-color: lightgreen;");
             setTooltipText("To miejsce jest dostępne");
+            setDisabled(false);
         }
         if (status == 1) {
             setStyle("-fx-background-color: indianred;");
             setTooltipText("Miejsce NIE dostępne");
+            setDisabled(true);
         }
         if (status == 2) {
             setStyle("-fx-background-color: lightblue;");

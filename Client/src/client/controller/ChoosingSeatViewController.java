@@ -19,13 +19,14 @@ public class ChoosingSeatViewController {
     @FXML private GridPane gridPane;
     @FXML private Button reserveButton;
     @FXML private Button buyButton;
+    @FXML private Label infoLabel;
     private List<List<SeatButton>> seatButtons;
     private int idEvent;
     private String price = "12.99";
 
     public void initialize() {
         reserveButton.setOnAction(event -> confirm("Zarezerwowany"));
-        buyButton.setOnAction(event -> confirm("Zakup"));
+        buyButton.setOnAction(event -> confirm("Zakupiony"));
     }
 
     public void confirm(String condition) {
@@ -40,6 +41,8 @@ public class ChoosingSeatViewController {
         if (!selected.isEmpty()) {
             ReservationRequestMessage message = new ReservationRequestMessage(idEvent, threadClient.getUserID(), price, "Normalny", condition, selected);
             threadClient.sendReservationRequest(message);
+            float cost = Float.parseFloat(price) * selected.size();
+            infoLabel.setText("Rezerwacja wysłana. Koszt: " + cost);
         }
     }
 
@@ -69,7 +72,15 @@ public class ChoosingSeatViewController {
         }
     }
 
-    public void refreshSeats(List<Seat> seats) {
+    public void refreshSeats(List<Integer> seats) {
+        for (List<SeatButton> list : seatButtons) {
+            for (SeatButton sb : list) {
+                if (seats.contains(Integer.parseInt(sb.getText()))) {
+                    sb.setStatus(1);
+                }
+            }
+        }
+
 //
 //        gridPane.getChildren().clear();
 //        seatButtons = new ArrayList<>();

@@ -74,7 +74,7 @@ public class ViewManager {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
 
-        primaryStage.setMinWidth(810);
+        primaryStage.setMinWidth(963);
         primaryStage.setMinHeight(500);
 
         connectionState.addListener((observable, oldValue, newValue) -> {
@@ -419,7 +419,7 @@ public class ViewManager {
         contentPane.setCenter(choosingSeatScene);
     }
 
-    public void updateChoosingSeatScene(List<Seat> seats) {
+    public void updateChoosingSeatScene(List<Integer> seats) {
         if (choosingSeatViewController != null) {
             choosingSeatViewController.refreshSeats(seats);
         }

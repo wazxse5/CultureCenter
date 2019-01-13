@@ -69,7 +69,6 @@ public class RepertuarViewController {
     public void choose() {
         threadClient.sendEventSeatsRequest(Integer.parseInt(rowData.getIdEvent()));
         viewManager.setChoosingSeatScene(Integer.parseInt(rowData.getIdEvent()),Integer.parseInt(rowData.getMaxSeats())/Integer.parseInt(rowData.getNumOfRows()), Integer.parseInt(rowData.getNumOfRows()));
-        //viewManager.setChoosingSeatScene();
         if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
     }
 

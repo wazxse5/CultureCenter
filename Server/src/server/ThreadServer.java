@@ -207,7 +207,12 @@ public class ThreadServer {
 
         if (message instanceof EventSeatsMessage) {
             EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
-//            dataLoader.
+            try {
+                List<Integer> reserved = dataLoader.getSeatsId(seatsMessage.getIdEvent());
+                connection.send(new EventSeatsAnswerMessage(reserved));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         if (message instanceof ReservationRequestMessage) {
             try {

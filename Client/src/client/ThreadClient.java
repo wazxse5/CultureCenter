@@ -11,6 +11,7 @@ import javafx.beans.property.StringProperty;
 import message.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class ThreadClient {
@@ -25,6 +26,7 @@ public class ThreadClient {
     private ArrayList<ArrayList<String>> idAndNameOfEvents = new ArrayList<>();
     private ArrayList<ArrayList<String>> infos = new ArrayList<>();
     private ArrayList<ArrayList<String>>  idOfRooms = new ArrayList<>();
+    private List<Integer> seatsID = new ArrayList<>();
 
     private String editEventsAnswerMsg;
     private Connection connection;
@@ -156,13 +158,10 @@ public class ThreadClient {
             System.out.println(answerMessage.getEmail());
 
         }
-        if (message instanceof EventSeatsMessage) {
-            EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
-            viewManager.updateChoosingSeatScene(seatsMessage.getSeats());
-        }
-        if (message instanceof EventSeatsMessage) {
-            EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
-            viewManager.updateChoosingSeatScene(seatsMessage.getSeats());
+        if (message instanceof EventSeatsAnswerMessage) {
+            EventSeatsAnswerMessage answerMessage = (EventSeatsAnswerMessage) message;
+            seatsID = answerMessage.getReserved();
+            viewManager.updateChoosingSeatScene(answerMessage.getReserved());
         }
 
     }
@@ -377,5 +376,9 @@ public class ThreadClient {
 
     public ViewManager getViewManager() {
         return viewManager;
+    }
+
+    public List<Integer> getSeatsID() {
+        return seatsID;
     }
 }
