@@ -103,7 +103,7 @@ public class EditEventsViewController {
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
             threadClient.sendEditEventsRequest(idEvent, title, duration, ageRestriction, language, releaseDate, type, imagePath);
-           // infoLabel.setText("Zmieniono dane");
+            infoLabel.setText("Wysłano żądanie zmiany danych");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 

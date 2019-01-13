@@ -62,11 +62,6 @@ public class EditRepertoireViewController {
                 return null;
             }
         });
-
-
-
-
-
     }
 
 
@@ -118,13 +113,12 @@ public class EditRepertoireViewController {
         System.out.println(room);
         if(!time.equals("")&&!title.equals("")&&!date.equals("")&&!id.equals("")&&!room.equals("")) {
             threadClient.sendEditRepertoireRequest(title, time,date,id,room,eventId);
-            infoLabel.setText("Dodano edytowano seans");
+            infoLabel.setText("Wysłano żądanie edycji seansu");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 
     public void back() {
         viewManager.setRepertoireScene();
-
     }
 
     public void RestrictionText(){

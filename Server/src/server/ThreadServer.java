@@ -185,6 +185,12 @@ public class ThreadServer {
             dataLoader.addInfo(addInfoRequestMessage.getInfo());
 
         }
+        if(message instanceof  GetEmailRequestMessage){
+            GetEmailRequestMessage getEmailRequestMessage= (GetEmailRequestMessage) message;
+            String result = dataLoader.getEmail(getEmailRequestMessage.getEmail());
+            connection.send(new GetEmailAnswerMessage(result));
+
+        }
         if(message instanceof GetInfosRequestMessage){
             GetInfosRequestMessage getInfosRequestMessage = (GetInfosRequestMessage)message;
             ArrayList<ArrayList<String>> result;

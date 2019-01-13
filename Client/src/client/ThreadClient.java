@@ -113,7 +113,7 @@ public class ThreadClient {
         if (message instanceof RepertoireCheckAnswerMessage) {
             RepertoireCheckAnswerMessage repertoireAnswer = (RepertoireCheckAnswerMessage) message;
             repertoireCheckData = repertoireAnswer.getResult();
-            viewManager.getRepertuarViewController().refresh();
+            viewManager.getRepertuarViewController().getTableView().refresh();
         }
         if (message instanceof ChangeUserDataAnswerMessage) {
             ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
@@ -142,12 +142,18 @@ public class ThreadClient {
         }
         if(message instanceof  RepertoireEditAnswerMessage){
             RepertoireEditAnswerMessage answerMessage = (RepertoireEditAnswerMessage) message;
-            viewManager.getRepertuarViewController().refresh();
+          //  viewManager.getRepertuarViewController().getTableView().refresh();
         }
         if(message instanceof GetInfosAnswerMessage){
             GetInfosAnswerMessage answerMessage= (GetInfosAnswerMessage) message;
             infos = answerMessage.getResult();
             viewManager.prepareInfos();
+
+        }
+        if(message instanceof  GetEmailAnswerMessage){
+            GetEmailAnswerMessage answerMessage = (GetEmailAnswerMessage) message;
+            viewManager.getRestorePasswordViewController().getTextLabel().setText(answerMessage.getEmail());
+            System.out.println(answerMessage.getEmail());
 
         }
 
@@ -172,6 +178,12 @@ public class ThreadClient {
     public void sendGetIdOfRooms(){
         if(connected.get()){
             connection.send(new GetIdOfRoomsRequestMessage());
+        }
+
+    }
+    public void sendRestorePasswordRequest(String email){
+        if(connected.get()){
+            connection.send(new GetEmailRequestMessage(email));
         }
 
     }

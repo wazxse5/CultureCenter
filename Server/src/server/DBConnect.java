@@ -194,6 +194,12 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
+    public String getEmail(String email) throws SQLException{
+        String query = "CALL getLogin(\""+email+"\")";
+        rs=st.executeQuery(query);
+        rs.next();
+        return rs.getString(1);
+    }
 
     public ResultSet getLogs(String login)throws SQLException{
         String query = "CALL showLogs(\""+login + "\")";
@@ -216,6 +222,7 @@ public class DBConnect {
         //rs.next();
         return rs;
     }
+
     public ResultSet getIdAndNameOfEvents() throws SQLException{
         String query = "CALL getIdAndNameOfEvents()";
         rs=st.executeQuery(query);
@@ -235,6 +242,8 @@ public class DBConnect {
        // rs.next();
         return rs;
     }
+
+
 
     public boolean changeName(String login, String newName) {
         try {

@@ -102,7 +102,7 @@ public class AddEventsViewController {
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
             threadClient.sendAddEventsRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
-            infoLabel.setText("Dodano nowy film");
+            infoLabel.setText("Wysłanie żądania dodania nowego filmu");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
 

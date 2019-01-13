@@ -297,6 +297,17 @@ public class DataLoader {
             return null;
         }
     }
+    public String getEmail(String email){
+        String result="";
+        try{
+            result  = dbConnect.getEmail(email);
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+
+    }
     public String addInfo(String info){
         String result="";
         try{
@@ -325,6 +336,7 @@ public class DataLoader {
         }
         this.recommended = arrayList;
     }
+
 
     public ArrayList<Integer> getRecommended() {
         return recommended;

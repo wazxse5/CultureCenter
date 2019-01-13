@@ -3,7 +3,9 @@ package client.controller;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,10 +26,17 @@ public class InitViewController {
     @FXML private Label loggedUserName;
     @FXML private Label notLoggedLabel;
 
+    @FXML private Button searchBT;
+    @FXML private TextField textTF;
+
     public void initialize() {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
         imageView.setImage(logo);
         imageView.setOnMouseClicked((MouseEvent event) -> viewManager.setRecommendationsScene());
+    }
+    public void search(){
+
+
     }
 
     public void login() {
@@ -89,4 +98,16 @@ public class InitViewController {
         this.viewManager = viewManager;
         viewManager.setContentPane(contentPane);
     }
+
+
+
+    public Button getSearchBT() {
+        return searchBT;
+    }
+
+    public TextField getTextTF() {
+        return textTF;
+    }
+
+
 }

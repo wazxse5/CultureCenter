@@ -116,13 +116,15 @@ public class AddRepertoireViewController {
 
         if(!time.equals("")&&!title.equals("")&&!date.equals("")&&!id.equals("")&&!room.equals("")) {
             threadClient.sendAddRepertoireRequest(title, time,date,id,room);
-            infoLabel.setText("Dodano nowy film");
+            infoLabel.setText("Wysłano żądanie dodania nowego seansu");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
+
     }
 
     public void back() {
-        viewManager.setRepertoireScene();
 
+        threadClient.sendRepertoireCheckRequest();
+        viewManager.setRepertoireScene();
     }
 
     public void RestrictionText(){
