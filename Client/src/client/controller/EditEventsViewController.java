@@ -108,6 +108,8 @@ public class EditEventsViewController {
     }
 
     public void back() {
+
+        threadClient.sendEventsCheckRequest();
         viewManager.setEventsScene();
     }
 

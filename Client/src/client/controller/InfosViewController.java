@@ -26,6 +26,8 @@ public class InfosViewController {
     public void add(){
      String text = infoTF.getText();
      threadClient.addInfo(text);
+     infoTF.clear();
+
     }
 
 

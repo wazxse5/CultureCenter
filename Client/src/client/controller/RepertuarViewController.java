@@ -28,6 +28,8 @@ public class RepertuarViewController {
     @FXML private TableColumn<Repertoire, String> columnStartTime;
     @FXML private TableColumn<Repertoire, String> columnIdEventType;
     @FXML private TableColumn<Repertoire, String> columnIdRoom;
+    @FXML private TableColumn<Repertoire, String> columnMaxSeats;
+    @FXML private TableColumn<Repertoire, String> columnNumOfRows;
     @FXML private Button ChooseButton;
     @FXML private Button EditButton;
 
@@ -39,6 +41,8 @@ public class RepertuarViewController {
         columnStartTime.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("StartTime"));
         columnIdEventType.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idEventType"));
         columnIdRoom.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("idRoom"));
+        columnMaxSeats.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("maxSeats"));
+        columnNumOfRows.setCellValueFactory(new PropertyValueFactory<Repertoire, String>("numOfRows"));
 
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -98,7 +102,7 @@ public class RepertuarViewController {
     public ObservableList<Repertoire> getValues(){
         list = FXCollections.observableArrayList();
         for(ArrayList<String> x : threadClient.getRepertoireCheckData()){
-            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5)));
+            list.add(new Repertoire(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5),x.get(6),x.get(7)));
         }
         return list;
     }

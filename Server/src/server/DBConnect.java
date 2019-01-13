@@ -229,7 +229,7 @@ public class DBConnect {
         return rs;
     }
     public ResultSet getRepertuar() throws SQLException{
-        String query = "CALL showEvents";
+        String query = "CALL showEventsPlusRoom()";
         rs=st.executeQuery(query);
         System.out.println(rs);
        // rs.next();

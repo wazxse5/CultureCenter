@@ -8,14 +8,18 @@ public class Repertoire {
     private String startTime;
     private String idEventType;
     private String idRoom;
+    private String maxSeats;
+    private String numOfRows;
 
-    public Repertoire(String idevent, String name,String date, String startTime,String idEventType,String idRoom){
+    public Repertoire(String idevent, String name,String date, String startTime,String idEventType,String idRoom,String maxSeats, String numOfRows){
             this.idEvent=idevent;
             this.name=name;
             this.date=date;
             this.startTime=startTime;
             this.idEventType=idEventType;
             this.idRoom=idRoom;
+            this.maxSeats=maxSeats;
+            this.numOfRows=numOfRows;
 
         }
 
@@ -50,5 +54,13 @@ public class Repertoire {
 
     public String getIdEventType() {
         return idEventType;
+    }
+
+    public String getMaxSeats() {
+        return maxSeats;
+    }
+
+    public String getNumOfRows() {
+        return numOfRows;
     }
 }

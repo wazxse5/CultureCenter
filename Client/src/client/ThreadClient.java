@@ -113,6 +113,7 @@ public class ThreadClient {
         if (message instanceof RepertoireCheckAnswerMessage) {
             RepertoireCheckAnswerMessage repertoireAnswer = (RepertoireCheckAnswerMessage) message;
             repertoireCheckData = repertoireAnswer.getResult();
+            viewManager.getRepertuarViewController().refresh();
         }
         if (message instanceof ChangeUserDataAnswerMessage) {
             ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
@@ -129,6 +130,7 @@ public class ThreadClient {
             editEventsAnswerMsg = answerMessage.getOk();
            if(!answerMessage.equals(""))  viewManager.getEditEventsViewController().getInfoLabel().setText("Zmieniono dane");
            else viewManager.getEditEventsViewController().getInfoLabel().setText("Błąd po stronie serwera");
+           sendEventsCheckRequest();
         }
         if(message instanceof GetIdAndNameOfEventsAnswerMessage){
             GetIdAndNameOfEventsAnswerMessage answerMessage = (GetIdAndNameOfEventsAnswerMessage) message;
@@ -140,6 +142,7 @@ public class ThreadClient {
         }
         if(message instanceof  RepertoireEditAnswerMessage){
             RepertoireEditAnswerMessage answerMessage = (RepertoireEditAnswerMessage) message;
+            viewManager.getRepertuarViewController().refresh();
         }
         if(message instanceof GetInfosAnswerMessage){
             GetInfosAnswerMessage answerMessage= (GetInfosAnswerMessage) message;
