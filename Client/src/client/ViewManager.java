@@ -522,9 +522,9 @@ public class ViewManager {
     public void prepareInfos(){
         if(!threadClient.getInfos().isEmpty()){
             getInfosViewController().getInfoLabel1().setText(threadClient.getInfos().get(0).get(1)+" - " + threadClient.getInfos().get(0).get(2));
-            getInfosViewController().getInfoLabel2().setText(threadClient.getInfos().get(1).get(1)+" - " + threadClient.getInfos().get(1).get(2));
-            getInfosViewController().getInfoLabel3().setText(threadClient.getInfos().get(2).get(1)+" - " + threadClient.getInfos().get(2).get(2));
-            getInfosViewController().getInfoLabel4().setText(threadClient.getInfos().get(3).get(1)+" - " + threadClient.getInfos().get(3).get(2));
+           if(threadClient.getInfos().size()>=1) getInfosViewController().getInfoLabel2().setText(threadClient.getInfos().get(1).get(1)+" - " + threadClient.getInfos().get(1).get(2));
+            if(threadClient.getInfos().size()>=2)  getInfosViewController().getInfoLabel3().setText(threadClient.getInfos().get(2).get(1)+" - " + threadClient.getInfos().get(2).get(2));
+            if(threadClient.getInfos().size()>=3)  getInfosViewController().getInfoLabel4().setText(threadClient.getInfos().get(3).get(1)+" - " + threadClient.getInfos().get(3).get(2));
         }
 
     }

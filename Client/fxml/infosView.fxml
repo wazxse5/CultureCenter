@@ -13,7 +13,7 @@
     <children>
       <VBox layoutX="65.0" layoutY="94.0" prefHeight="212.0" prefWidth="471.0">
          <children>
-            <Label fx:id="infoLabel1">
+            <Label fx:id="infoLabel1" text="Informacje jeszcze sie nie załadowały">
                <font>
                   <Font size="14.0" />
                </font>
@@ -21,7 +21,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel2" text="24.11.2018 - Nasz ośrodek będzie zamknięty">
+            <Label fx:id="infoLabel2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel3" text="2111.2018 - Zapraszamy na nowe...">
+            <Label fx:id="infoLabel3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -37,7 +37,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel4" text="20.11.2018 - Aplikacja będzie niedostępna w godzinach 03:00-06:00">
+            <Label fx:id="infoLabel4">
                <font>
                   <Font size="14.0" />
                </font>
