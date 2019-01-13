@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -63,7 +65,8 @@ public class RepertuarViewController {
 
 
     public void choose() {
-       // viewManager.setChoosingSeatScene();
+        threadClient.sendEventSeatsRequest(Integer.parseInt(rowData.getIdEvent()));
+        viewManager.setChoosingSeatScene(Integer.parseInt(rowData.getIdEvent()),Integer.parseInt(rowData.getMaxSeats())/Integer.parseInt(rowData.getNumOfRows()), Integer.parseInt(rowData.getNumOfRows()));
         if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
     }
 

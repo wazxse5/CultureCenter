@@ -16,8 +16,8 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-   // private String password = "";
-    private String password = "usbw";//do mojej bazy usbwebserver
+    private String password = "";
+//    private String password = "usbw";//do mojej bazy usbwebserver
 
     public DBConnect() {
         try {
@@ -143,13 +143,27 @@ public class DBConnect {
         return rs;
     }
 
+    public void addReservation(int idClient, int idEvent, List<Integer> seats, String type, float price, String condition) throws SQLException {
+        String query = "CALL buyTicket(?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setFloat(1, price);
+        ps.setString(2, type);
+        ps.setString(3, condition);
+        ps.setInt(4, idEvent);
+        ps.setInt(6, idClient);
+        for (Integer i : seats) {
+            ps.setInt(5, i);
+            ps.executeUpdate();
+        }
+    }
 
 
-    public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {
+        public String addClient(String name, String surname, String mail, String login, String password) throws SQLException {
         String query = "CALL addClient(?, ?, ?, ?, ?);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, name);
         ps.setString(2, surname);
+//        ps.set
         ps.setString(3, mail);
         ps.setString(4, login);
         ps.setString(5, password);
@@ -271,8 +285,6 @@ public class DBConnect {
             return false;
         }
     }
-
-
 
     public boolean changePassword(String login, String currentPassword, String newPassword) {
         // FIXME: Tu by się przydała osobna procedura w bazie

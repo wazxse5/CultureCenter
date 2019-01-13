@@ -10,9 +10,10 @@ public class Seat implements Serializable {
     private String type;
     private int idRoom;
     private int idTicket;
-    private SeatStatus seatStatus;
+    private int idEvent;
+    private int seatStatus;
 
-    public Seat(int idSeat, int row, int number, String type, int idRoom, int idTicket, SeatStatus seatStatus) {
+    public Seat(int idSeat, int row, int number, String type, int idRoom, int idTicket, int seatStatus) {
         this.idSeat = idSeat;
         this.row = row;
         this.number = number;
@@ -21,9 +22,37 @@ public class Seat implements Serializable {
         this.idTicket = idTicket;
         this.seatStatus = seatStatus;
     }
-}
 
-enum SeatStatus {
-    FREE,
-    TAKEN
+
+    public int getIdSeat() {
+        return idSeat;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getIdRoom() {
+        return idRoom;
+    }
+
+    public int getIdTicket() {
+        return idTicket;
+    }
+
+    public int getIdEvent() {
+        return idEvent;
+    }
+
+    public int getSeatStatus() {
+        return seatStatus;
+    }
 }
