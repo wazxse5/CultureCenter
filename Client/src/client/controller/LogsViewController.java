@@ -54,7 +54,7 @@ public class LogsViewController {
        // tableView.getItems().clear();
         list = FXCollections.observableArrayList();
         for(ArrayList<String> x : threadClient.getLogsCheckData()){
-            list.add(new Log(x.get(0),x.get(1),x.get(2),x.get(4),x.get(3),x.get(5)));
+            list.add(new Log(x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),x.get(5)));
         }
         return list;
     }

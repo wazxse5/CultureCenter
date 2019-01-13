@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -10,7 +13,7 @@
     <children>
       <VBox layoutX="65.0" layoutY="94.0" prefHeight="212.0" prefWidth="471.0">
          <children>
-            <Label fx:id="infoLabel1" text="26.11.2018 - Zmieniliśmy politykę prywatności...">
+            <Label fx:id="infoLabel1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -18,7 +21,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel4" text="24.11.2018 - Nasz ośrodek będzie zamknięty">
+            <Label fx:id="infoLabel2" text="24.11.2018 - Nasz ośrodek będzie zamknięty">
                <font>
                   <Font size="14.0" />
                </font>
@@ -49,5 +52,19 @@
                 <Font size="20.0" />
             </font>
         </Label>
+      <HBox layoutX="65.0" layoutY="271.0" prefHeight="39.0" prefWidth="275.0">
+         <children>
+            <TextField fx:id="infoTF" prefHeight="22.0" prefWidth="157.0" promptText="Informacja">
+               <padding>
+                  <Insets left="2.0" right="10.0" />
+               </padding>
+            </TextField>
+            <Button fx:id="addBT" mnemonicParsing="false" onAction="#add" text="Dodaj">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

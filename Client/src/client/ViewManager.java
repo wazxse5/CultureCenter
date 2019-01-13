@@ -169,7 +169,10 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku InfosView");
             }
         }
+        threadClient.sendGetInfos();
+
         contentPane.setCenter(infosScene);
+
     }
 
     public void setHistoryScene() {
@@ -465,6 +468,10 @@ public class ViewManager {
     public AccountSettingsViewController getAccountSettingsViewController(){
         return accountSettingsViewController;
     }
+    public InfosViewController getInfosViewController(){
+        return infosViewController;
+    }
+
 
     public RegisterViewController getRegisterViewController() {
         return registerViewController;
@@ -511,5 +518,14 @@ public class ViewManager {
         editRepertoireViewController.getRoomCB().setItems(editRepertoireViewController.getRoomValues());
         editRepertoireViewController.getRoomCB().setValue( new Room(repertuarViewController.getRowData().getIdRoom(),"1", "0","0","1"));
         editRepertoireViewController.getIdEventTF().setText(repertuarViewController.getRowData().getIdEvent());
+    }
+    public void prepareInfos(){
+        if(!threadClient.getInfos().isEmpty()){
+            getInfosViewController().getInfoLabel1().setText(threadClient.getInfos().get(0).get(1)+" - " + threadClient.getInfos().get(0).get(2));
+            getInfosViewController().getInfoLabel2().setText(threadClient.getInfos().get(1).get(1)+" - " + threadClient.getInfos().get(1).get(2));
+            getInfosViewController().getInfoLabel3().setText(threadClient.getInfos().get(2).get(1)+" - " + threadClient.getInfos().get(2).get(2));
+            getInfosViewController().getInfoLabel4().setText(threadClient.getInfos().get(3).get(1)+" - " + threadClient.getInfos().get(3).get(2));
+        }
+
     }
 }

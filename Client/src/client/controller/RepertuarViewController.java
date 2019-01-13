@@ -86,12 +86,13 @@ public class RepertuarViewController {
 
     public void refresh(){
         threadClient.sendRepertoireCheckRequest();
+        threadClient.sendGetIdOfRooms();
+        threadClient.sendGetIdAndNameOfEvents();
         tableView.setItems(getValues());
         tableView.refresh();
         if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
         if(EditButton.isDisabled()==false)EditButton.setDisable(true);
-        threadClient.sendGetIdOfRooms();
-        threadClient.sendGetIdAndNameOfEvents();
+
     }
 
     public ObservableList<Repertoire> getValues(){

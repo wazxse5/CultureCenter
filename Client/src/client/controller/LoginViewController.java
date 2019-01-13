@@ -18,8 +18,10 @@ public class LoginViewController {
     @FXML private Button loginButton;
     @FXML private Button connectButton;
 
-    public void connect() {
+    public void connect()
+    {
         threadClient.connect("localhost", 8989);
+
     }
 
     public void RestrictionText(){

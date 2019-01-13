@@ -120,6 +120,15 @@ public class DBConnect {
 //        rs.next();
         return rs;
     }
+
+    public String addInfo(String info)throws  SQLException{
+        String query = "CALL addInfo(?)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,info);
+        rs=ps.executeQuery();
+        return rs.toString();
+
+    }
     public ResultSet editRepertoire(String title, String date, String time, String idEventType, String idRoom,String idEvent)throws SQLException{
         String query = "CALL editEvent(?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query);
@@ -192,6 +201,15 @@ public class DBConnect {
        // rs.next();
         return rs;
     }
+
+    public ResultSet getInfos()throws SQLException{
+        String query = "CALL showInfos()";
+        rs=st.executeQuery(query);
+        // rs.next();
+        return rs;
+    }
+
+
     public ResultSet getEvents() throws SQLException{
         String query = "CALL showEventType()";
         rs=st.executeQuery(query);

@@ -43,6 +43,7 @@ public class ViewManager {
             }
         }
         primaryStage.setScene(initScene);
+
     }
 
     public void setAddEmployeeScene() {

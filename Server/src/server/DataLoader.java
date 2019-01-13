@@ -28,6 +28,7 @@ public class DataLoader {
     private ObservableList<ObservableList>repertuarCheckData;
     private ObservableList<ObservableList> idAndNameOfEvents;
     private ObservableList<ObservableList> idOfRooms;
+    private ObservableList<ObservableList> infos;
 
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
@@ -35,6 +36,7 @@ public class DataLoader {
     private ArrayList<ArrayList> SQLRepertuararray;
     private ArrayList<ArrayList> SQLidAndNamesOfEventsarray;
     private ArrayList<ArrayList> SQLidOfRoomsarray;
+    private ArrayList<ArrayList> SQLinfosarray;
 
     public DataLoader() {
         dbConnect = new DBConnect();
@@ -165,6 +167,28 @@ public class DataLoader {
         return SQLidAndNamesOfEventsarray;
     }
 
+    public synchronized ArrayList getInfos() throws SQLException{
+        infos = FXCollections.observableArrayList();
+        ResultSet result = null;
+        try{
+            SQLinfosarray = new ArrayList<ArrayList>();
+            result = dbConnect.getInfos();
+            ArrayList<String> tables = new ArrayList<String>();
+            while(result.next()){
+                ArrayList<String> newal = new ArrayList<String>();
+                for(int i=1 ; i<=result.getMetaData().getColumnCount(); i++){
+                    newal.add(result.getString(i));
+                }
+                SQLinfosarray.add(newal);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return SQLinfosarray;
+    }
+
+
+
     public synchronized ArrayList getIdOfRooms() throws SQLException{
         idOfRooms = FXCollections.observableArrayList();
         ResultSet result = null;
@@ -253,7 +277,7 @@ public class DataLoader {
         return result;
     }
     public String editRepertoire(String title, String date, String time, String idEventType, String idRoom,String idEvent){
-        String result=null;
+        String result="";
         try{
             result = dbConnect.editRepertoire(title,date,time,idEventType,idRoom,idEvent).toString();
         }catch (SQLException e){
@@ -273,6 +297,18 @@ public class DataLoader {
             return null;
         }
     }
+    public String addInfo(String info){
+        String result="";
+        try{
+            result = dbConnect.addInfo(info);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
 
     private void loadRecommended() {
         ArrayList<Integer> arrayList = new ArrayList<>();

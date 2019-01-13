@@ -23,6 +23,7 @@ public class ThreadClient {
     private ArrayList<ArrayList<String>> eventsCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> idAndNameOfEvents = new ArrayList<>();
+    private ArrayList<ArrayList<String>> infos = new ArrayList<>();
     private ArrayList<ArrayList<String>>  idOfRooms = new ArrayList<>();
 
     private String editEventsAnswerMsg;
@@ -52,6 +53,7 @@ public class ThreadClient {
             connectTask.setOnSucceeded(event -> handleNewConnection((Connection) event.getSource().getValue()));
             connectTask.setOnFailed(event -> connectionState.setValue("NOT_CONNECTED"));
             executor.execute(connectTask);
+
         } catch (Exception e) {
             connectionState.setValue("NOT_CONNECTED");
         }
@@ -138,6 +140,12 @@ public class ThreadClient {
         }
         if(message instanceof  RepertoireEditAnswerMessage){
             RepertoireEditAnswerMessage answerMessage = (RepertoireEditAnswerMessage) message;
+        }
+        if(message instanceof GetInfosAnswerMessage){
+            GetInfosAnswerMessage answerMessage= (GetInfosAnswerMessage) message;
+            infos = answerMessage.getResult();
+            viewManager.prepareInfos();
+
         }
 
     }
@@ -233,6 +241,12 @@ public class ThreadClient {
             }
         }
     }
+    public void sendGetInfos(){
+        if(connected.get()){
+            connection.send(new GetInfosRequestMessage());
+        }
+    }
+
 
     public void sendImageEventTypeRequest(int idEventType) {
         imageRequestQueue.add(new ImageEventTypeMessage(idEventType));
@@ -244,6 +258,12 @@ public class ThreadClient {
             if(Integer.valueOf(x.get(0))==id) return x.get(1);
         }
         return "Nie znaleziono";
+    }
+    public void addInfo(String info){
+        if(connected.get()){
+            connection.send(new AddInfoRequestMessage(info));
+        }
+
     }
 
     public void disconnect() {
@@ -257,6 +277,7 @@ public class ThreadClient {
         this.viewManager = viewManager;
         viewManager.connectionStateProperty().bind(connectionState);
     }
+
 
     public BooleanProperty loggedProperty() {
         return logged;
@@ -296,6 +317,11 @@ public class ThreadClient {
 
     public ArrayList<ArrayList<String>> getEventsCheckData() {
         return eventsCheckData;
+    }
+
+
+    public ArrayList<ArrayList<String>> getInfos() {
+        return infos;
     }
 
     public Connection getConnection() {

@@ -179,7 +179,25 @@ public class ThreadServer {
             imageEventTypeMessage.setImage(image);
             connection.send(imageEventTypeMessage);
         }
+
+        if(message instanceof AddInfoRequestMessage){
+            AddInfoRequestMessage addInfoRequestMessage = (AddInfoRequestMessage) message;
+            dataLoader.addInfo(addInfoRequestMessage.getInfo());
+
+        }
+        if(message instanceof GetInfosRequestMessage){
+            GetInfosRequestMessage getInfosRequestMessage = (GetInfosRequestMessage)message;
+            ArrayList<ArrayList<String>> result;
+            try {
+                result = dataLoader.getInfos();
+                connection.send(new GetInfosAnswerMessage(result));
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+
     }
+
 
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
         return dataLoader.addEmployee(name, surname, department, login, password, salary);

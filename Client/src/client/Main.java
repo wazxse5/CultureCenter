@@ -17,6 +17,7 @@ public class Main extends Application {
 
         primaryStage.setOnCloseRequest(event -> threadClient.disconnect());
         primaryStage.setTitle("Client");
+        threadClient.sendGetInfos();
         viewManager.setInitScene();
         viewManager.setRecommendationsScene();
         primaryStage.show();

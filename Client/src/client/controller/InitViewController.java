@@ -61,6 +61,7 @@ public class InitViewController {
     }
 
     public void infos() {
+        viewManager.prepareInfos();
         viewManager.setInfosScene();
     }
 
