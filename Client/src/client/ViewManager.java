@@ -12,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import message.ChangeUserDataAnswerMessage;
+import model.Seat;
+
 import java.time.LocalDate;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -399,7 +401,7 @@ public class ViewManager {
         contentPane.setCenter(restorePasswordScene);
     }
 
-    public void setChoosingSeatScene(List<List<Integer>> seats) {
+    public void setChoosingSeatScene(int idEvent, int width, int height) {
         if (choosingSeatScene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChoosingSeatView.fxml"));
@@ -413,8 +415,14 @@ public class ViewManager {
                 setTitle("Nie można załadować widoku repertuarView");
             }
         }
-        choosingSeatViewController.setLayout(seats);
+        choosingSeatViewController.setLayout(idEvent,width, height);
         contentPane.setCenter(choosingSeatScene);
+    }
+
+    public void updateChoosingSeatScene(List<Seat> seats) {
+        if (choosingSeatViewController != null) {
+            choosingSeatViewController.refreshSeats(seats);
+        }
     }
 
 

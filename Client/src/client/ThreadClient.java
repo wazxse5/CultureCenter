@@ -156,6 +156,14 @@ public class ThreadClient {
             System.out.println(answerMessage.getEmail());
 
         }
+        if (message instanceof EventSeatsMessage) {
+            EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
+            viewManager.updateChoosingSeatScene(seatsMessage.getSeats());
+        }
+        if (message instanceof EventSeatsMessage) {
+            EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
+            viewManager.updateChoosingSeatScene(seatsMessage.getSeats());
+        }
 
     }
     public void sendAddEventsRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
@@ -240,6 +248,10 @@ public class ThreadClient {
         }
     }
 
+    public void sendEventSeatsRequest(int idEvent) {
+        if (connected.get()) connection.send(new EventSeatsMessage(idEvent));
+    }
+
 
     public void sendReview(ReviewMessage reviewMessage) {
         connection.send(reviewMessage);
@@ -260,6 +272,10 @@ public class ThreadClient {
         if(connected.get()){
             connection.send(new GetInfosRequestMessage());
         }
+    }
+
+    public void sendReservationRequest(ReservationRequestMessage message) {
+        if (connected.get()) connection.send(message);
     }
 
 

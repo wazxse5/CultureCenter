@@ -8,6 +8,7 @@ public class Client {
     private String login;
 
     public Client(int id, String name, String surname, String mail, String login) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.mail = mail;

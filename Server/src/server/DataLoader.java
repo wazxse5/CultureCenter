@@ -252,6 +252,11 @@ public class DataLoader {
         return true;
     }
 
+    public void addReservation(int idClient, int idEvent, List<Integer> seats, String type, String price, String condition) throws SQLException {
+        float fPrice = Float.parseFloat(price);
+        dbConnect.addReservation(idClient, idEvent, seats, type, fPrice, condition);
+    }
+
     public boolean addEvent(String name, String time, String date, String idEvent,String idRoom){
         try{
             ResultSet result = null;

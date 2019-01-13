@@ -166,7 +166,6 @@ public class ThreadServer {
             }
 
         }
-
         if(message instanceof  AddRepertoireRequestMessage){
             AddRepertoireRequestMessage addRepertoireRequestMessage = (AddRepertoireRequestMessage) message;
             dataLoader.addEvent(addRepertoireRequestMessage.getTitle(),addRepertoireRequestMessage.getTime(),addRepertoireRequestMessage.getDate(),addRepertoireRequestMessage.getIdEvent(),addRepertoireRequestMessage.getIdRoom());
@@ -178,6 +177,10 @@ public class ThreadServer {
             byte[] image = dataLoader.getEvenTypeImage(imageEventTypeMessage.getIdEventType());
             imageEventTypeMessage.setImage(image);
             connection.send(imageEventTypeMessage);
+        }
+        if (message instanceof EventSeatsMessage) {
+            EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
+            // TODO: sprawdzenie wolnych miejsc na seans
         }
 
         if(message instanceof AddInfoRequestMessage){
@@ -202,6 +205,18 @@ public class ThreadServer {
             }
         }
 
+        if (message instanceof EventSeatsMessage) {
+            EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
+//            dataLoader.
+        }
+        if (message instanceof ReservationRequestMessage) {
+            try {
+                ReservationRequestMessage rm = (ReservationRequestMessage) message;
+                dataLoader.addReservation(rm.getIdClient(), rm.getIdEvent(), rm.getSeatNumbers(), rm.getType(), rm.getPrice(), rm.getCondition());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
