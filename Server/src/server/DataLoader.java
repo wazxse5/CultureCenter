@@ -12,6 +12,7 @@ import message.ChangeUserDataRequestMessage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class DataLoader {
     private ObservableList<ObservableList> idAndNameOfEvents;
     private ObservableList<ObservableList> idOfRooms;
     private ObservableList<ObservableList> infos;
+    private ObservableList<ObservableList> history;
 
     private TableView tableview;
     private ArrayList<ArrayList> SQLarray;
@@ -37,6 +39,7 @@ public class DataLoader {
     private ArrayList<ArrayList> SQLidAndNamesOfEventsarray;
     private ArrayList<ArrayList> SQLidOfRoomsarray;
     private ArrayList<ArrayList> SQLinfosarray;
+    private ArrayList<ArrayList> SQLhistoryarray;
 
     public DataLoader() {
         dbConnect = new DBConnect();
@@ -144,6 +147,27 @@ public class DataLoader {
         }
         return SQLEventsarray;
 
+
+    }
+
+    public synchronized ArrayList getHistory(String idClient) throws SQLException{
+        history = FXCollections.observableArrayList();
+        ResultSet result = null;
+        try {
+            SQLhistoryarray = new ArrayList<ArrayList>();
+            result = dbConnect.getHistory(idClient);
+            ArrayList<String> tables = new ArrayList<String>();
+            while (result.next()) {
+                ArrayList<String> newal = new ArrayList<String>();
+                for (int i = 1; i <= result.getMetaData().getColumnCount(); i++) {
+                    newal.add(result.getString(i));
+                }
+                SQLhistoryarray.add(newal);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return SQLhistoryarray;
 
     }
 
@@ -274,6 +298,15 @@ public class DataLoader {
         return true;
     }
 
+    public void addReview(int idEvent, int idUser, int grade, String opinion,String type)throws  SQLException{
+        try {
+            dbConnect.addReview(idEvent, idUser, grade, opinion, type);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
     public String editEvents(String idEvent, String title, String duration, String ageRestriction, String language, String releaseDate, String type, String imagePath) {
         String result = null;
         try {
@@ -281,6 +314,16 @@ public class DataLoader {
         } catch (SQLException e) {
             e.printStackTrace();
             return "Błąd";
+        }
+        return result;
+    }
+    public String changeTicketStatus(String idTicket){
+        String result ="";
+        try{
+         result=   dbConnect.changeTicketStatus(idTicket);
+        }
+        catch(SQLException e){
+            e.printStackTrace();
         }
         return result;
     }

@@ -25,6 +25,7 @@ public class ThreadClient {
     private ArrayList<ArrayList<String>> repertoireCheckData = new ArrayList<>();
     private ArrayList<ArrayList<String>> idAndNameOfEvents = new ArrayList<>();
     private ArrayList<ArrayList<String>> infos = new ArrayList<>();
+    private ArrayList<ArrayList<String>> history = new ArrayList<>();
     private ArrayList<ArrayList<String>>  idOfRooms = new ArrayList<>();
     private List<Integer> seatsID = new ArrayList<>();
 
@@ -155,13 +156,18 @@ public class ThreadClient {
         if(message instanceof  GetEmailAnswerMessage){
             GetEmailAnswerMessage answerMessage = (GetEmailAnswerMessage) message;
             viewManager.getRestorePasswordViewController().getTextLabel().setText(answerMessage.getEmail());
-            System.out.println(answerMessage.getEmail());
 
         }
         if (message instanceof EventSeatsAnswerMessage) {
             EventSeatsAnswerMessage answerMessage = (EventSeatsAnswerMessage) message;
             seatsID = answerMessage.getReserved();
             viewManager.updateChoosingSeatScene(answerMessage.getReserved());
+        }
+        if(message instanceof HistoryCheckAnswerMessage){
+            HistoryCheckAnswerMessage answerMessage  = (HistoryCheckAnswerMessage) message;
+            history = answerMessage.getResult();
+            viewManager.getHistoryViewController().getValues();
+            viewManager.getHistoryViewController().getTableView().refresh();
         }
 
     }
@@ -226,6 +232,18 @@ public class ThreadClient {
 
     }
 
+    public void sendHistoryCheckRequest(String idClient){
+        if(connected.get()){
+            connection.send(new HistoryCheckRequestMessage(idClient));
+        }
+
+    }
+
+    public void sendChangeTicketStatusRequest(String idEvent){
+        if(connected.get()){
+            connection.send(new ChangeTicketStatusRequestMessage(idEvent));
+        }
+    }
     public void sendRepertoireCheckRequest() {
         if (connected.get()) {
             connection.send(new RepertoireCheckRequestMessage());
@@ -354,6 +372,9 @@ public class ThreadClient {
         return infos;
     }
 
+    public ArrayList<ArrayList<String>> getHistory() {
+        return history;
+    }
     public Connection getConnection() {
         return connection;
     }

@@ -145,6 +145,21 @@ public class ThreadServer {
             connection.send(new RepertoireEditAnswerMessage(ansMsg));
 
         }
+
+        if(message instanceof HistoryCheckRequestMessage){
+            HistoryCheckRequestMessage requestMessage = (HistoryCheckRequestMessage) message;
+            ArrayList<ArrayList<String>> result;
+            try{
+
+                result = dataLoader.getHistory(requestMessage.getIdClient());
+                connection.send(new HistoryCheckAnswerMessage(result));
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+
+        }
+
+
         if (message instanceof GetIdAndNameOfEventsRequestMessage){
             GetIdAndNameOfEventsRequestMessage getIdAndNameOfEventsRequestMessage = (GetIdAndNameOfEventsRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -222,6 +237,21 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
+        if(message instanceof ReviewMessage){
+            ReviewMessage reviewMessage = (ReviewMessage)message;
+            try {
+            dataLoader.addReview(reviewMessage.getIdEvent(),reviewMessage.getIdUser(),reviewMessage.getGrade(),reviewMessage.getOpinion(),reviewMessage.getType());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(message instanceof ChangeTicketStatusRequestMessage){
+            ChangeTicketStatusRequestMessage requestMessage = (ChangeTicketStatusRequestMessage) message;
+                dataLoader.changeTicketStatus(requestMessage.getIdEvent());
+
+
+        }
+
     }
 
 

@@ -59,6 +59,9 @@ public class InitViewController {
         viewManager.setRepertoireScene();
         threadClient.sendRepertoireCheckRequest();
     }
+    public void history(){
+        viewManager.setHistoryScene();
+    }
 
     public void recommendation() {
         viewManager.setRecommendationsScene();
