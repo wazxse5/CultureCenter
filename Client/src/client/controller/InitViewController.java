@@ -26,18 +26,18 @@ public class InitViewController {
     @FXML private Label loggedUserName;
     @FXML private Label notLoggedLabel;
 
-    @FXML private Button searchBT;
-    @FXML private TextField textTF;
+    @FXML private Button connectButton;
 
     public void initialize() {
-        Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/polynesian.jpg")));
+        Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/logo1.png")));
         imageView.setImage(logo);
         imageView.setOnMouseClicked((MouseEvent event) -> viewManager.setRecommendationsScene());
     }
-    public void search(){
 
-
+    public void connect() {
+        threadClient.connect("localhost", 8989);
     }
+
 
     public void login() {
         viewManager.setLoginScene();
@@ -92,22 +92,12 @@ public class InitViewController {
         hboxLoggedAs.visibleProperty().bind(threadClient.loggedProperty());
         loggedUserName.textProperty().bind(threadClient.userNameProperty());
         notLoggedLabel.visibleProperty().bind(threadClient.loggedProperty().not());
+        connectButton.disableProperty().bind(threadClient.connectedProperty());
     }
 
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
         viewManager.setContentPane(contentPane);
     }
-
-
-
-    public Button getSearchBT() {
-        return searchBT;
-    }
-
-    public TextField getTextTF() {
-        return textTF;
-    }
-
 
 }

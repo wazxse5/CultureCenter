@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ContactViewController">
-   <children>
-      <Label layoutX="175.0" layoutY="36.0" prefHeight="30.0" prefWidth="251.0" text="Kontakt" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <VBox layoutX="65.0" layoutY="66.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
+<ScrollPane hbarPolicy="NEVER" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ContactViewController">
+   <content>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label text="Pierwsza linia adresu" />
-            <Label text="Druga linia adresu" />
-            <Label text="Trzecia linia adresu" />
-            <Label text="Skrytka pocztowa" />
-         </children>
-      </VBox>
-      <VBox layoutX="65.0" layoutY="188.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="135.0">
-         <children>
-            <Label text="Telefon 1: 48 123 456 789" />
-            <Label text="Telefon 2: 22 987 654 321" />
-            <Label text="Mail: osrodek_kultury@osrodek.pl" />
-         </children>
-      </VBox>
-      <AnchorPane fx:id="anchorPaneMap" layoutX="36.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="225.0">
-         <children>
-            <ImageView fx:id="imageViewMap" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="175.0" layoutY="36.0" prefHeight="30.0" prefWidth="251.0" text="Kontakt" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <VBox layoutX="65.0" layoutY="66.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
+               <children>
+                  <Label text="Pierwsza linia adresu" />
+                  <Label text="Druga linia adresu" />
+                  <Label text="Trzecia linia adresu" />
+                  <Label text="Skrytka pocztowa" />
+               </children>
+            </VBox>
+            <VBox layoutX="65.0" layoutY="188.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="135.0">
+               <children>
+                  <Label text="Telefon 1: 48 123 456 789" />
+                  <Label text="Telefon 2: 22 987 654 321" />
+                  <Label text="Mail: osrodek_kultury@osrodek.pl" />
+               </children>
+            </VBox>
+            <AnchorPane fx:id="anchorPaneMap" layoutX="36.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="225.0">
+               <children>
+                  <ImageView fx:id="imageViewMap" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="26.0" layoutY="212.0" text="Lokalizacja" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="26.0" layoutY="212.0" text="Dojazd" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+   </content>
+</ScrollPane>

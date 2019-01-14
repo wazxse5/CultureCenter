@@ -5,9 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 import message.ImageEventTypeMessage;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class DataLoader {
@@ -37,6 +35,18 @@ public class DataLoader {
                     int idEventType = Integer.parseInt(f.getName().substring(0, i));
                     ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>(image);
                     imagesProperty.put(idEventType, imageProperty);
+                }
+                if (extension.equals("txt")) {
+                    try {
+                        Scanner scanner = new Scanner(f);
+                        int counter = 0;
+                        while (scanner.hasNextLine()) {
+                            String line = scanner.nextLine();
+                            if (!line.isEmpty()) recommendation.set(counter++, Integer.valueOf(line));
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -77,5 +87,11 @@ public class DataLoader {
             this.recommendation.set(i, recommendation.get(i));
         }
         threadClient.getViewManager().getRecommendationViewController().rebindImageViews();
+        File recommendedFile = new File(fileDir, "recommended.txt");
+        try (PrintWriter out = new PrintWriter(recommendedFile)) {
+            for (int r : recommendation) out.println(r);
+        } catch (IOException e) {
+
+        }
     }
 }

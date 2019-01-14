@@ -75,7 +75,7 @@ public class ViewManager {
         this.threadClient = threadClient;
 
         primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(400);
+        primaryStage.setMinHeight(500);
 
         connectionState.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("NONE")) setTitle("Client");
