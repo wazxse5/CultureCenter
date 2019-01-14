@@ -2,7 +2,8 @@ package client.controller;
 
 import client.ThreadClient;
         import client.ViewManager;
-        import javafx.collections.FXCollections;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
         import javafx.collections.ObservableList;
         import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -52,6 +54,7 @@ public class EventsViewController {
     @FXML private Button EditButton;
     @FXML private Button AddButton;
     @FXML private Button refreshButton;
+    @FXML private HBox addeditHbox;
 
     public Event getRowData() {
         return rowData;
@@ -105,7 +108,12 @@ public class EventsViewController {
         threadClient.sendEventsCheckRequest();
         tableView.setItems(getValues());
         tableView.refresh();
-        if(EditButton.isDisabled()==false)EditButton.setDisable(true);
+        EditButton.setDisable(true);
+    }
+
+    public void refreshView() {
+        tableView.setItems(getValues());
+        tableView.refresh();
     }
 
     public ObservableList<Event> getValues(){
@@ -124,11 +132,12 @@ public class EventsViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
-        AddButton.disableProperty().bind(threadClient.loggedProperty().not());
-        AddButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
-        EditButton.disableProperty().bind(threadClient.loggedProperty().not());
-        EditButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
-        refreshButton.disableProperty().bind(threadClient.loggedProperty().not());
+        addeditHbox.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+//        AddButton.disableProperty().bind(threadClient.loggedProperty().not());
+//        AddButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+//        EditButton.disableProperty().bind(threadClient.loggedProperty().not());
+//        EditButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+//        refreshButton.disableProperty().bind(threadClient.loggedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {

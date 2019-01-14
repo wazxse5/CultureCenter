@@ -188,7 +188,6 @@ public class ThreadServer {
         }
         if (message instanceof ImageEventTypeMessage) {
             ImageEventTypeMessage imageEventTypeMessage = (ImageEventTypeMessage) message;
-            System.out.println("dupa " + imageEventTypeMessage.getIdEventType());
             byte[] image = dataLoader.getEvenTypeImage(imageEventTypeMessage.getIdEventType());
             imageEventTypeMessage.setImage(image);
             connection.send(imageEventTypeMessage);

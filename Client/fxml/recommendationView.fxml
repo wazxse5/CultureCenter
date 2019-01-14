@@ -9,14 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.RecommendationViewController">
    <content>
       <AnchorPane fx:id="anchorPane">
          <children>
             <Label alignment="BOTTOM_CENTER" prefHeight="46.0" prefWidth="586.0" text="TOP miesiąca">
                <font>
-                  <Font size="19.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
             <FlowPane fx:id="flowPane" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWrapLength="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">

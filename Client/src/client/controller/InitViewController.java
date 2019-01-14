@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 
 public class InitViewController {
@@ -27,6 +28,13 @@ public class InitViewController {
     @FXML private Label notLoggedLabel;
 
     @FXML private Button connectButton;
+    @FXML private Button recommendedButton;
+    @FXML private Button repertoireButton;
+    @FXML private Button eventsButton;
+    @FXML private Button InfoButton;
+    @FXML private Button ContactButton;
+    @FXML private Button LogsButton;
+    @FXML private Button historyButton;
 
     public void initialize() {
         Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/logo1.png")));
@@ -95,7 +103,17 @@ public class InitViewController {
         hboxLoggedAs.visibleProperty().bind(threadClient.loggedProperty());
         loggedUserName.textProperty().bind(threadClient.userNameProperty());
         notLoggedLabel.visibleProperty().bind(threadClient.loggedProperty().not());
-        connectButton.disableProperty().bind(threadClient.connectedProperty());
+        connectButton.visibleProperty().bind(threadClient.connectedProperty().not());
+        LogsButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        historyButton.visibleProperty().bind(threadClient.loggedProperty());
+
+        recommendedButton.disableProperty().bind(threadClient.connectedProperty().not());
+        repertoireButton.disableProperty().bind(threadClient.connectedProperty().not());
+        eventsButton.disableProperty().bind(threadClient.connectedProperty().not());
+        InfoButton.disableProperty().bind(threadClient.connectedProperty().not());
+        ContactButton.disableProperty().bind(threadClient.connectedProperty().not());
+        LogsButton.disableProperty().bind(threadClient.connectedProperty().not());
+        historyButton.disableProperty().bind(threadClient.connectedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {

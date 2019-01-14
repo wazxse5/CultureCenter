@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.HistoryViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.HistoryViewController">
    <children>
       <Label alignment="CENTER" layoutX="178.0" layoutY="26.0" prefHeight="30.0" prefWidth="251.0" text="Historia">
          <font>
@@ -37,7 +37,7 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <Label fx:id="textLabel" layoutX="33.0" layoutY="331.0" prefHeight="68.0" prefWidth="203.0" text="Label" wrapText="true" />
+      <Label fx:id="textLabel" layoutX="33.0" layoutY="331.0" prefHeight="68.0" prefWidth="203.0" wrapText="true" />
       <Button fx:id="regretBT" disable="true" layoutX="141.0" layoutY="301.0" mnemonicParsing="false" onAction="#regret" prefHeight="30.0" prefWidth="95.0" text="Wycofaj">
          <font>
             <Font size="11.0" />

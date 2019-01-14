@@ -106,7 +106,11 @@ public class HistoryViewController {
         threadClient.sendHistoryCheckRequest(String.valueOf(threadClient.getUserID()));
         tableView.setItems(getValues());
         tableView.refresh();
+    }
 
+    public void refreshView() {
+        tableView.setItems(getValues());
+        tableView.refresh();
     }
 
     public History getRowData() {

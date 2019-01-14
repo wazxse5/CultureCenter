@@ -113,15 +113,17 @@ public class ThreadClient {
         if (message instanceof LogsCheckAnswerMessage) {
             LogsCheckAnswerMessage logsAnswer = (LogsCheckAnswerMessage) message;
             logsCheckData = logsAnswer.getResult();
+            viewManager.getLogsViewController().refresh();
         }
         if (message instanceof EventsCheckAnswerMessage) {
             EventsCheckAnswerMessage eventsAnswer = (EventsCheckAnswerMessage) message;
             eventsCheckData = eventsAnswer.getResult();
+            viewManager.getEventsViewController().refreshView();
         }
         if (message instanceof RepertoireCheckAnswerMessage) {
             RepertoireCheckAnswerMessage repertoireAnswer = (RepertoireCheckAnswerMessage) message;
             repertoireCheckData = repertoireAnswer.getResult();
-            viewManager.getRepertuarViewController().getTableView().refresh();
+            viewManager.getRepertuarViewController().refreshView();
         }
         if (message instanceof ChangeUserDataAnswerMessage) {
             ChangeUserDataAnswerMessage answerMessage = (ChangeUserDataAnswerMessage) message;
@@ -171,8 +173,8 @@ public class ThreadClient {
         if(message instanceof HistoryCheckAnswerMessage){
             HistoryCheckAnswerMessage answerMessage  = (HistoryCheckAnswerMessage) message;
             history = answerMessage.getResult();
-            viewManager.getHistoryViewController().getValues();
-            viewManager.getHistoryViewController().getTableView().refresh();
+//            viewManager.getHistoryViewController().getValues();
+            viewManager.getHistoryViewController().refreshView();
         }
 
     }

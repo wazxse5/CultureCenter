@@ -51,6 +51,8 @@ public class LogsViewController {
     }
 
 
+
+
     public ObservableList<Log> getValues(){
        // list.clear();
        // tableView.getItems().clear();

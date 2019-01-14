@@ -65,9 +65,9 @@
       </AnchorPane>
    </top>
    <left>
-      <VBox prefWidth="200.0" styleClass="myborder" BorderPane.alignment="CENTER">
+      <VBox fx:id="menuVbox" prefWidth="200.0" styleClass="myborder" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#recommendation" prefHeight="50.0" prefWidth="200.0" text="Polecane">
+            <Button fx:id="recommendedButton" mnemonicParsing="false" onAction="#recommendation" prefHeight="50.0" prefWidth="200.0" text="Polecane">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
@@ -75,7 +75,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#repertoire" prefHeight="50.0" prefWidth="200.0" text="Repertuar">
+            <Button fx:id="repertoireButton" mnemonicParsing="false" onAction="#repertoire" prefHeight="50.0" prefWidth="200.0" text="Repertuar">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
@@ -83,7 +83,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="repertoireButton" mnemonicParsing="false" onAction="#events" prefHeight="50.0" prefWidth="200.0" text="Wydarzenia">
+            <Button fx:id="eventsButton" mnemonicParsing="false" onAction="#events" prefHeight="50.0" prefWidth="200.0" text="Wydarzenia">
                <font>
                   <Font size="18.0" />
                </font>
@@ -107,7 +107,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="LogsButton" mnemonicParsing="false" onAction="#history" prefHeight="50.0" prefWidth="200.0" text="Historia">
+            <Button fx:id="historyButton" mnemonicParsing="false" onAction="#history" prefHeight="50.0" prefWidth="200.0" text="Historia">
                <font>
                   <Font size="18.0" />
                </font>

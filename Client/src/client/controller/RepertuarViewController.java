@@ -13,6 +13,7 @@ import java.util.List;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 
 
 public class RepertuarViewController {
@@ -37,6 +38,8 @@ public class RepertuarViewController {
     @FXML private Button EditButton;
     @FXML private Button AddButton;
     @FXML private Button refreshButton;
+    @FXML private HBox addeditHbox;
+    @FXML private HBox chooseHbox;
 
 
     public void initialize() {
@@ -101,7 +104,11 @@ public class RepertuarViewController {
         tableView.refresh();
         if(ChooseButton.isDisabled()==false)ChooseButton.setDisable(true);
         if(EditButton.isDisabled()==false)EditButton.setDisable(true);
+    }
 
+    public void refreshView() {
+        tableView.setItems(getValues());
+        tableView.refresh();
     }
 
     public ObservableList<Repertoire> getValues(){
@@ -118,13 +125,10 @@ public class RepertuarViewController {
 
     public void setThreadClient(ThreadClient threadClient) {
         this.threadClient = threadClient;
-        ChooseButton.disableProperty().bind(threadClient.loggedProperty().not());
-        EditButton.disableProperty().bind(threadClient.loggedProperty().not());
-        EditButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
-        AddButton.disableProperty().bind(threadClient.loggedProperty().not());
-        AddButton.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
-        refreshButton.disableProperty().bind(threadClient.loggedProperty().not());
+        addeditHbox.visibleProperty().bind(threadClient.loggedAsEmployeeProperty());
+        chooseHbox.visibleProperty().bind(threadClient.loggedProperty());
     }
+
 
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;

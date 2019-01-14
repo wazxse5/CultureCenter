@@ -218,6 +218,7 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(eventsScene);
+        eventsViewController.refresh();
     }
 
     public void setRecommendationsScene() {
@@ -517,6 +518,10 @@ public class ViewManager {
 
     public HistoryViewController getHistoryViewController() {
         return historyViewController;
+    }
+
+    public LogsViewController getLogsViewController() {
+        return logsViewController;
     }
 
     public void setContentPane(BorderPane contentPane) {
