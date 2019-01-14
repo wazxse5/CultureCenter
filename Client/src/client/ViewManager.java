@@ -12,11 +12,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import message.ChangeUserDataAnswerMessage;
-import model.Seat;
 
 import java.time.LocalDate;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ViewManager {
@@ -69,12 +67,13 @@ public class ViewManager {
     private ReviewViewController reviewViewController;
     private EditRepertoireViewController editRepertoireViewController;
     private LocalDate dt;
-    private final String mainCssPath = "/../commonSources/css/styles.css";
+    private final String mainCssPath;
 
 
     public ViewManager(Stage primaryStage, ThreadClient threadClient) {
         this.primaryStage = primaryStage;
         this.threadClient = threadClient;
+        mainCssPath = String.valueOf(getClass().getResource("/css/styles.css"));
 
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(500);
@@ -96,9 +95,9 @@ public class ViewManager {
     public void setContactScene() {
         if (contactScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/contactView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/contactView.fxml"));
                 contactScene = loader.load();
-                contactScene.getStylesheets().add("/../commonSources/css/styles.css");
+                contactScene.getStylesheets().add(mainCssPath);
 
                 contactViewController = loader.getController();
                 contactViewController.setViewManager(this);
@@ -115,9 +114,9 @@ public class ViewManager {
     public void setReviewScene() {
         if (reviewScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/reviewView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reviewView.fxml"));
                 reviewScene = loader.load();
-                reviewScene.getStylesheets().add("/../commonSources/css/styles.css");
+                reviewScene.getStylesheets().add(mainCssPath);
 
                 reviewViewController = loader.getController();
                 reviewViewController.setViewManager(this);
@@ -132,9 +131,9 @@ public class ViewManager {
     public void setEditEventsScene() {
         if (editEventsScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editEventsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editEventsView.fxml"));
                 editEventsScene = loader.load();
-                editEventsScene.getStylesheets().add("/../commonSources/css/styles.css");
+                editEventsScene.getStylesheets().add(mainCssPath);
 
                 editEventsViewController = loader.getController();
                 editEventsViewController.setViewManager(this);
@@ -149,9 +148,9 @@ public class ViewManager {
     public void setEditRepertoireScene() {
         if (editRepertoireScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editRepertoireView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editRepertoireView.fxml"));
                 editRepertoireScene = loader.load();
-                editRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+                editRepertoireScene.getStylesheets().add(mainCssPath);
 
                 editRepertoireViewController = loader.getController();
                 editRepertoireViewController.setViewManager(this);
@@ -168,9 +167,9 @@ public class ViewManager {
     public void setInfosScene() {
         if (infosScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/infosView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/infosView.fxml"));
                 infosScene = loader.load();
-                infosScene.getStylesheets().add("/../commonSources/css/styles.css");
+                infosScene.getStylesheets().add(mainCssPath);
 
                 infosViewController = loader.getController();
                 infosViewController.setViewManager(this);
@@ -188,9 +187,9 @@ public class ViewManager {
     public void setHistoryScene() {
         if (historyScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/historyView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/historyView.fxml"));
                 historyScene = loader.load();
-                historyScene.getStylesheets().add("/../commonSources/css/styles.css");
+                historyScene.getStylesheets().add(mainCssPath);
 
                 historyViewController = loader.getController();
                 historyViewController.setViewManager(this);
@@ -206,9 +205,9 @@ public class ViewManager {
     public void setEventsScene() {
         if (eventsScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/eventsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/eventsView.fxml"));
                 eventsScene = loader.load();
-                eventsScene.getStylesheets().add("/../commonSources/css/styles.css");
+                eventsScene.getStylesheets().add(mainCssPath);
 
                 eventsViewController = loader.getController();
                 eventsViewController.setViewManager(this);
@@ -224,9 +223,9 @@ public class ViewManager {
     public void setRecommendationsScene() {
         if (recommendationScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/recommendationView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/recommendationView.fxml"));
                 recommendationScene = loader.load();
-                recommendationScene.getStylesheets().add("/../commonSources/css/styles.css");
+                recommendationScene.getStylesheets().add(mainCssPath);
 
                 recommendationViewController = loader.getController();
                 recommendationViewController.setViewManager(this);
@@ -242,9 +241,9 @@ public class ViewManager {
     public void setActualReservedScene() {
         if (actualReservedScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/actualReservedView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/actualReservedView.fxml"));
                 actualReservedScene = loader.load();
-                actualReservedScene.getStylesheets().add("/../commonSources/css/styles.css");
+                actualReservedScene.getStylesheets().add(mainCssPath);
 
                 actualReservedViewController = loader.getController();
                 actualReservedViewController.setViewManager(this);
@@ -259,9 +258,9 @@ public class ViewManager {
     public void setLogsScene() {
         if (logsScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/logsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/logsView.fxml"));
                 logsScene = loader.load();
-                logsScene.getStylesheets().add("/../commonSources/css/styles.css");
+                logsScene.getStylesheets().add(mainCssPath);
 
                 logsViewController = loader.getController();
                 logsViewController.setViewManager(this);
@@ -276,9 +275,9 @@ public class ViewManager {
     public void setRepertoireScene() {
         if (repertoireScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/repertoireView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/repertoireView.fxml"));
                 repertoireScene = loader.load();
-                repertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+                repertoireScene.getStylesheets().add(mainCssPath);
 
                 repertuarViewController = loader.getController();
                 repertuarViewController.setViewManager(this);
@@ -292,9 +291,9 @@ public class ViewManager {
     public void setAddEventsScene() {
         if (addEventsScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addEventsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addEventsView.fxml"));
                 addEventsScene = loader.load();
-                addEventsScene.getStylesheets().add("/../commonSources/css/styles.css");
+                addEventsScene.getStylesheets().add(mainCssPath);
 
                 addEventsViewController = loader.getController();
                 addEventsViewController.setViewManager(this);
@@ -308,9 +307,9 @@ public class ViewManager {
     public void setAddRepertoireScene() {
         if (addRepertoireScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addRepertoireView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addRepertoireView.fxml"));
                 addRepertoireScene = loader.load();
-                addRepertoireScene.getStylesheets().add("/../commonSources/css/styles.css");
+                addRepertoireScene.getStylesheets().add(mainCssPath);
 
                 addRepertoireViewController = loader.getController();
                 addRepertoireViewController.setViewManager(this);
@@ -326,9 +325,9 @@ public class ViewManager {
     public void setAccountSettingsScene() {
         if (accountSettingsScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/accountSettingsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/accountSettingsView.fxml"));
                 accountSettingsScene = loader.load();
-                accountSettingsScene.getStylesheets().add("/../commonSources/css/styles.css");
+                accountSettingsScene.getStylesheets().add(mainCssPath);
 
                 accountSettingsViewController = loader.getController();
                 accountSettingsViewController.setViewManager(this);
@@ -343,7 +342,7 @@ public class ViewManager {
     public void setInitScene() {
         if (initScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/initView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/initView.fxml"));
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
                 initScene.getStylesheets().add(mainCssPath);
@@ -361,9 +360,9 @@ public class ViewManager {
     public void setLoginScene() {
         if (loginScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/loginView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginView.fxml"));
                 loginScene = loader.load();
-                loginScene.getStylesheets().add("/../commonSources/css/styles.css");
+                loginScene.getStylesheets().add(mainCssPath);
 
                 loginViewController = loader.getController();
                 loginViewController.setViewManager(this);
@@ -379,9 +378,9 @@ public class ViewManager {
     public void setRegisterScene() {
         if (registerScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/registerView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/registerView.fxml"));
                 registerScene = loader.load();
-                registerScene.getStylesheets().add("/../commonSources/css/styles.css");
+                registerScene.getStylesheets().add(mainCssPath);
 
                 registerViewController = loader.getController();
                 registerViewController.setViewManager(this);
@@ -397,9 +396,9 @@ public class ViewManager {
     public void setRestorePasswordScene() {
         if (restorePasswordScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/restorePasswordView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/restorePasswordView.fxml"));
                 restorePasswordScene = loader.load();
-                restorePasswordScene.getStylesheets().add("/../commonSources/css/styles.css");
+                restorePasswordScene.getStylesheets().add(mainCssPath);
 
                 restorePasswordViewController = loader.getController();
                 restorePasswordViewController.setViewManager(this);
@@ -414,9 +413,9 @@ public class ViewManager {
     public void setChoosingSeatScene(int idEvent, int width, int height) {
         if (choosingSeatScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChoosingSeatView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoosingSeatView.fxml"));
                 choosingSeatScene = loader.load();
-                choosingSeatScene.getStylesheets().add("/../commonSources/css/styles.css");
+                choosingSeatScene.getStylesheets().add(mainCssPath);
 
                 choosingSeatViewController = loader.getController();
                 choosingSeatViewController.setViewManager(this);

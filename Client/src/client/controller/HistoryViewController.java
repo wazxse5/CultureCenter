@@ -79,7 +79,7 @@ public class HistoryViewController {
         } catch (ParseException e){
             e.printStackTrace();
         }
-        if(getRowData().getCondition()!="Wycofany") {
+        if(!getRowData().getCondition().equals("Wycofany")&&!getRowData().getCondition().equals("Zarezerwowany")) {
             if (date2.after(date)) {
                 viewManager.setReviewScene();
                 MarkButton.setDisable(true);

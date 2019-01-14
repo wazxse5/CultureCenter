@@ -14,12 +14,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="MarkButton" disable="true" layoutX="37.0" layoutY="301.0" mnemonicParsing="false" onAction="#mark" prefHeight="30.0" prefWidth="95.0" text="Oceń">
+      <Button fx:id="MarkButton" disable="true" layoutX="37.0" layoutY="301.0" mnemonicParsing="false" onAction="#mark" prefHeight="30.0" prefWidth="95.0" text="Oceń" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <TableView fx:id="tableView" layoutX="28.0" layoutY="67.0" prefHeight="225.0" prefWidth="551.0">
+      <TableView fx:id="tableView" layoutX="28.0" layoutY="67.0" prefHeight="225.0" prefWidth="551.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="70.0">
         <columns>
             <TableColumn fx:id="columnIdTicket" prefWidth="140.0" text="idTicket" visible="false" />
             <TableColumn fx:id="columnIdEvent" prefWidth="140.0" text="idEvent" visible="false" />
@@ -32,13 +32,13 @@
           <TableColumn fx:id="columnPrice" prefWidth="56.0" text="Cena" />
         </columns>
       </TableView>
-      <Button fx:id="refreshButton" layoutX="455.0" layoutY="331.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="103.0" text="Odśwież">
+      <Button fx:id="refreshButton" layoutX="460.0" layoutY="331.0" mnemonicParsing="false" onAction="#refresh" prefHeight="30.0" prefWidth="100.0" text="Odśwież" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Label fx:id="textLabel" layoutX="33.0" layoutY="331.0" prefHeight="68.0" prefWidth="203.0" wrapText="true" />
-      <Button fx:id="regretBT" disable="true" layoutX="141.0" layoutY="301.0" mnemonicParsing="false" onAction="#regret" prefHeight="30.0" prefWidth="95.0" text="Wycofaj">
+      <Label fx:id="textLabel" layoutX="247.0" layoutY="304.0" prefHeight="68.0" prefWidth="203.0" wrapText="true" AnchorPane.bottomAnchor="20.0" />
+      <Button fx:id="regretBT" disable="true" layoutX="141.0" layoutY="301.0" mnemonicParsing="false" onAction="#regret" prefHeight="30.0" prefWidth="95.0" text="Wycofaj" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="140.0">
          <font>
             <Font size="11.0" />
          </font>

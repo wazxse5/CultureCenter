@@ -27,7 +27,7 @@
       </Button>
       <Label fx:id="imagesDirPathLabel" alignment="TOP_LEFT" layoutX="328.0" layoutY="292.0" prefHeight="60.0" prefWidth="160.0" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0" />
       <Button layoutX="332.0" layoutY="288.0" mnemonicParsing="false" onAction="#chooseDirectory" text="Wybierz folder z plikami" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="30.0" />
-      <Button fx:id="addRoomButton" disable="true" layoutX="300.0" layoutY="98.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="40.0" prefWidth="170.0" text="Dodaj salę">
+      <Button fx:id="addRoomButton" disable="true" layoutX="300.0" layoutY="98.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="40.0" prefWidth="170.0" text="Dodaj salę" AnchorPane.rightAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>

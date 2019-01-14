@@ -16,27 +16,19 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox layoutX="65.0" layoutY="66.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
-               <children>
-                  <Label text="Pierwsza linia adresu" />
-                  <Label text="Druga linia adresu" />
-                  <Label text="Trzecia linia adresu" />
-                  <Label text="Skrytka pocztowa" />
-               </children>
-            </VBox>
-            <VBox layoutX="65.0" layoutY="188.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="135.0">
+            <VBox layoutX="20.0" layoutY="55.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="55.0">
                <children>
                   <Label text="Telefon 1: 48 123 456 789" />
                   <Label text="Telefon 2: 22 987 654 321" />
                   <Label text="Mail: osrodek_kultury@osrodek.pl" />
                </children>
             </VBox>
-            <AnchorPane fx:id="anchorPaneMap" layoutX="36.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="225.0">
+            <AnchorPane fx:id="anchorPaneMap" layoutX="20.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="148.0">
                <children>
                   <ImageView fx:id="imageViewMap" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <Label layoutX="26.0" layoutY="212.0" text="Lokalizacja" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0">
+            <Label layoutX="20.0" layoutY="123.0" text="Lokalizacja" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="123.0">
                <font>
                   <Font size="16.0" />
                </font>

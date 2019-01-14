@@ -21,19 +21,21 @@ public class ViewManager {
     private InitViewController initViewController;
     private AddEmployeeController addEmployeeController;
     private AddRoomController addRoomController;
+    private String mainCssPath;
 
     public ViewManager(Stage primaryStage, ThreadServer threadServer) {
         this.primaryStage = primaryStage;
         this.threadServer = threadServer;
+        mainCssPath = String.valueOf(getClass().getResource("/css/styles.css"));
     }
 
     public void setInitScene() {
         if (initScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/initView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/initView.fxml"));
                 Parent parent = loader.load();
                 initScene = new Scene(parent);
-                initScene.getStylesheets().add("/../commonSources/css/styles.css");
+                initScene.getStylesheets().add(mainCssPath);
 
                 initViewController = loader.getController();
                 initViewController.setViewManager(this);
@@ -49,10 +51,10 @@ public class ViewManager {
     public void setAddEmployeeScene() {
         if (addEmployeeScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addEmployeeView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addEmployeeView.fxml"));
                 Parent parent = loader.load();
                 addEmployeeScene = new Scene(parent);
-                addEmployeeScene.getStylesheets().add("/../commonSources/css/styles.css");
+                addEmployeeScene.getStylesheets().add(mainCssPath);
 
                 addEmployeeController = loader.getController();
                 addEmployeeController.setViewManager(this);
@@ -66,10 +68,10 @@ public class ViewManager {
     public void setAddRoomScene() {
         if (addRoomScene == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/addRoomView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addRoomView.fxml"));
                 Parent parent = loader.load();
                 addRoomScene = new Scene(parent);
-                addRoomScene.getStylesheets().add("/../commonSources/css/styles.css");
+                addRoomScene.getStylesheets().add(mainCssPath);
 
                 addRoomController = loader.getController();
                 addRoomController.setViewManager(this);

@@ -16,7 +16,7 @@ public class ContactViewController {
 
 
     public void initialize() {
-        Image image = new Image(String.valueOf(getClass().getResource("/../commonSources/images/map.jpg")));
+        Image image = new Image(String.valueOf(getClass().getResource("/images/map.jpg")));
         imageViewMap.setImage(image);
 
         imageViewMap.fitWidthProperty().bind(anchorPaneMap.widthProperty());

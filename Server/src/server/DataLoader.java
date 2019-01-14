@@ -242,13 +242,26 @@ public class DataLoader {
     }
 
     public ChangeUserDataAnswerMessage changeUserData(String userLogin, ChangeUserDataRequestMessage changeMessage) {
+        Client changingClient = null;
+        for (Client c : knownClients) if (c.getLogin().equals(userLogin)) changingClient = c;
+        if (changingClient == null) for (Employee e : knownEmployees) if (e.getLogin().equals(userLogin)) changingClient = e;
+
         boolean nameChanged = false, surnameChanged = false, mailChanged = false, passwordChanged = false;
-        if (changeMessage.isChangeName()) nameChanged = dbConnect.changeName(userLogin, changeMessage.getNewName());
-        if (changeMessage.isChangeSurname())
+        if (changeMessage.isChangeName()) {
+            nameChanged = dbConnect.changeName(userLogin, changeMessage.getNewName());
+            changingClient.setName(changeMessage.getNewName());
+        }
+        if (changeMessage.isChangeSurname()) {
             surnameChanged = dbConnect.changeSurname(userLogin, changeMessage.getNewSurname());
-        if (changeMessage.isChangeMail()) mailChanged = dbConnect.changeMail(userLogin, changeMessage.getNewMail());
-        if (changeMessage.isChangePassword())
+            changingClient.setSurname(changeMessage.getNewSurname());
+        }
+        if (changeMessage.isChangeMail()) {
+            mailChanged = dbConnect.changeMail(userLogin, changeMessage.getNewMail());
+            changingClient.setMail(changeMessage.getNewMail());
+        }
+        if (changeMessage.isChangePassword()) {
             passwordChanged = dbConnect.changePassword(userLogin, changeMessage.getCurrentPassword(), changeMessage.getNewPassword());
+        }
 
         ChangeUserDataAnswerMessage answerMessage = new ChangeUserDataAnswerMessage(nameChanged, surnameChanged, mailChanged, passwordChanged);
         return answerMessage;

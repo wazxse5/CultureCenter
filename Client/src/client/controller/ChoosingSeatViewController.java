@@ -78,6 +78,7 @@ public class ChoosingSeatViewController {
                 if (seats.contains(Integer.parseInt(sb.getText()))) {
                     sb.setStatus(1);
                 }
+                else sb.setStatus(0);
             }
         }
 

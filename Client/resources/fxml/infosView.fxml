@@ -11,9 +11,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.InfosViewController">
     <children>
-      <VBox layoutX="65.0" layoutY="94.0" prefHeight="212.0" prefWidth="471.0">
+      <VBox layoutX="65.0" layoutY="94.0" prefHeight="212.0" prefWidth="471.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
          <children>
-            <Label fx:id="infoLabel1" text="Informacje jeszcze sie nie załadowały">
+            <Label fx:id="infoLabel1" text="Informacje jeszcze sie nie załadowały" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -21,7 +21,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel2">
+            <Label fx:id="infoLabel2" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel3">
+            <Label fx:id="infoLabel3" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -37,7 +37,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="infoLabel4">
+            <Label fx:id="infoLabel4" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -52,7 +52,7 @@
                 <Font size="20.0" />
             </font>
         </Label>
-      <HBox layoutX="65.0" layoutY="271.0" prefHeight="39.0" prefWidth="275.0">
+      <HBox layoutX="30.0" layoutY="330.0" prefHeight="39.0" prefWidth="275.0" AnchorPane.bottomAnchor="30.0">
          <children>
             <TextField fx:id="infoTF" prefHeight="22.0" prefWidth="157.0" promptText="Informacja">
                <padding>

@@ -25,6 +25,7 @@ public class SeatButton extends ToggleButton {
         setTooltip(new Tooltip());
         setStatus(originalStatus);
         setPrefSize(35, 35);
+        setStyle("-fx-font-size: 14; -fx-font-weight: bold");
         selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 if (status == 1) setSelected(false);

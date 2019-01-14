@@ -37,7 +37,7 @@ public class InitViewController {
     @FXML private Button historyButton;
 
     public void initialize() {
-        Image logo = new Image(String.valueOf(getClass().getResource("/../commonSources/images/logo1.png")));
+        Image logo = new Image(String.valueOf(getClass().getResource("/images/logo1.png")));
         imageView.setImage(logo);
         imageView.setOnMouseClicked((MouseEvent event) -> viewManager.setRecommendationsScene());
     }

@@ -135,6 +135,7 @@ public class AccountSettingsViewController {
         userNameLabel.textProperty().bind(threadClient.getConnection().userNameProperty());
         userSurnameLabel.textProperty().bind(threadClient.getConnection().userSurnameProperty());
         userMailLabel.textProperty().bind(threadClient.getConnection().userMailProperty());
+        tabPane.disableProperty().bind(threadClient.loggedProperty().not());
     }
 
     public void setViewManager(ViewManager viewManager) {
