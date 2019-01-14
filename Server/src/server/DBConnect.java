@@ -45,6 +45,22 @@ public class DBConnect {
         return clients;
     }
 
+    public List<Employee> getAllEmployees() throws SQLException {
+        List<Employee> employees = new ArrayList<>();
+        String query = "SELECT idEmployee, Name, Surname, Department, login, Salary FROM employee";
+        rs = st.executeQuery(query);
+        while (rs.next()) {
+            int idEmployee = rs.getInt("idEmployee");
+            String name = rs.getString("Name");
+            String surname = rs.getString("Surname");
+            String login = rs.getString("login");
+            String department = rs.getString("Department");
+            float salary = rs.getFloat("Salary");
+            employees.add(new Employee(idEmployee, name, surname, login, department, salary));
+        }
+        return employees;
+    }
+
     public int getClientID(String userLogin) throws SQLException {
         PreparedStatement st = con.prepareStatement("SELECT idClient FROM client WHERE login = ?");
         st.setString(1, userLogin);
@@ -227,8 +243,10 @@ public class DBConnect {
         return rs;
     }
 
-    public String loginUser(String name, String password) throws SQLException {
-        String query = "CALL loginClient(?, ?);";
+    public String loginUser(String name, String password, boolean employee) throws SQLException {
+        String query = "";
+        if (employee) query = "CALL loginEmployee(?, ?);";
+        else query = "CALL loginClient(?, ?);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, name);
         ps.setString(2, password);
@@ -236,6 +254,8 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
+
+
 
     public String getEmail(String email) throws SQLException {
         String query = "CALL getLogin(\"" + email + "\")";

@@ -7,6 +7,7 @@ import message.LoginRequestMessage;
 import server.Client;
 import server.DataLoader;
 import server.Connection;
+import server.Employee;
 
 import java.sql.SQLException;
 
@@ -25,9 +26,10 @@ public class AuthenticationTask extends Task<Client> {
     @Override protected Client call() {
         String name = loginRequestMessage.getLogin();
         String password = loginRequestMessage.getPassword();
+        boolean employee = loginRequestMessage.isEmployee();
         try {
-            Client client = dataLoader.login(name, password);
-            connection.send(new LoginAnswerMessage(true, client.getId(), client.getLogin(), client.getName(), client.getSurname(), client.getMail()));
+            Client client = dataLoader.login(name, password, employee);
+            connection.send(new LoginAnswerMessage(true, client.getId(), client.getLogin(), client.getName(), client.getSurname(), client.getMail(), employee));
             connection.setClient(client);
             return client;
         } catch (AuthenticationException e) {

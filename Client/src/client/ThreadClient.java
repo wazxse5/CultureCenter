@@ -18,6 +18,7 @@ public class ThreadClient {
     private BooleanProperty connected = new SimpleBooleanProperty(false);
     private StringProperty connectionState = new SimpleStringProperty("NONE");
     private BooleanProperty logged = new SimpleBooleanProperty(false);
+    private BooleanProperty loggedAsEmployee = new SimpleBooleanProperty();
     private StringProperty userName = new SimpleStringProperty();
     private int userID;
     private ArrayList<ArrayList<String>> logsCheckData = new ArrayList<>();
@@ -85,8 +86,10 @@ public class ThreadClient {
             LoginAnswerMessage loginAnswer = (LoginAnswerMessage) message;
             if (loginAnswer.isGood()) {
                 logged.setValue(true);
+                loggedAsEmployee.setValue(loginAnswer.isEmployee());
                 userName.setValue(loginAnswer.getUserLogin());
                 userID = loginAnswer.getUserID();
+                connectionState.setValue("LOGGED");
                 viewManager.setRecommendationsScene();
                 connection.setUserData(loginAnswer.getUserName(), loginAnswer.getUserSurName(), loginAnswer.getUserMail(), loginAnswer.getUserLogin());
             } else {
@@ -103,6 +106,8 @@ public class ThreadClient {
         }
         if (message instanceof LogoutAnswerMessage) {
             logged.setValue(false);
+            connectionState.setValue("CONNECTED");
+            loggedAsEmployee.setValue(false);
             connection.setUserData("", "", "", "");
         }
         if (message instanceof LogsCheckAnswerMessage) {
@@ -200,10 +205,9 @@ public class ThreadClient {
         }
 
     }
-    public void sendLoginRequest(String name, String password) {
+    public void sendLoginRequest(String name, String password, boolean asEmployee) {
         if (connected.get()) {
-            connection.send(new LoginRequestMessage(name, password));
-//            this.userName.setValue(name);
+            connection.send(new LoginRequestMessage(name, password, asEmployee));
         } else viewManager.getLoginViewController().setInfoLabel("Brak połączenia z serwerem");
     }
 
@@ -402,4 +406,15 @@ public class ThreadClient {
     public List<Integer> getSeatsID() {
         return seatsID;
     }
+
+
+    public boolean isLoggedAsEmployee() {
+        return loggedAsEmployee.get();
+    }
+
+    public BooleanProperty loggedAsEmployeeProperty() {
+        return loggedAsEmployee;
+    }
+
+
 }

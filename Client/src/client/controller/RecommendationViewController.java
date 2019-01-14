@@ -4,8 +4,11 @@ import client.DataLoader;
 import client.ThreadClient;
 import client.ViewManager;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+
 
 import java.util.List;
 
@@ -23,8 +26,12 @@ public class RecommendationViewController {
     @FXML private ImageView imageview7;
     @FXML private ImageView imageview8;
 
-    public void initialize() {
+    @FXML private ScrollPane scrollPane;
+    @FXML private AnchorPane anchorPane;
+    @FXML private FlowPane flowPane;
 
+    public void initialize() {
+        flowPane.prefWrapLengthProperty().bind(scrollPane.widthProperty().subtract(40));
     }
 
     public void refresh() {
