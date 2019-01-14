@@ -16,7 +16,7 @@ public class DBConnect {
     //private String url = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla testów
     private String url = "jdbc:mysql://localhost/culturecenter?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"; // dla naszej bazy
     private String user = "root";
-    private String password = "";
+    private String password = "usbw";
 //    private String password = "usbw";//do mojej bazy usbwebserver
 
     public DBConnect() {
@@ -121,6 +121,14 @@ public class DBConnect {
         rs.next();
         return rs.getString(1);
     }
+    public String changeTicketStatus(String idTicket)throws SQLException{
+        String query = "CALL regretTicket(?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1,Integer.valueOf(idTicket));
+        rs=ps.executeQuery();
+        return "Zmieniono dane";
+    }
+
 
     public ResultSet editEvent(String idEvent, String title, String duration, String ageRestriction, String language, String releaseDate, String type, String imagePath) throws SQLException {
         String query = "CALL editEventType(?,?,?,?,?,?,?,?)";
@@ -138,6 +146,8 @@ public class DBConnect {
         return rs;
     }
 
+
+
     public String addInfo(String info) throws SQLException {
         String query = "CALL addInfo(?)";
         PreparedStatement ps = con.prepareStatement(query);
@@ -145,6 +155,19 @@ public class DBConnect {
         rs = ps.executeQuery();
         return rs.toString();
 
+    }
+
+    public String addReview(int idEvent, int idUser, int grade, String opinion,String type)throws  SQLException{
+        String query = "CALL addReview(?, ?, ?, ?,?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, idEvent);
+        ps.setInt(2, idUser);
+        ps.setInt(3, grade);
+        ps.setString(4, opinion);
+        ps.setString(5,type);
+        rs = ps.executeQuery();
+//        rs.next();
+        return "Dodano opinię";
     }
 
     public ResultSet editRepertoire(String title, String date, String time, String idEventType, String idRoom, String idEvent) throws SQLException {
@@ -160,6 +183,7 @@ public class DBConnect {
 //        rs.next();
         return rs;
     }
+
 
     public void addReservation(int idClient, int idEvent, List<Integer> seats, String type, float price, String condition) throws SQLException {
         String query = "CALL buyTicket(?, ?, ?, ?, ?, ?)";
@@ -259,6 +283,12 @@ public class DBConnect {
         String query = "CALL showEventType()";
         rs = st.executeQuery(query);
         //rs.next();
+        return rs;
+    }
+
+    public ResultSet getHistory(String idClient) throws SQLException{
+        String query = "CALL getHistory(\""+idClient+"\")";
+        rs=st.executeQuery(query);
         return rs;
     }
 

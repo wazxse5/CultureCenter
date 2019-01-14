@@ -107,10 +107,21 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button fx:id="LogsButton" mnemonicParsing="false" onAction="#history" prefHeight="50.0" prefWidth="200.0" text="Historia">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
             <Button fx:id="LogsButton" mnemonicParsing="false" onAction="#logs" prefHeight="50.0" prefWidth="200.0" text="Logi">
                <font>
                   <Font size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </Button>
          </children>
          <BorderPane.margin>

@@ -7,11 +7,16 @@ public class ReviewMessage extends Message {
     private int grade;
     private String opinion;
 
-    public ReviewMessage(int idEvent, int idUser, int grade, String opinion) {
+
+
+    private String type;
+
+    public ReviewMessage(int idEvent, int idUser, int grade, String opinion,String type) {
         this.idEvent = idEvent;
         this.idUser = idUser;
         this.grade = grade;
         this.opinion = opinion;
+        this.type=type;
     }
 
     public int getIdEvent() {
@@ -29,4 +34,8 @@ public class ReviewMessage extends Message {
     public String getOpinion() {
         return opinion;
     }
+    public String getType() {
+        return type;
+    }
+
 }

@@ -10,11 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 
 public class RepertuarViewController {
 

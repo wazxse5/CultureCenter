@@ -31,6 +31,8 @@ public class ViewManager {
     private Region registerScene;
     private Region restorePasswordScene;
     private Region accountSettingsScene;
+
+
     private Region historyScene;
     private Region logsScene;
     private Region repertoireScene;
@@ -52,7 +54,7 @@ public class ViewManager {
     private RegisterViewController registerViewController;
     private RestorePasswordController restorePasswordViewController;
     private AccountSettingsViewController accountSettingsViewController;
-    private HistoryViewController historyViewController;
+   private HistoryViewController historyViewController;
     private LogsViewController logsViewController;
     private RepertuarViewController repertuarViewController;
     private ActualReservedViewController actualReservedViewController;
@@ -198,6 +200,7 @@ public class ViewManager {
             }
         }
         contentPane.setCenter(historyScene);
+        threadClient.sendHistoryCheckRequest(String.valueOf(threadClient.getUserID()));
     }
 
     public void setEventsScene() {
@@ -498,6 +501,9 @@ public class ViewManager {
         return repertuarViewController;
     }
 
+    public Region getHistoryScene() {
+        return historyScene;
+    }
     public RecommendationViewController getRecommendationViewController() {
         return recommendationViewController;
     }
@@ -507,6 +513,10 @@ public class ViewManager {
     }
     public EditRepertoireViewController getEditRepertoireViewController() {
         return editRepertoireViewController;
+    }
+
+    public HistoryViewController getHistoryViewController() {
+        return historyViewController;
     }
 
     public void setContentPane(BorderPane contentPane) {

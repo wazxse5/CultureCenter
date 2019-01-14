@@ -30,14 +30,14 @@ public class ReviewViewController {
         choiceBox.setValue("Opinia");
     }
     public void check(){
-        if(choiceBox.getValue()=="Opinia")if(!gradeSlider.isDisabled())gradeSlider.setDisable(false);
+        if(choiceBox.getValue().toString()=="Opinia")if(!gradeSlider.isDisabled())gradeSlider.setDisable(false);
         else gradeSlider.setDisable(true);
 
     }
     public void confirm() {
         int grade = (int) gradeSlider.getValue();
         String opinion = opinionTA.getText();
-//        threadClient.sendReview(new ReviewMessage(event.getId(), threadClient.getUserID(), grade, opinion));
+        threadClient.sendReview(new ReviewMessage(Integer.valueOf(viewManager.getHistoryViewController().getRowData().getIdEvent()), Integer.valueOf(viewManager.getHistoryViewController().getRowData().getIdClient()), grade, opinion,choiceBox.getValue().toString()));
         infoLabel.setText("Opinia została wysłana");
 //        confirmButton.setDisable(true);
     }
