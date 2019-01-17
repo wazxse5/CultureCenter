@@ -6,8 +6,11 @@ import exception.WrongPasswordException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import message.AddEventsRequestMessage;
 import message.ChangeUserDataAnswerMessage;
 import message.ChangeUserDataRequestMessage;
+import message.ImageEventTypeMessage;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -288,10 +291,24 @@ public class DataLoader {
 
     }
 
-    public boolean addRepertoire(String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type) {
+    public boolean addRepertoire(AddEventsRequestMessage addEventsRequestMessage) {
+        String imagePath = addEventsRequestMessage.getImagePath();
+        byte[] image = addEventsRequestMessage.getImage();
+        String imageExtension = addEventsRequestMessage.getImageExtension();
+        String title = addEventsRequestMessage.getTitle();
+        String duration = addEventsRequestMessage.getDuration();
+        String ageRestriction = addEventsRequestMessage.getAgeRestriction();
+        String language = addEventsRequestMessage.getLanguage();
+        String releaseDate = addEventsRequestMessage.getReleaseDate();
+        String type = addEventsRequestMessage.getType();
+
         try {
             ResultSet result = null;
             result = dbConnect.addRepertoire(imagePath, title, duration, ageRestriction, language, releaseDate, type);
+            if (result.getString(1).equals("Dodano rodzaj wydarzenia!")) {
+                int idEventType = result.getInt(2);
+                saveImageEventType(idEventType, imageExtension, image);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -360,13 +377,24 @@ public class DataLoader {
         return result;
     }
 
-    public byte[] getEvenTypeImage(int idEventType) {
+    public byte[] getEventTypeImage(int idEventType) {
         File image = new File(eventTypeImagesDir, idEventType + ".jpg");
         try {
             return Files.readAllBytes(Paths.get(image.getPath()));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void saveImageEventType(int eventTypeId, String extension, byte[] image) {
+        String fullName = eventTypeId + "." + extension;
+        File fileImage = new File(eventTypeImagesDir, fullName);
+
+        try (FileOutputStream stream = new FileOutputStream(fileImage)) {
+            stream.write(image);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

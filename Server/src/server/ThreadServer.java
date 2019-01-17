@@ -131,8 +131,8 @@ public class ThreadServer {
             }
         }
         if(message instanceof AddEventsRequestMessage){
-            AddEventsRequestMessage addRepertuarMessage = (AddEventsRequestMessage) message;
-                dataLoader.addRepertoire(addRepertuarMessage.getImagePath(),addRepertuarMessage.getTitle(),addRepertuarMessage.getDuration(),addRepertuarMessage.getAgeRestriction(),addRepertuarMessage.getLanguage(),addRepertuarMessage.getReleaseDate(),addRepertuarMessage.getType());
+            AddEventsRequestMessage addEventsRequestMessage = (AddEventsRequestMessage) message;
+            dataLoader.addRepertoire(addEventsRequestMessage);
         }
         if(message instanceof  EventsEditRequestMessage){
             EventsEditRequestMessage eventsEditRequestMessage = (EventsEditRequestMessage) message;
@@ -188,7 +188,7 @@ public class ThreadServer {
         }
         if (message instanceof ImageEventTypeMessage) {
             ImageEventTypeMessage imageEventTypeMessage = (ImageEventTypeMessage) message;
-            byte[] image = dataLoader.getEvenTypeImage(imageEventTypeMessage.getIdEventType());
+            byte[] image = dataLoader.getEventTypeImage(imageEventTypeMessage.getIdEventType());
             imageEventTypeMessage.setImage(image);
             connection.send(imageEventTypeMessage);
         }
@@ -253,10 +253,10 @@ public class ThreadServer {
 
     }
 
-
     public boolean addEmployee(String name, String surname, String department, String login, String password, int salary) {
         return dataLoader.addEmployee(name, surname, department, login, password, salary);
     }
+
     public boolean addRoom(Integer number, Integer seats, Integer rows, Integer branchId){
         return dataLoader.addRoom(number,seats,rows,branchId);
 

@@ -17,15 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddRepertoireViewController {
-
-
-
-
     private ViewManager viewManager;
     private ThreadClient threadClient;
+
     private List <String> lstFile;
     private ObservableList<ShortEvent> list;
     private ObservableList<Room> roomList;
+
     @FXML private TextField titleTF;
     @FXML private TextField timeTF;
     @FXML private DatePicker dateTF;

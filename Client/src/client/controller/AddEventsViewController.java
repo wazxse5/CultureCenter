@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.DatePicker;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -34,13 +37,10 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
 public class AddEventsViewController {
-
-
-
-
     private ViewManager viewManager;
     private ThreadClient threadClient;
     private List <String> lstFile;
+    private File selectedImageFile;
 
     @FXML private TextField imagePathTF;
     @FXML private TextField titleTF;
@@ -49,8 +49,6 @@ public class AddEventsViewController {
     @FXML private TextField languageTF;
     @FXML private DatePicker releaseDateTF;
     @FXML private TextField typeTF;
-
-
 
     @FXML private Label infoLabel;
     @FXML private Button confirmButton;
@@ -65,43 +63,41 @@ public class AddEventsViewController {
         lstFile.add("*.jpeg");
         releaseDateTF.setValue( LocalDate.now());
     }
+
     public void numOnly(){
         ageRestrictionTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.matches("[0-9]*")){
                 ageRestrictionTF.setText(oldValue);
             }
         });
-
     }
-    public void numPlus(){
 
-
-    }
     public void RestrictionAge(){
         durationTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.matches("[0-9:]*")){
                 durationTF.setText(oldValue);
             }
         });
-
        // SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
        // durationTF.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
-
     }
 
 
     public void confirm() {
-
-        String imagePath=imagePathTF.getText();
-        String  title = titleTF.getText();
-        String  duration = durationTF.getText();
-        String  ageRestriction = ageRestrictionTF.getText();
-        String  language = languageTF.getText();
-        String  releaseDate = releaseDateTF.getValue().toString();
-        String  type = typeTF.getText();
+        String imagePath = imagePathTF.getText();
+        String title = titleTF.getText();
+        String duration = durationTF.getText();
+        String ageRestriction = ageRestrictionTF.getText();
+        String language = languageTF.getText();
+        String releaseDate = releaseDateTF.getValue().toString();
+        String type = typeTF.getText();
+        byte[] image = new byte[0];
+        try {
+            image = Files.readAllBytes(Paths.get(selectedImageFile.getPath()));
+        } catch (IOException e) { e.printStackTrace(); }
 
         if(!imagePath.equals("")&&!title.equals("")&&!duration.equals("")&&!ageRestriction.equals("")&&!language.equals("")&&!releaseDate.equals("")&&!type.equals("")) {
-            threadClient.sendAddEventsRequest(imagePath, title, duration, ageRestriction, language, releaseDate, type);
+            threadClient.sendAddEventsRequest(image, imagePath, title, duration, ageRestriction, language, releaseDate, type);
             infoLabel.setText("Wysłanie żądania dodania nowego filmu");
         } else infoLabel.setText("Proszę wypełnić wszystkie pola");
     }
@@ -141,10 +137,11 @@ public class AddEventsViewController {
     public void singleFileChooser(javafx.event.ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Obrazy",lstFile));
-        File f = fc.showOpenDialog(null);
+        File file = fc.showOpenDialog(null);
 
-        if(f!=null){
-            imagePathTF.setText(f.getAbsolutePath());
+        if (file != null) {
+            imagePathTF.setText(file.getAbsolutePath());
+            selectedImageFile = file;
         }
 
         StringConverter converter = new StringConverter<LocalDate>() {

@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import message.ReservationRequestMessage;
-import model.Seat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,30 +80,6 @@ public class ChoosingSeatViewController {
                 else sb.setStatus(0);
             }
         }
-
-//
-//        gridPane.getChildren().clear();
-//        seatButtons = new ArrayList<>();
-//        for (int i = 0; i < width; i++) {
-//            List<SeatButton> list = new ArrayList<>();
-//            for (int j = 0; j < height; j++) {
-//                SeatButton seatButton = new SeatButton(i, j);
-//                seatButton.setStatus(seats.get(i).get(j));
-//                list.add(seatButton);
-//            }
-//            seatButtons.add(list);
-//        }
-
-//        for (int i = 0; i < height; i++) {
-//            Label label = new Label("Rząd " + i);
-//            label.setPrefSize(50, 30);
-//            gridPane.add(label, 0, i);
-//        }
-//        for (int i = 0; i < seatButtons.size(); i++) {
-//            for (int j = 0; j < seatButtons.get(i).size(); j++) {
-//                gridPane.add(seatButtons.get(i).get(j), i + 1, j);
-//            }
-//        }
     }
 
     public void setViewManager(ViewManager viewManager) {

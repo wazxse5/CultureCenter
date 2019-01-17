@@ -131,7 +131,6 @@ public class ThreadClient {
         }
         if (message instanceof ImageEventTypeMessage) {
             ImageEventTypeMessage imageEventTypeMessage = (ImageEventTypeMessage) message;
-            System.out.println("rec id=" + imageEventTypeMessage.getIdEventType());
             dataLoader.saveImageEventType(imageEventTypeMessage);
             imageRequestSemaphore.release();
         }
@@ -178,9 +177,9 @@ public class ThreadClient {
         }
 
     }
-    public void sendAddEventsRequest(String imagePath,String title, String duration, String ageRestriction, String language, String releaseDate, String type){
+    public void sendAddEventsRequest(byte[] image, String imagePath, String title, String duration, String ageRestriction, String language, String releaseDate, String type){
         if(connected.get()){
-            connection.send(new AddEventsRequestMessage(imagePath,title,duration,ageRestriction,language,releaseDate,type));
+            connection.send(new AddEventsRequestMessage(image, imagePath, title,duration,ageRestriction,language,releaseDate,type));
         }
     }
     public void sendAddRepertoireRequest(String title, String time, String date, String idFilm,String room){
