@@ -30,7 +30,6 @@ public class ViewManager {
     private Region restorePasswordScene;
     private Region accountSettingsScene;
 
-
     private Region historyScene;
     private Region logsScene;
     private Region repertoireScene;
@@ -45,6 +44,7 @@ public class ViewManager {
     private Region addRepertoireScene;
     private Region reviewScene;
     private Region editRepertoireScene;
+    private Region eventTypeScene;
 
 
     private InitViewController initViewController;
@@ -66,6 +66,7 @@ public class ViewManager {
     private AddRepertoireViewController addRepertoireViewController;
     private ReviewViewController reviewViewController;
     private EditRepertoireViewController editRepertoireViewController;
+    private EventTypeViewController eventTypeViewController;
     private LocalDate dt;
     private final String mainCssPath;
 
@@ -432,6 +433,24 @@ public class ViewManager {
         if (choosingSeatViewController != null) {
             choosingSeatViewController.refreshSeats(seats);
         }
+    }
+
+    public void setEventTypeScene(Event event) {
+        if (eventTypeScene == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EventTypeView.fxml"));
+                eventTypeScene = loader.load();
+                eventTypeScene.getStylesheets().add(mainCssPath);
+
+                eventTypeViewController = loader.getController();
+                eventTypeViewController.setViewManager(this);
+                eventTypeViewController.setThreadClient(threadClient);
+            } catch (IOException e) {
+                setTitle("Nie można załadować widoku loginView");
+            }
+        }
+        eventTypeViewController.setLayout(event);
+        contentPane.setCenter(eventTypeScene);
     }
 
 

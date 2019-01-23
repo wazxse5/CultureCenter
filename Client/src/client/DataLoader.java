@@ -67,7 +67,7 @@ public class DataLoader {
 
     public ObjectProperty<Image> getImageProperty(int idEventType) {
         if (!imagesProperty.containsKey(idEventType)) {
-            Image defaultImage = new Image(String.valueOf(getClass().getResource("/../commonSources/images/no-image.jpg")));
+            Image defaultImage = new Image(String.valueOf(getClass().getResource("/images/no-image.jpg")));
             ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>(defaultImage);
             imagesProperty.put(idEventType, imageProperty);
         }

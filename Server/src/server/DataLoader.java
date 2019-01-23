@@ -308,6 +308,11 @@ public class DataLoader {
             if (result.getString(1).equals("Dodano rodzaj wydarzenia!")) {
                 int idEventType = result.getInt(2);
                 saveImageEventType(idEventType, imageExtension, image);
+
+                for (int i = recommended.size()-1; i > 0; i--) {
+                    recommended.set(i, recommended.get(i-1));
+                }
+                recommended.set(0, idEventType);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -379,6 +384,7 @@ public class DataLoader {
 
     public byte[] getEventTypeImage(int idEventType) {
         File image = new File(eventTypeImagesDir, idEventType + ".jpg");
+        if (!image.exists()) image = new File(eventTypeImagesDir, idEventType + ".png");
         try {
             return Files.readAllBytes(Paths.get(image.getPath()));
         } catch (IOException e) {

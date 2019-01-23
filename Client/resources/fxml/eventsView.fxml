@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventsViewController">
    <children>
       <Label alignment="CENTER" layoutX="186.0" layoutY="14.0" prefHeight="30.0" prefWidth="251.0" text="Wydarzenia">
          <font>
@@ -28,7 +33,7 @@
             <TableColumn fx:id="columnImagePath" minWidth="0.0" prefWidth="109.0" text="imagePath" visible="false" />
          </columns>
       </TableView>
-      <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="103.0" text="Odśwież" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="30.0" prefWidth="120.0" text="Odśwież" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <HBox fx:id="addeditHbox" layoutX="16.0" layoutY="60.0" prefHeight="30.0" prefWidth="180.0">
          <children>
             <Button fx:id="AddButton" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="100.0" text="Dodaj">
@@ -49,5 +54,6 @@
             </Button>
          </children>
       </HBox>
+      <Button fx:id="seeButton" disable="true" layoutX="20.0" layoutY="352.0" mnemonicParsing="false" onAction="#seeEvent" prefHeight="30.0" prefWidth="120.0" text="Zobacz więcej" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
    </children>
 </AnchorPane>

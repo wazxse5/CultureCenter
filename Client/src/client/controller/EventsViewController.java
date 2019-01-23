@@ -54,6 +54,7 @@ public class EventsViewController {
     @FXML private Button EditButton;
     @FXML private Button AddButton;
     @FXML private Button refreshButton;
+    @FXML private Button seeButton;
     @FXML private HBox addeditHbox;
 
     public Event getRowData() {
@@ -79,7 +80,10 @@ public class EventsViewController {
             TableRow<Event> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (!row.isEmpty())) {
-                    if(EditButton.isDisabled())EditButton.setDisable(false);
+                    seeButton.setDisable(false);
+                    if(EditButton.isDisabled()){
+                        EditButton.setDisable(false);
+                    }
                      rowData = row.getItem();
                 }
             });
@@ -96,6 +100,9 @@ public class EventsViewController {
         if(EditButton.isDisabled()==false)EditButton.setDisable(true);
     }
 
+    public void seeEvent() {
+        viewManager.setEventTypeScene(rowData);
+    }
 
     public void back(){
         if(threadClient.isConnected()) {

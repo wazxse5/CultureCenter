@@ -133,6 +133,8 @@ public class ThreadServer {
         if(message instanceof AddEventsRequestMessage){
             AddEventsRequestMessage addEventsRequestMessage = (AddEventsRequestMessage) message;
             dataLoader.addRepertoire(addEventsRequestMessage);
+            List<Integer> r = new ArrayList<>(dataLoader.getRecommended());
+            connection.send(new FirstInfoMessage(r));
         }
         if(message instanceof  EventsEditRequestMessage){
             EventsEditRequestMessage eventsEditRequestMessage = (EventsEditRequestMessage) message;
@@ -145,7 +147,6 @@ public class ThreadServer {
             connection.send(new RepertoireEditAnswerMessage(ansMsg));
 
         }
-
         if(message instanceof HistoryCheckRequestMessage){
             HistoryCheckRequestMessage requestMessage = (HistoryCheckRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -158,8 +159,6 @@ public class ThreadServer {
             }
 
         }
-
-
         if (message instanceof GetIdAndNameOfEventsRequestMessage){
             GetIdAndNameOfEventsRequestMessage getIdAndNameOfEventsRequestMessage = (GetIdAndNameOfEventsRequestMessage) message;
             ArrayList<ArrayList<String>> result;
@@ -196,7 +195,6 @@ public class ThreadServer {
             EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
             // TODO: sprawdzenie wolnych miejsc na seans
         }
-
         if(message instanceof AddInfoRequestMessage){
             AddInfoRequestMessage addInfoRequestMessage = (AddInfoRequestMessage) message;
             dataLoader.addInfo(addInfoRequestMessage.getInfo());
@@ -218,7 +216,6 @@ public class ThreadServer {
                 e.printStackTrace();
             }
         }
-
         if (message instanceof EventSeatsMessage) {
             EventSeatsMessage seatsMessage = (EventSeatsMessage) message;
             try {

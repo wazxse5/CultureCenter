@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="590.0" styleClass="myborder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.EventTypeViewController">
+   <children>
+      <AnchorPane fx:id="imageAnchor" layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="296.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="titleLabel" layoutX="227.0" layoutY="31.0" prefHeight="40.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <VBox layoutX="240.0" layoutY="80.0" prefHeight="70.0" spacing="5.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="264.0" layoutY="100.0" prefHeight="30.0" spacing="5.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <Label fx:id="typeLabel" alignment="CENTER" contentDisplay="CENTER" text="type" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator maxHeight="20.0" orientation="VERTICAL" />
+                  <Label fx:id="ageLabel" alignment="CENTER" contentDisplay="CENTER" text="age" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator maxHeight="20.0" orientation="VERTICAL" />
+                  <Label fx:id="durationLabel" alignment="CENTER" contentDisplay="CENTER" text="duration" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="30.0" spacing="5.0">
+               <children>
+                  <Label fx:id="languageLabel" alignment="CENTER" contentDisplay="CENTER" text="language" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator maxHeight="20.0" orientation="VERTICAL" />
+                  <Label fx:id="releaseLabel" alignment="CENTER" contentDisplay="CENTER" text="release" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="264.0" layoutY="192.0" text="Opis:" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+      <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="240.0" layoutY="197.0" text="Label" wrapText="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </Label>
+   </children>
+</AnchorPane>
